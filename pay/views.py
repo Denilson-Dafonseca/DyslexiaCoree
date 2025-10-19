@@ -313,24 +313,34 @@ def process_order(request):
 			return redirect('main')
 
 
-
-
-
 def payment_success(request):
-    
-	# Get the cart
-	cart = Cart(request)
-	cart_products = cart.get_prods
-	quantities = cart.get_quants
-	totals = cart.cart_total()
+    # ✅ Get the cart
+    cart = Cart(request)
+    cart_products = cart.get_prods()
+    quantities = cart.get_quants()
+    totals = cart.cart_total()
 
-	# Delete our cart
-	for key in list(request.session.keys()):
-		if key == "session_key":
-			# Delete the key
-			del request.session[key]
+    # ✅ Delete purchased products
+    for product in cart_products:
+        try:
+            product_name = product.name
+            product.delete()
+            print(f"Deleted product after purchase: {product_name}")
+        except Exception as e:
+            print(f" Error deleting {product.name}: {e}")
 
-	return render(request, "payment/payment_success.html", {})
+    # ✅ Clear the session cart
+    for key in list(request.session.keys()):
+        if key == "session_key":
+            del request.session[key]
+
+    # ✅ Clear old cart data for logged-in users
+    if request.user.is_authenticated:
+        Profile.objects.filter(user__id=request.user.id).update(old_cart="")
+
+    messages.success(request, "Payment successful! Purchased items have been removed from the store.")
+    return render(request, "payment/payment_success.html", {})
+
 
 def payment_failed(request):
     

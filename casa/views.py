@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .models import Product, CarouselSlide, Category, Profile, Relief
+from .models import Product, CarouselSlide, Category, Profile, Relief, Video
 from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, UserInfoForm
 from cart.cart import Cart
 from pay.forms import ShippingForm
@@ -193,13 +193,15 @@ def stand(request):
     return render(request, 'stand.html', {'products':products})
 
 def info(request):
-
- return render(request, 'info.html',{})
+    videos = Video.objects.all()
+    return render(request, 'info.html', {'videos': videos})
+ 
 
 def door_to_door_relief(request):
     doors = Relief.objects.all()
     context = {"doors": doors}    
     return render(request, 'door_to_door_relief.html', context)
+
 
 
 

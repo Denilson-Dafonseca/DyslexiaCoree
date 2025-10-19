@@ -92,4 +92,29 @@ class Relief(models.Model):
   
     def __str__(self):
         return self.name
+    
+from django.db import models
+
+class Video(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+    youtube_url = models.URLField(blank=True, null=True, help_text="Paste a YouTube link here.")
+    video_file = models.FileField(upload_to='site/', blank=True, null=True, help_text="Or upload a video file.")
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-date_added']
+
+    def __str__(self):
+        return self.title
+
+    def get_embed_url(self):
+        """
+        Converts a normal YouTube link into an embeddable link
+        (e.g. https://www.youtube.com/watch?v=abc123 → https://www.youtube.com/embed/abc123)
+        """
+        if self.youtube_url:
+            return self.youtube_url.replace("watch?v=", "embed/")
+        return None
+    
   

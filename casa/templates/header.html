@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Author" content="Denilson Bernardo Da Fonseca" />
+    <meta name="description" content="E-store" />
+    <title></title>
+  </head>
+  <body>
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    {% endfor %} {% endif %}
+    <!-- header -->
+    <header class="navbar navbar-expand-lg bg-dark px-3 py-3">
+      <div class="container-fluid">
+        <!-- Brand Logo -->
+        <a
+          class="navbar-brand d-flex align-items-center"
+          href="{% url 'main' %}"
+        >
+          <img
+            src="{% static 'site/Dx.png' %}"
+            alt="Dyslexia Logo"
+            class="img-fluid"
+            style="max-height: 80px"
+          />
+        </a>
+
+        <h1 class="navbar-item item-aligns-center">DyslexiaCore</h1>
+        <a class="navbar-item d-flex" href="{% url 'search' %}">
+          <img
+            src="{% static 'site/Tech.png' %}"
+            alt="Dyslexia Logo"
+            class="img-fluid"
+            style="max-height: 80px"
+          />
+        </a>
+      </div>
+    </header>
+  </body>
+</html>

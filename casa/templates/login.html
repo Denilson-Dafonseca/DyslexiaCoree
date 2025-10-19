@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link href="{% static 'styles.css' %}" rel="stylesheet" />
+
+    <script defer src="{% static 'jquery-3.7.1.js' %}"></script>
+  </head>
+  <body>
+    {% block content %}
+    <!-- Messages -->
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    {% endfor %} {% endif %}
+
+    <!-- Header -->
+    <nav class="bg-dark py-1">
+      <a class="d-flex" href="{% url 'main' %}">
+        <img
+          src="{% static 'site/Dx.png' %}"
+          alt="Dyslexia Logo"
+          class="img-fluid"
+          style="max-height: 80px"
+        />
+      </a>
+      <div class="container text-center text-white">
+        <h1 class="display-4 fw-bolder">Log In</h1>
+        <p class="lead fw-normal text-white-50 mb-0">
+          Log into your account...
+        </p>
+      </div>
+    </nav>
+
+    <!-- Login Section -->
+    <section class="py-5 d-flex align-items-center justify-content-center">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-sm-10 col-md-8 col-lg-5">
+            <!-- Login Card -->
+            <div class="card shadow border rounded-3 p-4">
+              <h3 class="text-center mb-4">Login</h3>
+
+              <form method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+
+                <!-- Username -->
+                <div class="mb-3">
+                  <label for="username" class="form-label">Username</label>
+                  <input
+                    type="text"
+                    id="username"
+                    class="form-control"
+                    name="username"
+                    placeholder="Enter your username"
+                    required
+                  />
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+                  <label for="password" class="form-label">Password</label>
+                  <input
+                    type="password"
+                    id="password"
+                    class="form-control"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                  />
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-grid mt-3">
+                  <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+              </form>
+            </div>
+            <!-- End Card -->
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endblock %}
+    <br /><br /><br /><br /><br /><br /><br /><br />
+    {% include 'footer.html' %}
+  </body>
+</html>

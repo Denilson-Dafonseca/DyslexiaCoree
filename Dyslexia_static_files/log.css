@@ -1,0 +1,70 @@
+/* body*/
+body {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+
+nav {
+  width: 100%;
+  background: url(site/water.gif);
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+
+/* Animation field */
+.will {
+  width: auto;
+  height: auto;
+  position: relative;
+  animation-name: logo;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+  animation-delay: -2s;
+}
+
+@keyframes logo {
+  0% {
+    left: 0px;
+    top: 0px;
+    transform: rotateY(90deg);
+  }
+  16.6% {
+    left: 100px;
+    top: 0px;
+    transform: rotateY(-90deg);
+  }
+  49.8% {
+    left: 80px;
+    top: 0px;
+    transform: rotateY(90deg);
+  }
+  66.4% {
+    left: 60px;
+    top: 0px;
+    transform: rotateY(-90deg);
+  }
+  83% {
+    left: 40px;
+    top: 0px;
+    transform: rotateY(90deg);
+  }
+  99.6% {
+    left: 20px;
+    top: 0px;
+    transform: rotateY(-90deg);
+  }
+  100% {
+    left: 0px;
+    top: 0px;
+    transform: rotateY(90deg);
+  }
+}
+
+footer {
+  width: 100%;
+  background-image: radial-gradient(circle, rgb(118, 172, 238), rgb(1, 39, 41));
+}

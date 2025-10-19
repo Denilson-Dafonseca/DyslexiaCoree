@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link href="{% static 'styles.css' %}" rel="stylesheet" />
+    <script defer src="{% static 'jquery-3.7.1.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
+  </head>
+  <body>
+    {% block content %}
+
+    <!-- Messages -->
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    {% endfor %} {% endif %}
+
+    <!-- Header -->
+    <nav class="bg-dark py-1">
+      <a class="d-flex" href="{% url 'main' %}">
+        <img
+          src="{% static 'site/Dx.png' %}"
+          alt="Dyslexia Logo"
+          class="img-fluid"
+          style="max-height: 80px"
+        />
+      </a>
+      <div class="container text-center text-white">
+        <h1 class="display-4 fw-bolder">Register</h1>
+        <p class="lead fw-normal text-white-50 mb-0">
+          Register for a User Account...
+        </p>
+      </div>
+    </nav>
+
+    <!-- Register Form Section -->
+    <section class="py-5 d-flex align-items-center justify-content-center">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+            <!-- Card Wrapper -->
+            <div class="card shadow border rounded-3 p-4">
+              <h3 class="text-center mb-4">Register</h3>
+
+              <form method="POST" action="{% url 'register' %}">
+                {% csrf_token %} {{ form.as_p }}
+
+                <div class="d-grid mt-4">
+                  <button type="submit" class="btn btn-secondary">
+                    Register
+                  </button>
+                </div>
+              </form>
+            </div>
+            <!-- End Card -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% endblock %} {% include 'footer.html' %}
+  </body>
+</html>

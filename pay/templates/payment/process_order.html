@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Dyslexiacore products</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'styles.css' %}" rel="stylesheet" />
+    <script defer src="{% static 'jquery-3.7.1.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+{% block content %}   
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    {% endfor %} {% endif %}
+    <!-- Navigation-->
+
+    {% include 'nav.html' %}
+    <!-- Header-->
+    <header class="bg-dark py-5">
+      <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+          <h1 class="display-4 fw-bolder">Process order</h1>
+          <p class="lead fw-normal text-white-50 mb-0">You are almost there</p>
+        </div>
+      </div>
+    </header>
+                  <div class="card-body">
+            {% for product in cart_products %}
+                {{ product.name }}: 
+                    {% if product.is_sale %}
+                        ${{ product.sale_price }}
+                    {% else %}
+                        ${{ product.price }}
+                {% endif %}
+
+                <br/>
+                <small>Quantity: 
+                {% for key, value in quantities.items %}
+                    {% if key == product.id|slugify %}
+                        {{ value }}
+                    {% endif %}
+                {% endfor %}</small>
+                <br/><br/>
+
+            {% endfor %}
+            Total:  ${{ totals }}
+            <br/><br/>
+            <a href="{% url 'cart_summary' %}" class="btn btn-sm btn-outline-secondary">Update Items</a>
+          </div>
+        </div>
+<br/><br/>
+<div class="card">
+  <div class="card-header">
+    Shipping Info
+  </div>
+  <div class="card-body">
+    
+    Name: {{ shipping_info.shipping_full_name }}<br/>
+    Email: {{ shipping_info.shipping_email }}<br/>
+    Address 1: {{ shipping_info.shipping_address1 }}<br/>
+    Address 2: {{ shipping_info.shipping_address2 }}<br/>
+    City: {{ shipping_info.shipping_city }}<br/>
+    State: {{ shipping_info.shipping_state }}<br/>
+    Zipcode: {{ shipping_info.shipping_zipcode }}<br/>
+    Country: {{ shipping_info.shipping_country }}<br/>
+    <br/>
+    <a href="{% url 'checkout' %}" class="btn btn-outline-secondary">Update Shipping</a>
+
+  </div>
+</div>
+<br/><br/>
+
+<div class="card">
+  <div class="card-header">
+    Billing Info
+  </div>
+  <div class="card-body">
+    <form method="POST" action="{% url 'process_order' %}">
+      {% csrf_token %}
+    {{ billing_form.as_p }}
+    
+  </div>
+</div>
+<br/>
+<br/>
+
+<button type="submit" class="btn btn-secondary">
+        Pay here
+</button>
+
+
+<br/><br/>
+
+
+            </div>
+        </div>
+    </div>
+
+
+            
+{% endblock %}
+                          
+
+  
+    {% include 'footer.html' %}
+  </body>
+</html>

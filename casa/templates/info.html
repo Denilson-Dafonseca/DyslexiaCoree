@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Author" content="Denilson Bernardo Da Fonseca" />
+    <meta name="description" content="E-store" />
+    <title>About DyslexiaCore</title>
+    <link href="{% static 'styles.css' %}" rel="stylesheet" />
+    <link href="{% static 'info.css' %}" rel="stylesheet" />
+    <script defer src="{% static 'jquery-3.7.1.js' %}"></script>
+  </head>
+  <body>
+    {% block content %}
+
+    <!-- Header-->
+    <header class="bg-dark py-2">
+      <a class="d-flex" href="{% url 'main' %}">
+        <img
+          src="{% static 'site/Dx.png' %}"
+          alt="Dyslexia Logo"
+          class="img-fluid"
+          style="max-height: 80px"
+        />
+      </a>
+      <div class="container px-2 px-lg-5">
+        <div class="text-center text-white">
+          <h1 class="display-4 fw-bolder">
+            What is DyslexiaCore all
+            <span class="text-danger">TUOBA</span>?
+          </h1>
+          <p class="lead fw-normal text-white-50 mb-0">Take the deep dive.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- text-->
+    <div class="row">
+      <p class="col text-center">
+        <h3 class="text-center text-success display-2 fw-bolder">DyslexiaCore</h3>
+<p class="text-center">
+  DyslexiaCore is a community-driven e-commerce store that sells products on behalf of its vendors. 
+  The vendor ratio follows an <strong>80%-20%</strong> split — with vendors receiving 80% of the profit. 
+  Most of our vendors are students, while the rest come from the broader community. 
+  Our goal is to help students and small entrepreneurs who are working hard to make ends meet. 
+  We serve as a bridge between the seller and the world, helping them showcase their talents and products. 
+  Beyond being an e-commerce store, DyslexiaCore also stands for something greater — 
+  <span class="text-danger">(Our Cause)</span>.
+</p>
+
+<h3 class="text-center text-danger display-2 fw-bolder">Our Cause</h3>
+<p class="text-center">
+  DyslexiaCore is dedicated to raising awareness and breaking the stigma surrounding learning disabilities. 
+  The founder of this initiative studied at IUM and graduated with a Bachelor’s Honours in Education. 
+  During teaching practice, they encountered learners with learning disabilities who were already in high school — 
+  many of whom had gone through their schooling years unaware of their challenges. 
+  Teachers, often managing over 300 learners a day, rarely have the time or resources to provide individual support.
+  <br /><br />
+  DyslexiaCore has taken it upon itself to help address this issue through a unique approach called the 
+  <strong>A.S.A.P. Method</strong> — <em>Awareness, Solutions, Appraisal, and Platform</em>:
+  <br /><br />
+  <strong>Awareness</strong> — Spreading knowledge and understanding about learning disabilities.<br />
+  <strong>Solutions</strong> — Sharing ways to support and empower individuals with learning disabilities.<br />
+  <strong>Appraisal</strong> — Teaching the public how to identify learning difficulties in themselves or others.<br />
+  <strong>Platform</strong> — Providing a space where all this information can reach the community — in our case, this website.<br />
+  <br />
+  Our mission is to improve the lives of African children and learners everywhere. 
+  Too many families have given up on their children, thinking they are “slow” or “dumb,” when in reality, 
+  they just need understanding, guidance, and support. 
+  Together, we can change that narrative — let’s work hand in hand to spread awareness and make a lasting difference.
+</p>
+</p>
+    </div>
+<!-- Video Section -->
+<section class="py-5 bg-light" id="videos">
+  <div class="container">
+    <h2 class="text-center text-success fw-bold mb-4">Our Video Stories</h2>
+    <p class="text-center text-muted mb-5">
+      Watch our latest videos about awareness, learning support, and community impact.
+    </p>
+
+    <div class="row g-4 justify-content-center">
+      {% for video in videos %}
+      <div class="col-md-6 col-lg-4">
+        <!-- Video Embed -->
+        <div class="ratio ratio-16x9 shadow-sm rounded-3 overflow-hidden">
+          {% if video.youtube_url %}
+          <iframe
+            src="{{ video.get_embed_url }}"
+            title="{{ video.title }}"
+            allowfullscreen
+          ></iframe>
+          {% elif video.video_file %}
+          <video controls class="w-100 rounded-3">
+            <source src="{{ video.video_file.url }}" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          {% endif %}
+        </div>
+
+        <!-- Video Title -->
+        <p class="text-center mt-2 fw-semibold">{{ video.title }}</p>
+        {% if video.description %}
+        <p class="text-center text-muted small">{{ video.description }}</p>
+        {% endif %}
+
+        <!-- AdSense Spot -->
+        <div class="text-center my-3">
+          <!-- Replace the ad-client and ad-slot with your AdSense codes -->
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
+               data-ad-slot="YYYYYYYYYY"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+
+      </div>
+      {% empty %}
+      <p class="text-center">No videos available yet. Check back soon!</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+    
+
+
+    <!-- footer-->
+    {% include 'footer.html' %} {% endblock %}
+  </body>
+</html>

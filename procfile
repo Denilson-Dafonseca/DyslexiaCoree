@@ -1,2 +1,2 @@
-web : gunicorn Dyslexia.wsgi --log-file
-web : python manage.py migrate && gunicorn Dyslexia.wsg
+web: gunicorn Dyslexia.wsgi --log-file
+web: python manage.py migrate && gunicorn Dyslexia.wsg

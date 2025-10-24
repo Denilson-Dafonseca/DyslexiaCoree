@@ -88,13 +88,5 @@
     </div>
 
     {% include 'footer.html' %} {% endblock %}
-
-    <script>
-      app.get("/fetch-secret", async (req, res) => {
-        axios.get(`${process.env.BACKEND_URL}/secret`).then((response) => {
-          res.json(response.data);
-        });
-      });
-    </script>
   </body>
 </html>

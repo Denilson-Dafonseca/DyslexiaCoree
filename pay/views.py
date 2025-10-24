@@ -14,65 +14,7 @@ import uuid
 import datetime
 
 
-def billing_info(request):
-    cart = Cart(request)
-    cart_products = cart.get_prods()
-    quantities = cart.get_quants()
-    totals = cart.cart_total()
-
-    if request.POST:
-        # Save shipping info in session
-        request.session['my_shipping'] = request.POST
-
-        host = request.get_host()
-        invoice = str(uuid.uuid4())
-
-        # Create PayPal payment form
-        paypal_dict = {
-            'business': settings.PAYPAL_RECEIVER_EMAIL,
-            'amount': totals,
-            'item_name': 'items',
-            'no_shipping': '2',
-            'invoice': invoice,
-            'currency_code': 'NAD',
-            'notify_url': 'https://{}{}'.format(host, reverse("paypal-ipn")),
-            'return_url': 'https://{}{}'.format(host, reverse("payment_success")),
-            'cancel_return': 'https://{}{}'.format(host, reverse("payment_failed")),
-        }
-        paypal_form = PayPalPaymentsForm(initial=paypal_dict)
-
-        if request.user.is_authenticated:
-            
-            billing_form = PaymentForm()
-            return render(
-                request,
-                "payment/billing_info.html",
-                {
-                    "paypal_form": paypal_form,
-                    "cart_products": cart_products,
-                    "quantities": quantities,
-                    "totals": totals,
-                    "shipping_info": request.POST,
-                    "billing_form": billing_form,
-                }
-            )
-        else:
-            billing_form = PaymentForm()
-            return render(
-                request,
-                "payment/billing_info.html",
-                {
-                    "paypal_form": paypal_form,
-                    "cart_products": cart_products,
-                    "quantities": quantities,
-                    "totals": totals,
-                    "shipping_info": request.POST,
-                    "billing_form": billing_form,
-                }
-            )
-    else:
-        messages.error(request, "Access Denied")
-        return redirect('main')
+    
 
 def orders(request, pk):
 	if request.user.is_authenticated and request.user.is_superuser:
@@ -104,6 +46,64 @@ def orders(request, pk):
 	else:
 		messages.success(request, "Access Denied")
 		return redirect('main')
+
+
+def billing_info(request):
+    cart = Cart(request)
+    cart_products = cart.get_prods()
+    quantities = cart.get_quants()
+    totals = float(cart.cart_total())  # Make sure it's a float, not a Decimal or string
+
+    if request.method == "POST":
+        # Save shipping info in session
+        request.session['my_shipping'] = request.POST
+
+        host = request.get_host()
+        invoice = str(uuid.uuid4())
+
+        # ✅ Format amount properly — PayPal expects a string with 2 decimal places
+        formatted_total = "{:.2f}".format(totals)
+
+        # ✅ Make sure your settings.py has:
+        # PAYPAL_RECEIVER_EMAIL = "your-paypal-business-email@example.com"
+
+        # ✅ Use NAD only if your business account supports it.
+        # If not, use USD — many errors come from unsupported currency.
+        paypal_dict = {
+            "business": settings.PAYPAL_RECEIVER_EMAIL,
+            "amount": formatted_total,
+            "item_name": "DyslexiaCore Order",
+            "invoice": invoice,
+            "currency_code": "NAD",  # or "USD" if NAD not supported by your PayPal account
+            "notify_url": f"https://{host}{reverse('paypal-ipn')}",
+            "return_url": f"https://{host}{reverse('payment_success')}",
+            "cancel_return": f"https://{host}{reverse('payment_failed')}",
+            "custom": str(request.user.id) if request.user.is_authenticated else "Guest",
+            "no_shipping": "1",  # 0 = address required, 1 = no address, 2 = prompt but optional
+        }
+
+        # ✅ Create PayPal form
+        paypal_form = PayPalPaymentsForm(initial=paypal_dict)
+
+        billing_form = PaymentForm()
+
+        return render(
+            request,
+            "payment/billing_info.html",
+            {
+                "paypal_form": paypal_form,
+                "cart_products": cart_products,
+                "quantities": quantities,
+                "totals": formatted_total,
+                "shipping_info": request.POST,
+                "billing_form": billing_form,
+            },
+        )
+
+    else:
+        messages.error(request, "Access Denied")
+        return redirect("main")
+
 
 
 def not_shipped_dash(request):

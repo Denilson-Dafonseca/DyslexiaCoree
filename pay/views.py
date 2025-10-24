@@ -5,9 +5,11 @@ from pay.models import ShippingAddress, Order, OrderItem
 from django.contrib.auth.models import User
 from django.contrib import messages
 from casa.models import Product, Profile
+# PAYPAL INFO
 from django.urls import reverse
 from paypal.standard.forms import PayPalPaymentsForm
 from django.conf import settings
+
 import uuid
 import datetime
 
@@ -25,6 +27,7 @@ def create_order_from_cart(request, payment_method="PayPal"):
 
     full_name = my_shipping['shipping_full_name']
     email = my_shipping['shipping_email']
+    phone_number = my_shipping['shipping_phone_number']
     shipping_address = (
         f"{my_shipping['shipping_address1']}\n"
         f"{my_shipping['shipping_address2']}\n"
@@ -42,6 +45,7 @@ def create_order_from_cart(request, payment_method="PayPal"):
             user=user,
             full_name=full_name,
             email=email,
+            phone_number=phone_number,
             shipping_address=shipping_address,
             amount_paid=totals,
             invoice=invoice,
@@ -90,7 +94,7 @@ def billing_info(request):
     quantities = cart.get_quants()
     totals = cart.cart_total()
 
-    if request.method == "POST":
+    if request.POST:
         # Save shipping info in session
         request.session['my_shipping'] = request.POST
 
@@ -101,7 +105,7 @@ def billing_info(request):
         paypal_dict = {
             'business': settings.PAYPAL_RECEIVER_EMAIL,
             'amount': totals,
-            'item_name': 'dyslexia_items',
+            'item_name': 'items',
             'no_shipping': '2',
             'invoice': invoice,
             'currency_code': 'NAD',
@@ -111,25 +115,38 @@ def billing_info(request):
         }
         paypal_form = PayPalPaymentsForm(initial=paypal_dict)
 
-        billing_form = PaymentForm()
-
-        return render(
-            request,
-            "payment/billing_info.html",
-            {
-                "paypal_form": paypal_form,
-                "cart_products": cart_products,
-                "quantities": quantities,
-                "totals": totals,
-                "shipping_info": request.POST,
-                "billing_form": billing_form,
-            }
-        )
+        if request.user.is_authenticated:
+            
+            billing_form = PaymentForm()
+            return render(
+                request,
+                "payment/billing_info.html",
+                {
+                    "paypal_form": paypal_form,
+                    "cart_products": cart_products,
+                    "quantities": quantities,
+                    "totals": totals,
+                    "shipping_info": request.POST,
+                    "billing_form": billing_form,
+                }
+            )
+        else:
+            billing_form = PaymentForm()
+            return render(
+                request,
+                "payment/billing_info.html",
+                {
+                    "paypal_form": paypal_form,
+                    "cart_products": cart_products,
+                    "quantities": quantities,
+                    "totals": totals,
+                    "shipping_info": request.POST,
+                    "billing_form": billing_form,
+                }
+            )
     else:
         messages.error(request, "Access Denied")
-        return redirect('checkout')
-
-
+        return redirect('main')
 
 def orders(request, pk):
 	if request.user.is_authenticated and request.user.is_superuser:
@@ -161,7 +178,6 @@ def orders(request, pk):
 	else:
 		messages.success(request, "Access Denied")
 		return redirect('main')
-
 
 
 def not_shipped_dash(request):

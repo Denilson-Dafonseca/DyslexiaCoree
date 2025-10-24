@@ -18,7 +18,7 @@ load_dotenv()
 SECRET_KEY = 'django-insecure-9+_@mp%sklldf6l7lq0o*1=h=y!y$@mb#n1#v(i4sptl-aoysm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['https://dyslexiacore.xyz','dyslexiacore.xyz', 'dyslexiacoree-production.up.railway.app', 'https://dyslexiacoree-production.up.railway.app']
 CSRF_TRUSTED_ORIGINS = ['https://dyslexiacore.xyz','https://dyslexiacoree-production.up.railway.app']
@@ -131,10 +131,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'Dyslexia_static_files')
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'Dyslexia_static_files')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'Dyslexiafile')
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
@@ -149,4 +148,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #PAYPAL INFO
 
 PAYPAL_TEST = False  # MUST TURN TO FALSE
-PAYPAL_RECEIVER_EMAIL = os.environ.get('email')
+PAYPAL_RECEIVER_EMAIL = 'dyslexiacore@gmail.com'

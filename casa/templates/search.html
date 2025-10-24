@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Author" content="Denilson Bernardo Da Fonseca" />
     <meta name="description" content="E-store" />
-    <title>Search</title>
+    <title>Search page</title>
     <link href="{% static 'styles.css' %}" rel="stylesheet" />
     <script defer src="{% static 'bootstrap.bundle.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
@@ -124,8 +124,8 @@
               </div>
 
               <!-- Product price-->
-              <strike> ${{ product.price }} </strike>
-              &nbsp; ${{ product.sale_price }}
+              <strike> N${{ product.price }} </strike>
+              &nbsp; N${{ product.sale_price }}
             </div>
           </div>
           <!-- Product actions-->
@@ -152,7 +152,7 @@
               <!-- Product name-->
               <h5 class="fw-bolder">{{ product.name }}</h5>
               <!-- Product price-->
-              ${{ product.price }}
+              N${{ product.price }}
             </div>
           </div>
           <!-- Product actions-->

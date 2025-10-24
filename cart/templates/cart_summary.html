@@ -11,6 +11,7 @@
     <meta name="author" content="" />
     <title>Shopping Cart</title>
     <!-- Favicon-->
+    <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap icons-->
     <link
@@ -43,7 +44,7 @@
     <!-- Navigation-->
 
     <!-- Header-->
-    <nav class="bg-dark">
+    <nav>
       <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
           <h1 class="display-4 fw-bolder">Shopping Cart</h1>
@@ -78,15 +79,15 @@
 
                 <!-- Product price-->
                 <strike>
-                ${{ product.price }}
+                N${{ product.price }}
                 </strike>
                 &nbsp;
-                ${{ product.sale_price }}
+                N${{ product.sale_price }}
 
 
 
         {% else %}
-            ${{ product.price }}
+            N${{ product.price }}
             
         {% endif %}
             <br/><br/>
@@ -125,7 +126,7 @@
 
         	{% endfor %}
             <div align="right">
-           <center> <h3 class="bg-light">Total: ${{ totals }}</h3></center>
+           <center> <h3 class="bg-light">Total: N${{ totals }}</h3></center>
            <center><a href="{% url 'checkout' %}" class="btn btn-success">Checkout</a></center>
 
             </div>

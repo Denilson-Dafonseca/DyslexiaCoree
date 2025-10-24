@@ -9,6 +9,7 @@ from django.urls import reverse
 from paypal.standard.forms import PayPalPaymentsForm
 from django.conf import settings
 import uuid
+import datetime
 
 
 def create_order_from_cart(request, payment_method="PayPal"):
@@ -314,13 +315,13 @@ def process_order(request):
 
 
 def payment_success(request):
-    # ✅ Get the cart
+    # Get the cart
     cart = Cart(request)
     cart_products = cart.get_prods()
     quantities = cart.get_quants()
     totals = cart.cart_total()
 
-    # ✅ Delete purchased products
+    # Delete purchased products
     for product in cart_products:
         try:
             product_name = product.name
@@ -329,12 +330,12 @@ def payment_success(request):
         except Exception as e:
             print(f" Error deleting {product.name}: {e}")
 
-    # ✅ Clear the session cart
+    # Clear the session cart
     for key in list(request.session.keys()):
         if key == "session_key":
             del request.session[key]
 
-    # ✅ Clear old cart data for logged-in users
+    # Clear old cart data for logged-in users
     if request.user.is_authenticated:
         Profile.objects.filter(user__id=request.user.id).update(old_cart="")
 

@@ -146,6 +146,5 @@ MEDIA_ROOT = BASE_DIR / 'site'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #PAYPAL INFO
-
-PAYPAL_TEST = False  # MUST TURN TO FALSE
 PAYPAL_RECEIVER_EMAIL = 'dyslexiacore@gmail.com'
+PAYPAL_MERCHANT_ID = 'RPVXRHF92MKUC'

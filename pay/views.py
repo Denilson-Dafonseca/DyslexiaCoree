@@ -74,7 +74,7 @@ def billing_info(request):
             "amount": formatted_total,
             "item_name": "DyslexiaCore Order",
             "invoice": invoice,
-            "currency_code": "NAD",  # or "USD" if NAD not supported by your PayPal account
+            "currency_code": "USD",  # or "USD" if NAD not supported by your PayPal account
             "notify_url": f"https://{host}{reverse('paypal-ipn')}",
             "return_url": f"https://{host}{reverse('payment_success')}",
             "cancel_return": f"https://{host}{reverse('payment_failed')}",

@@ -70,3 +70,11 @@ footer {
   background-size: cover;
   background-position: center;
 }
+@media (max-width: 400px) {
+  nav img {
+    max-height: 40px !important;
+  }
+  nav .fw-bolder {
+    font-size: 1rem !important;
+  }
+}

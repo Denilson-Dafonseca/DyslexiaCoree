@@ -7,26 +7,41 @@
   <body>
     {% block content %}
 
-    <nav class="navbar navbar-expand-lg bg-dark">
-      <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg bg-dark py-2">
+      <div
+        class="container-fluid d-flex justify-content-between align-items-center flex-nowrap"
+      >
         <!-- Brand Logo -->
-        <a class="navbar-brand d-flex align-item-start" href="{% url 'main' %}">
+        <a
+          class="navbar-brand d-flex align-items-center"
+          href="{% url 'main' %}"
+        >
           <img
             src="{% static 'site/Dx.png' %}"
             alt="Dyslexia Logo"
             class="img-fluid"
-            style="max-height: 80px"
+            style="max-height: 60px; width: auto"
           />
         </a>
 
-        <div class="navbar-item align-item-center display-6 fw-bolder">
+        <!-- Site Title -->
+        <div
+          class="text-white fw-bolder text-center flex-grow-1 text-nowrap"
+          style="font-size: clamp(1.2rem, 2.5vw, 2rem)"
+        >
           DyslexiaCore
         </div>
-        <a class="navbar-item d-flex align-item-end" href="{% url 'search' %}">
+
+        <!-- Search Icon -->
+        <a
+          class="d-flex align-items-center justify-content-center"
+          href="{% url 'search' %}"
+        >
           <img
             src="{% static 'site/seaa.png' %}"
             alt="Search"
             class="img-fluid"
+            style="height: 55px; width: auto"
           />
         </a>
       </div>

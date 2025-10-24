@@ -8,6 +8,7 @@ import datetime
 class ShippingAddress(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 	shipping_full_name = models.CharField(max_length=255)
+	shipping_phone_number = models.CharField(max_length=10, null=True)
 	shipping_email = models.CharField(max_length=255)
 	shipping_address1 = models.CharField(max_length=255)
 	shipping_address2 = models.CharField(max_length=255, null=True, blank=True)

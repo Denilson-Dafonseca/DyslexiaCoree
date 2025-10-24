@@ -127,11 +127,11 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = ['Dyslexia_static_files/']
 # whitenoise 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# --- Media Files ---
-MEDIA_URL = 'site/'
 MEDIA_ROOT = BASE_DIR / 'site'
+MEDIA_URL = '/site/'
+# --- Media Files ---
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

@@ -1,7 +1,9 @@
 {% extends "master.html" %} {% load static %}
 <!DOCTYPE html>
 <html>
-  <head> </head>
+  <head>
+    <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
+  </head>
   <body>
     {% block content %}
 
@@ -22,7 +24,7 @@
         </div>
         <a class="navbar-item d-flex align-item-end" href="{% url 'search' %}">
           <img
-            src="{% static 'site/sea.png' %}"
+            src="{% static 'site/sea.jpg' %}"
             alt="Search"
             class="img-fluid"
           />

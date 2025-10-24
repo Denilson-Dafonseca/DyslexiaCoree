@@ -82,14 +82,6 @@ WSGI_APPLICATION = 'Dyslexia.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': os.environ.get('password'),
-        'HOST': 'postgres-ojzn.railway.internal',
-        'PORT': '5432',
-    }
 }
 
 DATABASES["default"] = dj_database_url.parse('postgresql://postgres:KEKHvVyQKupUEBzWNqsFmQBFBmbNOetV@interchange.proxy.rlwy.net:44571/railway')

@@ -4,6 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
     <link href="{% static 'styles.css' %}" rel="stylesheet" />
     <title></title>
   </head>
@@ -53,40 +54,31 @@
         </div>
 
         <hr class="border-secondary bg-dark mt-4" />
-        <div
-          class="payment-options"
-          style="text-align: center; padding: 20px 0; background-color: #f8f8f8"
-        >
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg"
-            alt="Visa"
-            style="height: 30px; margin: 0 10px"
-          />
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Mastercard-logo.png"
-            alt="MasterCard"
-            style="height: 30px; margin: 0 10px"
-          />
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo_%282018%29.svg"
-            alt="Amex"
-            style="height: 30px; margin: 0 10px"
-          />
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/5/50/PayPal.svg"
-            alt="PayPal"
-            style="height: 30px; margin: 0 10px"
-          />
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Apple_Pay_logo.svg"
-            alt="Apple Pay"
-            style="height: 30px; margin: 0 10px"
-          />
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Google_Pay_Logo.svg"
-            alt="Google Pay"
-            style="height: 30px; margin: 0 10px"
-          />
+        <!-- Payment Section -->
+        <div class="payment-options text-center py-4">
+          <a
+            href="https://www.paypal.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/5/50/PayPal.svg"
+              alt="PayPal"
+              class="img-fluid payment-icon"
+            />
+          </a>
+
+          <a
+            href="https://www.visa.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg"
+              alt="Visa"
+              class="img-fluid payment-icon"
+            />
+          </a>
         </div>
 
         <div class="row">
@@ -96,7 +88,5 @@
         </div>
       </div>
     </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

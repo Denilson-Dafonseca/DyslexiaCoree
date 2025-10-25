@@ -78,3 +78,31 @@ footer {
     font-size: 1rem !important;
   }
 }
+
+.payment-options {
+  background-color: #f8f8f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.payment-icon {
+  height: 35px;
+  width: auto;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.payment-icon:hover {
+  transform: scale(1.1);
+  opacity: 0.85;
+}
+
+/* Responsive behavior */
+@media (max-width: 480px) {
+  .payment-icon {
+    height: 28px;
+  }
+}

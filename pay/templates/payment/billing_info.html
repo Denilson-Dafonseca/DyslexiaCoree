@@ -126,18 +126,71 @@
     Save Shipping Info
   </button>
 </form>
-<br/><br/><br/><br/><br/><br/>
-  <center>
-  {{ paypal_form.render }}
-  </center>
 
-    
-  
+<div class="accordion" id="ewalletAccordion">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="fnbHeader">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#fnbCollapse">
+        FNB eWallet
+      </button>
+    </h2>
+    <div id="fnbCollapse" class="accordion-collapse collapse show" data-bs-parent="#ewalletAccordion">
+      <div class="accordion-body">
+        Send eWallet to: <strong>+264 81 234 5678</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="bankWindhoekHeader">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#bankWindhoekCollapse">
+        Bank Windhoek EasyWallet
+      </button>
+    </h2>
+    <div id="bankWindhoekCollapse" class="accordion-collapse collapse" data-bs-parent="#ewalletAccordion">
+      <div class="accordion-body">
+        Send to: <strong>+264 81 234 5678</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="standardBankHeader">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#standardBankCollapse">
+        Standard Bank PayPulse
+      </button>
+    </h2>
+    <div id="standardBankCollapse" class="accordion-collapse collapse" data-bs-parent="#ewalletAccordion">
+      <div class="accordion-body">
+        Send to: <strong>+264 81 234 5678</strong>
+      </div>
+    </div>
+  </div>
+</div>
+<form method="POST">
+  {% csrf_token %}
+  <input type="text" name="full_name" placeholder="Full Name" required class="form-control my-2">
+  <input type="email" name="email" placeholder="Email" required class="form-control my-2">
+  <input type="text" name="phone_number" placeholder="phone_number" required class="form-control my-2">
+  <input type="text" name="address" placeholder="Address" required class="form-control my-2">
+  <input type="text" name="city" placeholder="City" required class="form-control my-2">
+  <input type="text" name="zip_code" placeholder="Postal Code" required class="form-control my-2">
+  <input type="hidden" name="payment_option" id="paymentOption">
+
+  <button type="submit" class="btn btn-success w-100 mt-3">Submit Order</button>
+</form>
+
+<script>
+  // Automatically set payment option when accordion opens
+  document.querySelectorAll('.accordion-button').forEach(button => {
+    button.addEventListener('click', () => {
+      document.getElementById('paymentOption').value = button.textContent.trim();
+    });
+  });
+</script>
 
 
 
-
-<br/><br/>
 
 
 <!-- <div class="card">
@@ -157,19 +210,8 @@
 
 <!--<button type="submit" class="btn btn-secondary">
   Pay Now
-</button> -->
-</form>
-<br/><br/>
-
-
-            </div>
-        </div>
-    </div>
-
-
-
-
-
+</button>
+</form> -->
 
 {% endblock %}
 

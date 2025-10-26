@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'casa',
     'cart',
     'pay',
-    'paypal.standard.ipn',
     'whitenoise.runserver_nostatic',
 ]
 
@@ -137,8 +136,3 @@ MEDIA_URL = '/site/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-PAYPAL_TEST = False
-#PAYPAL INFO
-PAYPAL_RECEIVER_EMAIL = 'dyslexiacore@gmail.com'
-PAYPAL_MERCHANT_ID = 'RPVXRHF92MKUC'

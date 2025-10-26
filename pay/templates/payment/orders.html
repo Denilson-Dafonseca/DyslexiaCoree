@@ -27,7 +27,7 @@
     Order {{ order.id}} - ${{order.amount_paid}}
   </div>
   <div class="card-body">
-    Email: {{ order.email}}<br/>
+    phone_number: {{ order.phone_number}}<br/>
     {% if order.date_shipped %}
       Date Shipped: {{ order.date_shipped}}
     {% else %}
@@ -56,7 +56,8 @@
       <button type="Submit" class="btn btn-danger">Mark As Not Shipped</button>
     </from>
 
-    {% endif %}    
+    {% endif %} 
+
     
   </div>
 </div>

@@ -11,8 +11,7 @@ admin.site.register(Order)
 admin.site.register(Profile)
 admin.site.register(Relief)
 admin.site.register(Video)
-
-
+ 
 class ProfileInline(admin.StackedInline):
       model = Profile
       
@@ -26,7 +25,6 @@ class UserAdmin(admin.ModelAdmin):
 admin.site.unregister(User)     
 
 admin.site.register(User,UserAdmin) 
-
 
       
 

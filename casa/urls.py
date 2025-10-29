@@ -13,7 +13,6 @@ urlpatterns = [
     path('door_to_door_relief/', views.door_to_door_relief, name='door_to_door_relief'),
     path('update_password/', views.update_password, name='update_password'),
     path('update_user/', views.update_user, name='update_user'),
-    path('update_info/', views.update_info, name='update_info'),
     path('search/', views.search, name='search'),
     path('info/', views.info, name='info'),
 ]

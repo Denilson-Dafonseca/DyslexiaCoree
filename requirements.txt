@@ -6,7 +6,6 @@ dj-database-url==3.0.1
 Django==4.2.24
 django-bootstrap-v5==1.0.11
 django-bootstrap5==25.2
-django-paypal==2.1
 gunicorn==23.0.0
 idna==3.10
 packaging==25.0

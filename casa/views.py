@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .models import Product, CarouselSlide, Category, Profile, Relief, Video
+from .models import Product, CarouselSlide, Category, Profile, Relief, Video, Order
 from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, UserInfoForm
 from cart.cart import Cart
 from pay.forms import ShippingForm
@@ -32,29 +32,6 @@ def main(request):
             messages.warning(request, "Please enter a search term")
 
     return render(request, "main.html", context)
-
-def update_info(request):
-    if request.user.is_authenticated:
-        # Get Current User
-        current_user = Profile.objects.get(user__id=request.user.id)
-        # get current 
-        shipping_user = ShippingAddress.objects.get(user__id=request.user.id)
-        # Get original User Form
-        form = UserInfoForm(request.POST or None, instance=current_user)
-        # Get User's Shipping Form
-        shipping_form = ShippingForm(request.POST or None, instance=shipping_user)
-        if shipping_form.is_valid():
-            # Save original form
-            
-            shipping_form.save()
-            
-            messages.success(request, "Your Info Has Been Updated!!")
-            return redirect('main')
-        return render(request, "update_info.html", {'shipping_form':shipping_form, 'form':form})
-    else:
-        messages.success(request, "You Must Be Logged In To Access That Page!!")
-        return redirect('main')
-
 
 def update_password(request):
 	if request.user.is_authenticated:
@@ -96,8 +73,6 @@ def update_user(request):
 		messages.success(request, "You Must Be Logged In To Access That Page!!")
 		return redirect('main')
 
-
-
 def login_user(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -124,14 +99,12 @@ def login_user(request):
             messages.success(request, ("You have logged into your account"))
             return redirect('main')
         else:
-             messages.success(request, ("An Error has occured try again"))
+             messages.success(request, ("An Error has occurred try again"))
              return redirect('login')
             
     else:
         return render(request, "login.html", {})    
-    
-    
-    
+       
 def logout_user(request):
     logout(request)
     messages.success(request, ("You have successfully logged out"))
@@ -152,7 +125,6 @@ def search(request):
 	else:
 		return render(request, "search.html", {})	
  
-
 def register_user(request):
     form = SignUpForm()
     if request.method == "POST":
@@ -165,8 +137,7 @@ def register_user(request):
             # log in user
             user = authenticate(username=username, password=password, email=email)
             login(request, user)
-            messages.success(request, ("Step 1 completed, contiune with this form. some parts are optional"))
-            return redirect('update_info')
+            return redirect('main')
         else:
             messages.success(request, ("here was a problem Registering, please try again..."))
             return redirect('register')
@@ -180,7 +151,7 @@ def category(request,bk):
         products = Product.objects.filter(category=category)
         return render(request, 'category.html', {'products':products, 'category':category})
     except: 
-        messages.success(request, ("You have successfully logged out"))
+        messages.success(request, ("No product in that page"))
         return redirect('/')  
     
 

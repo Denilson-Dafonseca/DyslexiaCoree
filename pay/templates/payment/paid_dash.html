@@ -1,29 +1,38 @@
-{% extends 'base.html' %} {% block content %}
-<div class="container my-5">
-  <h2 class="text-center mb-4 text-success">Paid Orders</h2>
-  <div class="row">
-    {% for order in orders %}
-    <div class="col-md-4 mb-4">
-      <div class="card shadow-sm border-success">
-        <div class="card-body">
-          <h5 class="card-title">{{ order.full_name }}</h5>
-          <p><strong>Email:</strong> {{ order.email }}</p>
-          <p><strong>Address:</strong> {{ order.shipping_address }}</p>
-          <p><strong>Amount:</strong> ${{ order.amount_paid }}</p>
-          <p><strong>Payment Method:</strong> {{ order.payment_method }}</p>
-          <form method="POST">
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paid Orders</title>
+<link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
+<link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+{% include 'nav.html' %}
+<div class="container mt-5">
+    <h2>Paid Orders</h2>
+ {% if orders %}
+{% for order in orders %}
+<tr>
+    <td>{{ order.id }}</td>
+    <td>{{ order.full_name }}</td>
+    <td>{{ order.email }}</td>
+    <td>NAD {{ order.amount_paid }}</td>
+    <td>{{ order.payment_method }}</td>
+    <td>{{ order.date_ordered|date:"Y-m-d H:i" }}</td>
+    <td>
+        <form method="POST">
             {% csrf_token %}
-            <input type="hidden" name="order_id" value="{{ order.id }}" />
-            <button type="submit" class="btn btn-outline-danger w-100">
-              Mark as Not Paid
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-    {% empty %}
-    <p class="text-center">No paid orders found.</p>
-    {% endfor %}
-  </div>
+            <input type="hidden" name="order_id" value="{{ order.id }}">
+            <button type="submit" class="btn btn-warning btn-sm">Revert to Not Paid</button>
+        </form>
+    </td>
+</tr>
+{% endfor %}
+{% endif %}
+  
 </div>
-{% endblock %}
+{% include 'footer.html' %}
+</body>
+</html>

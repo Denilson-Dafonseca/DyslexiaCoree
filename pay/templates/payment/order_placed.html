@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Author" content="Denilson Bernardo Da Fonseca" />
+    <meta name="description" content="E-store" />
+    <title>Order placed</title>
+    <link href="{% static 'styles.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
+    <script defer src="{% static 'bootstrap.bundle.min.js' %}"></script>
+    <script defer src="{% static 'jquery-3.7.1.js' %}"></script>
+  </head>
+  <body>
+    {% block content %}
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    {% endfor %} {% endif %} 
+    <!-- Header-->
+    <nav class="bg-dark py-2">
+      <a class="d-flex" href="{% url 'main' %}">
+        <img
+          src="{% static 'site/Dx.png' %}"
+          alt="Dyslexia Logo"
+          class="img-fluid"
+          style="max-height: 80px"
+        />
+      </a>
+      <div class="container px-2 px-lg-5 my-2">
+        <div class="text-center text-dark">
+          <h1 class="display-4 fw-bolder text-decoration-underline">Order placed</h1>
+          <p class="lead fw-normal text-white-50 mb-0">
+            
+          </p>
+        </div>
+      </div>
+    </nav>
+    <div class="row">
+      <div class="col text-white">
+    <center><h1 class="mt-5 text-decoration-underline "> Next step </h1></center>
+    <center><p class="w-50 bg-success"> You can send the funds to the number perviously provided, then we'll put you throw to the respective vendor <br>
+    you can exit this page by pressing on the logo.
+  </p></center>
+  <center>
+  <p class="w-50 bg-success display-6">THANK YOU FOR SHOPPING WITH US. </p>
+</center>
+      </div>
+    </div>
+    {% endblock %}
+    
+
+{% include 'footer.html' %}
+  </body>
+</html>

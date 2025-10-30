@@ -93,8 +93,8 @@ def checkout(request):
         if request.user.is_authenticated:
             Profile.objects.filter(user=request.user).update(old_cart="")
 
-        messages.success(request, " Sign up to be able to place an order.")
-        return redirect("register")
+        
+        return redirect("order_placed")
 
     return render(
         request,

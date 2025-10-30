@@ -93,9 +93,6 @@ def checkout(request):
         if request.user.is_authenticated:
             Profile.objects.filter(user=request.user).update(old_cart="")
 
-        messages.success(request, "Order placed successfully using E-wallet.")
-        return redirect("order_placed")
-
     return render(
         request,
         "payment/checkout.html",

@@ -71,6 +71,8 @@
 </p>
     </div>
 <!-- Video Section -->
+
+<!-- Video Section -->
 <section class="py-5 bg-light" id="videos">
   <div class="container">
     <h2 class="text-center text-success fw-bold mb-4 text-decoration-underline">Our Video Stories</h2>
@@ -84,16 +86,30 @@
         <!-- Video Embed -->
         <div class="ratio ratio-16x9 shadow-sm rounded-3 overflow-hidden">
           {% if video.youtube_url %}
+          <!-- YouTube Video -->
           <iframe
             src="{{ video.get_embed_url }}"
             title="{{ video.title }}"
             allowfullscreen
           ></iframe>
-          {% elif video.video_file %}
+
+          {% elif video.vimeo_url %}
+          <!-- Vimeo Video -->
+          <iframe
+            src="{{ video.vimeo_url }}"
+            title="{{ video.title }}"
+            allowfullscreen
+          ></iframe>
+
+          {% elif video.video_url %}
+          <!-- External MP4 Video -->
           <video controls class="w-100 rounded-3">
-            <source src="{{ video.video_file.url }}" type="video/mp4" />
+            <source src="{{ video.video_url }}" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
+
+          {% else %}
+          <p class="text-center text-muted small">Video unavailable</p>
           {% endif %}
         </div>
 
@@ -105,7 +121,6 @@
 
         <!-- AdSense Spot -->
         <div class="text-center my-3">
-          <!-- Replace the ad-client and ad-slot with your AdSense codes -->
           <ins class="adsbygoogle"
                style="display:block"
                data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
@@ -116,7 +131,6 @@
                (adsbygoogle = window.adsbygoogle || []).push({});
           </script>
         </div>
-
       </div>
       {% empty %}
       <p class="text-center">No videos available yet. Check back soon!</p>
@@ -124,8 +138,6 @@
     </div>
   </div>
 </section>
-    
-
 
     <!-- footer-->
     {% include 'footer.html' %} {% endblock %}

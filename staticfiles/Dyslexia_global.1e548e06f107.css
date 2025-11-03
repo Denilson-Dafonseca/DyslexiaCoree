@@ -1,6 +1,6 @@
 /* body*/
 body {
-  background-image: url(site/Bk.jpg);
+  background-image: url("site/Bk.a1c84f927f8d.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -10,7 +10,7 @@ body {
 
 nav {
   width: 100%;
-  background: url(site/water.gif);
+  background: url("site/water.c69fca48df0e.gif");
   background-size: cover;
   background-position: center;
 }
@@ -66,7 +66,7 @@ nav {
 
 footer {
   width: 100%;
-  background: url(site/water.gif);
+  background: url("site/water.c69fca48df0e.gif");
   background-size: cover;
   background-position: center;
 }
@@ -167,4 +167,26 @@ body.loaded #skeleton-loader {
 }
 body.loaded .content {
   display: block;
+}
+
+
+/* Ensure carousel images fit within Bootstrap carousel */
+.carousel-inner,
+.carousel-item {
+    max-height: 80vh;       /* Max height relative to viewport */
+    overflow: hidden;       /* Hide excess */
+}
+
+.carousel-item img {
+    width: 100%;            /* Full width of carousel */
+    height: 100%;           /* Fill carousel-item height */
+    object-fit: cover;      /* Crop to fill without stretching */
+    object-position: center;
+}
+
+/* Optional: captions styling */
+.carousel-caption {
+    background: rgba(0,0,0,0.4);
+    padding: 8px 12px;
+    border-radius: 6px;
 }

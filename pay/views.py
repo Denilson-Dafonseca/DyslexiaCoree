@@ -31,7 +31,6 @@ def orders(request, pk):
 
     return render(request, "payment/orders.html", {"order": order, "items": items})
 
-
 def checkout(request):
     cart = Cart(request)
     cart_products = cart.get_prods()
@@ -43,7 +42,7 @@ def checkout(request):
         email = request.POST.get("email")
         phone_number = request.POST.get("phone_number")
         address = request.POST.get("address")
-        city = request.POST.get("city")
+        district = request.POST.get("district")
 
         # Always use e-wallet as payment method
         payment_option = "E-wallet"
@@ -55,8 +54,7 @@ def checkout(request):
             shipping_email=email,
             shipping_phone_number=phone_number,
             shipping_address1=address,
-            shipping_city=city,
-            shipping_country="Namibia",
+            shipping_district=district,
         )
 
         # Create the order
@@ -71,7 +69,7 @@ def checkout(request):
             date_ordered=timezone.now(),
         )
 
-        # Create order items
+        # Create order items + delete the product from website categories
         for product in cart_products:
             product_obj = Product.objects.get(id=product.id)
             quantity = quantities.get(str(product.id))
@@ -85,17 +83,25 @@ def checkout(request):
                 price=price,
             )
 
-        # Clear cart
+            # Delete the product from the website (and its category)
+            # 🕹️ Mark product as unavailable (soft delete)
+            product_obj.is_available = False
+            product_obj.save()
+
+
+
+        # Clear the cart from session
         for key in list(request.session.keys()):
             if key == "session_key":
                 del request.session[key]
 
+        # Clear saved cart data from user profile if logged in
         if request.user.is_authenticated:
             Profile.objects.filter(user=request.user).update(old_cart="")
 
-        
         return redirect("order_placed")
 
+    # If GET request → render checkout page
     return render(
         request,
         "payment/checkout.html",
@@ -105,7 +111,6 @@ def checkout(request):
             "totals": totals,
         },
     )
-
 
 def not_paid_dash(request):
     if not request.user.is_superuser:

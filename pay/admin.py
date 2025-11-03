@@ -56,16 +56,16 @@ class ShippingAddressAdmin(admin.ModelAdmin):
         'shipping_full_name',
         'shipping_email',
         'shipping_phone_number',
-        'shipping_city',
-        'shipping_country',
+        'shipping_district'
+        'shipping_address1'
+        'shipping_state',
     ]
     search_fields = [
         'shipping_full_name',
         'shipping_email',
         'shipping_phone_number',
-        'shipping_city',
+        'shipping_district',
     ]
-    list_filter = ['shipping_country']
 
 class OrderItemAdmin(admin.ModelAdmin):
     list_display = [

@@ -1,7 +1,14 @@
-/*!
-* Start Bootstrap - Shop Item v5.0.6 (https://startbootstrap.com/template/shop-item)
-* Copyright 2013-2023 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-item/blob/master/LICENSE)
-*/
-// This file is intentionally blank
-// Use this file to add JavaScript to your project
+// Universal page loading skeleton
+window.addEventListener("load", () => {
+  // Add delay for smoother fade-in (optional)
+  setTimeout(() => {
+    document.body.classList.add("loaded");
+  }, 800); // 0.8 seconds
+});
+
+// Universal page loading skeleton with 3-second delay
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    document.body.classList.add("loaded"); // hides skeleton and shows content
+  }, 3000); // 3000ms = 3 seconds
+});

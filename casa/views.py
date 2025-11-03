@@ -151,7 +151,7 @@ def category(request,bk):
         products = Product.objects.filter(category=category)
         return render(request, 'category.html', {'products':products, 'category':category})
     except: 
-        messages.success(request, ("No product in that page"))
+        messages.success(request, ("No product on that page"))
         return redirect('/')  
     
 
@@ -160,7 +160,7 @@ def product(request,pk):
     return render(request, 'product.html', {'product':product})
 
 def stand(request):
-    products = Product.objects.all()
+    products = Product.objects.filter(is_available=True)
     return render(request, 'stand.html', {'products':products})
 
 def info(request):
@@ -173,6 +173,10 @@ def door_to_door_relief(request):
     context = {"doors": doors}    
     return render(request, 'door_to_door_relief.html', context)
 
+
+def payment_method(request):
+    
+    return render(request, 'payment_method.html',{})
 
 
 

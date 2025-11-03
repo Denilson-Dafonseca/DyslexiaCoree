@@ -15,6 +15,9 @@ admin.site.register(Video)
 class ProfileInline(admin.StackedInline):
       model = Profile
       
+class Order(admin.StackedInline):
+      model = Order      
+      
       
 class UserAdmin(admin.ModelAdmin):
       model = User

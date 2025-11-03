@@ -15,16 +15,15 @@ class ShippingAddress(models.Model):
     shipping_phone_number = models.CharField(max_length=10, blank=True)
     shipping_address1 = models.CharField(max_length=255)
     shipping_address2 = models.CharField(max_length=255, null=True, blank=True)
-    shipping_city = models.CharField(max_length=255)
+    shipping_district = models.CharField(max_length=255)
     shipping_state = models.CharField(max_length=255, null=True, blank=True)
-    shipping_country = models.CharField(max_length=255, default="Namibia")
     date_shipped = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         verbose_name_plural = "Shipping Address"
 
     def __str__(self):
-        return f"{self.shipping_full_name} - {self.shipping_city}"
+        return f"{self.shipping_full_name} - {self.shipping_district}"
 
 
 # Auto-create a shipping address profile when a new user registers

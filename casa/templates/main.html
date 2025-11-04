@@ -41,7 +41,7 @@
   </div>
 </div>     
 
-      <div class="container-fluid mb-3 mt-3 skeleton-item">
+      <div class="container-fluid mb-3 mt-3">
         <div id="demo" class="carousel slide" data-bs-ride="carousel">
           <!-- Indicators/dots -->
           <div class="carousel-indicators">
@@ -56,8 +56,8 @@
             <div class="carousel-item text-center {% if forloop.first %}active{% endif %}">
               <img src="{{ slide.image.url }}" class="d-block w-100 img-fluid" alt="{{ slide.title }}" />
               <div class="carousel-caption">
-                <h3>{{ slide.title }}</h3>
-                <p>{{ slide.caption }}</p>
+                <h3 class="text-dark">{{ slide.title }}</h3>
+                <p class="text-dark">{{ slide.caption }}</p>
               </div>
             </div>
             {% endfor %}

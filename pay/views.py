@@ -45,7 +45,7 @@ def checkout(request):
         district = request.POST.get("district")
 
         # Always use e-wallet as payment method
-        payment_option = "E-wallet"
+        payment_method = request.POST.get("payment_method")
 
         # Create shipping address
         shipping = ShippingAddress.objects.create(
@@ -64,7 +64,7 @@ def checkout(request):
             email=email,
             shipping_address=address,
             amount_paid=totals,
-            payment_method=payment_option,
+            payment_method=payment_method,
             paid=False,
             date_ordered=timezone.now(),
         )
@@ -147,5 +147,5 @@ def paid_dash(request):
 
 
 def order_placed(request):
-    messages.success(request, "Order placed successfully using E-wallet.")
+    messages.success(request, "Order placed successfully.")
     return render(request, "payment/order_placed.html")

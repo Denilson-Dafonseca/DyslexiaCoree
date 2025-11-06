@@ -5,11 +5,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .models import Product, CarouselSlide, Category, Profile, Relief, Video, Order
+from .models import Product, CarouselSlide, Category, Profile, Relief, Video
+
 from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, UserInfoForm
 from cart.cart import Cart
 from pay.forms import ShippingForm
-from pay.models import ShippingAddress
+from pay.models import ShippingAddress, Order
 from django import forms
 import json
 from django.db.models import Q

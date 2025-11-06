@@ -82,6 +82,7 @@ DATABASES = {
 }
 
 DATABASES["default"] = dj_database_url.parse('postgresql://postgres:KEKHvVyQKupUEBzWNqsFmQBFBmbNOetV@interchange.proxy.rlwy.net:44571/railway')
+                                             
 
 
 
@@ -118,15 +119,24 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'Dyslexia_static_files']
 
+# Folder where your development static files live
+STATICFILES_DIRS = [
+    BASE_DIR / 'Dyslexia_static_files',
+]
+
+# Folder where Django will collect all static files for production
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# WhiteNoise storage
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Media files
+
+# -------------------------
+# MEDIA FILES (uploads)
+# -------------------------
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

@@ -1,5 +1,5 @@
-import os
 from pathlib import Path
+import os
 import dj_database_url
 # from dotenv import load_dotenv
 
@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'casa',
     'cart',
     'pay',
-    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -78,12 +77,11 @@ WSGI_APPLICATION = 'Dyslexia.wsgi.application'
 
 
 DATABASES = {
-    "default": dj_database_url.parse(
-        "postgresql://postgres:KEKHvVyQKupUEBzWNqsFmQBFBmbNOetV@interchange.proxy.rlwy.net:44571/railway",
-        conn_max_age=600,  # Keep connections open for 10 minutes
-        ssl_require=True   # Use SSL for secure connection
-    )
 }
+
+DATABASES["default"] = dj_database_url.parse('postgresql://postgres:KEKHvVyQKupUEBzWNqsFmQBFBmbNOetV@interchange.proxy.rlwy.net:44571/railway')
+
+   
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -126,7 +124,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
 
 
 # Default primary key field type

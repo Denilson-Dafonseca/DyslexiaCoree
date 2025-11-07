@@ -54,7 +54,7 @@ class Product(models.Model):
     price = models.DecimalField(default=0, decimal_places=2, max_digits=8)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
     description = models.CharField(max_length=250, default="", blank=True, null=True)
-    image = models.ImageField(upload_to='uploads/product/')
+    image = models.ImageField(upload_to='media/')
     #sales
     is_sale = models.BooleanField(default=False)
     sale_price = models.DecimalField(default=0, decimal_places=2, max_digits=8)
@@ -70,7 +70,7 @@ class Product(models.Model):
 class CarouselSlide(models.Model):
     title = models.CharField(max_length=100)
     caption = models.TextField(blank=True)
-    image = models.ImageField(upload_to='uploads/carouselslide/')
+    image = models.ImageField(upload_to='media/')
     is_active = models.BooleanField(default=True)  # Optional: for toggling visibility
 
     def __str__(self):
@@ -80,7 +80,7 @@ class Relief(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(default=0, decimal_places=2, max_digits=8)
     description = models.CharField(max_length=250, default="", blank=True, null=True)
-    image = models.ImageField(upload_to='uploads/relief/')
+    image = models.ImageField(upload_to='media/')
   
     def __str__(self):
         return self.name
@@ -91,7 +91,7 @@ class Video(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     youtube_url = models.URLField(blank=True, null=True, help_text="Paste a YouTube link here.")
-    video_file = models.FileField(upload_to='uploads/video/', blank=True, null=True, help_text="Or upload a video file.")
+    video_file = models.FileField(upload_to='media/', blank=True, null=True, help_text="Or upload a video file.")
     date_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:

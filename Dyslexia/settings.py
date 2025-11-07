@@ -18,10 +18,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9+_@mp%sklldf6l7lq0o*1=h=y!y$@mb#n1#v(i4sptl-aoysm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['https://dyslexiacore.xyz','dyslexiacore.xyz', 'dyslexiacoree-production.up.railway.app', 'https://dyslexiacoree-production.up.railway.app']
-CSRF_TRUSTED_ORIGINS = ['https://dyslexiacore.xyz','https://dyslexiacoree-production.up.railway.app']
+ALLOWED_HOSTS = ['*']
 
 
 
@@ -50,7 +49,9 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',   
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+   
 ]
 
 ROOT_URLCONF = 'Dyslexia.urls'
@@ -82,8 +83,6 @@ DATABASES = {
 }
 
 DATABASES["default"] = dj_database_url.parse('postgresql://postgres:KEKHvVyQKupUEBzWNqsFmQBFBmbNOetV@interchange.proxy.rlwy.net:44571/railway')
-                                             
-
 
 
 # Password validation
@@ -118,24 +117,16 @@ USE_TZ = True
 
 
 # Static files
-# -------------------------
-# STATIC FILES
-# -------------------------
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    BASE_DIR / 'Dyslexia_static_files',
-]
+STATICFILES_DIRS = [BASE_DIR / 'Dyslexia_static_files']
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
-# -------------------------
-# MEDIA FILES (uploads)
-# -------------------------
+# Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

@@ -1,5 +1,4 @@
 from django.db import models
-import datetime
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
@@ -19,79 +18,81 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-# Create a user Profile by default when user signs up
+
+# Create a user profile when user is created
 def create_profile(sender, instance, created, **kwargs):
     if created:
-        user_profile = Profile(user=instance)
-        user_profile.save()
+        Profile.objects.create(user=instance)
 
-# Automate the profile thing
 post_save.connect(create_profile, sender=User)
-    
-# Category     
+
+
+# Category
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    
+
+    class Meta:
+        verbose_name_plural = "Categories"
+
     def __str__(self):
         return self.name
-    
-class Meta:
-    verbose_name_plural = 'Categories'    
-    
-# Cutomers    
+
+
+# Customer
 class Customer(models.Model):
     first_name = models.CharField(max_length=100, default="client")
     last_name = models.CharField(max_length=100, default="client")
     phone = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
     password = models.CharField(max_length=100)
-   
+
     def __str__(self):
-        return f'{self.first_name} {self.sur_name}'   
-    
+        return f"{self.first_name} {self.last_name}"
+
+
+# Products
 class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(default=0, decimal_places=2, max_digits=8)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
-    description = models.CharField(max_length=250, default="", blank=True, null=True)
-    image = models.ImageField(upload_to='media/')
-    #sales
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    description = models.CharField(max_length=250, blank=True, null=True)
+    image = models.ImageField(upload_to='products/')
     is_sale = models.BooleanField(default=False)
     sale_price = models.DecimalField(default=0, decimal_places=2, max_digits=8)
     is_available = models.BooleanField(default=True)
 
-
-
     def __str__(self):
-        return self.name  
-        
+        return self.name
 
-        
+
+# Carousel Images
 class CarouselSlide(models.Model):
     title = models.CharField(max_length=100)
     caption = models.TextField(blank=True)
-    image = models.ImageField(upload_to='media/')
-    is_active = models.BooleanField(default=True)  # Optional: for toggling visibility
+    image = models.ImageField(upload_to='carousel/')
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
-    
+
+
+# Relief items
 class Relief(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(default=0, decimal_places=2, max_digits=8)
-    description = models.CharField(max_length=250, default="", blank=True, null=True)
-    image = models.ImageField(upload_to='media/')
-  
+    description = models.CharField(max_length=250, blank=True, null=True)
+    image = models.ImageField(upload_to='relief/')
+
     def __str__(self):
         return self.name
-    
-from django.db import models
 
+
+# Videos
 class Video(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
-    youtube_url = models.URLField(blank=True, null=True, help_text="Paste a YouTube link here.")
-    video_file = models.FileField(upload_to='media/', blank=True, null=True, help_text="Or upload a video file.")
+    youtube_url = models.URLField(blank=True, null=True)
+    video_file = models.FileField(upload_to='videos/', blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -101,12 +102,6 @@ class Video(models.Model):
         return self.title
 
     def get_embed_url(self):
-        """
-        Converts a normal YouTube link into an embeddable link
-        (e.g. https://www.youtube.com/watch?v=abc123 → https://www.youtube.com/embed/abc123)
-        """
         if self.youtube_url:
             return self.youtube_url.replace("watch?v=", "embed/")
         return None
-    
-  

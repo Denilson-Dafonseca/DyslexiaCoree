@@ -1,5 +1,5 @@
-from pathlib import Path
 import os
+from pathlib import Path
 import dj_database_url
 # from dotenv import load_dotenv
 
@@ -78,11 +78,12 @@ WSGI_APPLICATION = 'Dyslexia.wsgi.application'
 
 
 DATABASES = {
+    "default": dj_database_url.parse(
+        "postgresql://postgres:KEKHvVyQKupUEBzWNqsFmQBFBmbNOetV@interchange.proxy.rlwy.net:44571/railway",
+        conn_max_age=600,  # Keep connections open for 10 minutes
+        ssl_require=True   # Use SSL for secure connection
+    )
 }
-
-DATABASES["default"] = dj_database_url.parse('postgresql://postgres:KEKHvVyQKupUEBzWNqsFmQBFBmbNOetV@interchange.proxy.rlwy.net:44571/railway')
-
-   
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -116,15 +117,16 @@ USE_TZ = True
 
 
 # Static files
-STATIC_URL = 'static/'
-STATICFILES_DIRS = ['Dyslexia_static_files/']
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'Dyslexia_static_files']
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media files
-MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 
 # Default primary key field type

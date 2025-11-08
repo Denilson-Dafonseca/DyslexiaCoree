@@ -10,7 +10,7 @@ from .models import Product, CarouselSlide, Category, Profile, Relief, Video
 from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, UserInfoForm
 from cart.cart import Cart
 from pay.forms import ShippingForm
-from pay.models import ShippingAddress, Order
+from pay.models import ShippingAddress, Order, OrderItem
 from django import forms
 import json
 from django.db.models import Q
@@ -149,7 +149,7 @@ def category(request,bk):
     bk = bk.replace('-', ' ')
     try:
         category = Category.objects.get(name=bk)
-        products = Product.objects.filter(category=category)
+        products = Product.objects.filter(category=category,is_available=True)
         return render(request, 'category.html', {'products':products, 'category':category})
     except: 
         messages.success(request, ("No product on that page"))

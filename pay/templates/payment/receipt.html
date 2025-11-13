@@ -1,0 +1,41 @@
+{% load static %}
+{% load cart_extras %}  {# Custom template filter to get quantity by product ID #}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receipt Page</title>
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+  <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
+</head>
+<body>
+  <!-- Header -->
+  <div class="container mt-4">
+    <h2 class="w-25 bg-light text-dark">Receipt</h2>
+
+    <!-- Order Summary Card -->
+    <div class="card w-25 mb-4 justify-content-center">
+      <div class="card-body">
+        {% for product in cart_products %}
+          <strong>{{ product.name }}</strong> :
+          {% if product.is_sale %}
+            ${{ product.sale_price }}
+          {% else %}
+            ${{ product.price }}
+          {% endif %}
+          <br>
+          <small>
+            Quantity: {{ quantities|get_item:product.id }}
+          </small>
+          <hr>
+        {% endfor %}
+        <strong>Total:</strong> ${{ totals }}
+      </div>
+      <center>
+    </div>
+    <a href="{% url 'main' %}" class="btn btn-primary">Back to Home</a>
+  </div>
+</center>
+</body>
+</html>

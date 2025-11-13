@@ -24,7 +24,6 @@ ALLOWED_HOSTS = ['https://dyslexiacore.xyz','dyslexiacore.xyz', 'dyslexiacoree-p
 CSRF_TRUSTED_ORIGINS = ['https://dyslexiacore.xyz','https://dyslexiacoree-production.up.railway.app']
 
 
-
 # Application definition
 
 INSTALLED_APPS = [

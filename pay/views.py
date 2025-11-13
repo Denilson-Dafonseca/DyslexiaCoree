@@ -4,7 +4,9 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 from cart.cart import Cart
+
 from pay.models import ShippingAddress, Order, OrderItem
+from pay.forms import ShippingForm
 from casa.models import Product, Profile
 
 
@@ -31,6 +33,7 @@ def orders(request, pk):
 
     return render(request, "payment/orders.html", {"order": order, "items": items})
 
+
 def checkout(request):
     cart = Cart(request)
     cart_products = cart.get_prods()
@@ -38,14 +41,13 @@ def checkout(request):
     totals = cart.cart_total()
 
     if request.method == "POST":
+        # Get shipping and payment info
         full_name = request.POST.get("full_name")
         email = request.POST.get("email")
         phone_number = request.POST.get("phone_number")
         address = request.POST.get("address")
         district = request.POST.get("district")
-
-        # Always use e-wallet as payment method
-        payment_method = request.POST.get("payment_method")
+        payment_method = request.POST.get("payment_method")  # e-wallet, etc.
 
         # Create shipping address
         shipping = ShippingAddress.objects.create(
@@ -69,10 +71,10 @@ def checkout(request):
             date_ordered=timezone.now(),
         )
 
-        # Create order items + delete the product from website categories
+        # Create order items and mark products as unavailable
         for product in cart_products:
             product_obj = Product.objects.get(id=product.id)
-            quantity = quantities.get(str(product.id))
+            quantity = quantities.get(str(product.id), 1)
             price = product_obj.sale_price if product_obj.is_sale else product_obj.price
 
             OrderItem.objects.create(
@@ -83,25 +85,29 @@ def checkout(request):
                 price=price,
             )
 
-            # Delete the product from the website (and its category)
-            # 🕹️ Mark product as unavailable (soft delete)
+            # Soft delete: mark product as unavailable
             product_obj.is_available = False
             product_obj.save()
 
-
-
-        # Clear the cart from session
-        for key in list(request.session.keys()):
-            if key == "session_key":
-                del request.session[key]
+            # Remove product from cart session
+            cart.delete(product_obj.id)
 
         # Clear saved cart data from user profile if logged in
         if request.user.is_authenticated:
             Profile.objects.filter(user=request.user).update(old_cart="")
 
+        # Save shipping info in session for receipt page
+        request.session["shipping_info"] = {
+            "shipping_full_name": full_name,
+            "shipping_email": email,
+            "shipping_phone": phone_number,
+            "shipping_address1": address,
+            "shipping_district": district,
+        }
+
         return redirect("order_placed")
 
-    # If GET request → render checkout page
+    # GET request → show checkout page
     return render(
         request,
         "payment/checkout.html",
@@ -111,6 +117,7 @@ def checkout(request):
             "totals": totals,
         },
     )
+    
 
 def not_paid_dash(request):
     if not request.user.is_superuser:
@@ -149,3 +156,36 @@ def paid_dash(request):
 def order_placed(request):
     messages.success(request, "Order placed successfully.")
     return render(request, "payment/order_placed.html")
+
+def receipt(request):
+    # Get the latest order for the current user (or last session)
+    if request.user.is_authenticated:
+        order = Order.objects.filter(user=request.user).order_by('-date_ordered').first()
+    else:
+        # For guests, you might store the order id in the session
+        order = Order.objects.filter(user=None).order_by('-date_ordered').first()        
+
+    if not order:
+        return render(request, "payment/receipt.html", {
+            "cart_products": [],
+            "quantities": {},
+            "totals": 0,
+        })
+
+    # Get order items
+    order_items = OrderItem.objects.filter(order=order)
+
+    # Prepare quantities dict
+    quantities = {item.product.id: item.quantity for item in order_items}
+
+    # Prepare totals
+    totals = sum(item.price * item.quantity for item in order_items)
+
+  
+
+    return render(request, "payment/receipt.html", {
+        "cart_products": [item.product for item in order_items],
+        "quantities": quantities,
+        "totals": totals,
+    })
+    

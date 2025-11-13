@@ -3,16 +3,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Shopping Cart</title>
     <!-- Favicon-->
     <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap icons-->
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static 'styles.css' %}" rel="stylesheet" />
@@ -50,7 +46,9 @@
 <div class="card mb-3">
   <div class="row g-0">
     <div class="col-md-4">
-      <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="...">
+      <img src="{{ product.image.url }}" 
+           class="img-fluid rounded-start" 
+                  alt="...">
     </div>
     <div class="col-md-8">
       <div class="card-body">
@@ -108,11 +106,9 @@
   </div>
 </div>
 
-
-
         	{% endfor %}
             <div align="right">
-           <center> <h3 class="bg-light">Total: N${{ totals }}</h3></center>
+           <center> <h3 class="w-25 bg-light">Total: N${{ totals }}</h3></center>
            <center><a href="{% url 'checkout' %}" class="btn w-25% btn-success">Checkout</a></center>
 
             </div>

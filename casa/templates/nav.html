@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8" />  
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
     <link href="{% static 'styles.css' %}" rel="stylesheet" />
@@ -28,18 +28,26 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div
-          class="collapse navbar-collapse fw-bolder"
-          id="navbarSupportedContent"
+        class="collapse navbar-collapse fw-bolder"
+        id="navbarSupportedContent"
         >
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-            <li class="nav-item">
-              <a
-                class="nav-link active"
-                aria-current="page"
-                href="{% url 'main' %}"
-                >Home</a
-              >
-            </li>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+          <li class="nav-item">
+            <a
+            class="nav-link active"
+            aria-current="page"
+            href="{% url 'main' %}"
+            >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              href="{% url 'receipt' %}"
+              >Receipt page</a
+            >
+          </li>              
             <li class="nav-item">
               <a class="nav-link" href="{% url 'door_to_door_relief' %}"
                 >Door_to_door_relief</a
@@ -139,7 +147,7 @@
               </ul>
             </li>
             <!--  yyu-->
-
+              
             <li class="nav-item dropdown fw-bolder">
               <a
                 class="nav-link dropdown-toggle"

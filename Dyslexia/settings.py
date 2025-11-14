@@ -1,9 +1,7 @@
 from pathlib import Path
 import os
 import dj_database_url
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+
 
 # from dotenv import load_dotenv
 
@@ -41,8 +39,6 @@ INSTALLED_APPS = [
     'casa',
     'cart',
     'pay',
-    'cloudinary',
-    'cloudinary_storage',
     'whitenoise.runserver_nostatic',
 ]
 
@@ -130,7 +126,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # MEDIA FILES
 # -------------------------
 MEDIA_URL = 'media/'
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Default primary key field type
@@ -139,12 +135,4 @@ MEDIA_URL = 'media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CLOUDINARY CONFIG
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'du5qt97qf',
-    'API_KEY': '288832488742757',
-    'API_SECRET': 'S3WWA'
-}
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-MEDIA_URL = '/media/'

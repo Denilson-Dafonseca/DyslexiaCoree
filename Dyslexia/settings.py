@@ -22,8 +22,17 @@ SECRET_KEY = 'django-insecure-9+_@mp%sklldf6l7lq0o*1=h=y!y$@mb#n1#v(i4sptl-aoysm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://dyslexiacore.xyz','dyslexiacore.xyz', 'dyslexiacoree-production.up.railway.app', 'https://dyslexiacoree-production.up.railway.app']
-CSRF_TRUSTED_ORIGINS = ['https://dyslexiacore.xyz','https://dyslexiacoree-production.up.railway.app']
+ALLOWED_HOSTS = [
+    'dyslexiacore.xyz',
+    'www.dyslexiacore.xyz',
+    'dyslexiacoree-production.up.railway.app',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://dyslexiacore.xyz',
+    'https://www.dyslexiacore.xyz',
+    'https://dyslexiacoree-production.up.railway.app',
+]
 
 
 # Application definition
@@ -77,11 +86,11 @@ WSGI_APPLICATION = 'Dyslexia.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-
 DATABASES = {
 }
 
 DATABASES["default"] = dj_database_url.parse('postgresql://postgres:KEKHvVyQKupUEBzWNqsFmQBFBmbNOetV@interchange.proxy.rlwy.net:44571/railway')
+
 
 
 # Password validation

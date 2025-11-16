@@ -179,5 +179,10 @@ def payment_method(request):
     
     return render(request, 'payment_method.html',{})
 
+def advert(request):
+    
+    return render(request, 'advert.html',{})
+
+
 
 

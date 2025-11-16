@@ -10,49 +10,65 @@
   <body class="d-flex flex-column min-vh-100">
 
 
-    <!-- Footer -->
-    <footer class="mt-auto bg-light py-4">
-      <div class="container">
-        <div class="row align-items-center text-center text-md-start">
-          <!-- About Link -->
-          <div class="col-12 col-md-4 mb-3 mb-md-0">
-            <a href="/info" class="text-dark text-decoration-underline fw-semibold">
-              About Dyslexia
-            </a>
-          </div>
+<!-- Footer -->
+<footer class="mt-auto bg-light py-4">
+  <div class="container">
 
-          <!-- Phone -->
-          <div class="col-12 col-md-4 mb-3 mb-md-0 d-flex justify-content-center justify-content-md-start align-items-center">
-            <img src="{% static 'site/app.png' %}" alt="Phone Icon" class="me-2" style="width:24px; height:24px;" />
-            <span>+264 81 385 8181</span>
-          </div>
+    <!-- Contact Row -->
+<div class="row align-items-center text-center text-md-start">
 
-          <!-- Email -->
-          <div class="col-12 col-md-4 d-flex justify-content-center justify-content-md-start align-items-center">
-            <img src="{% static 'site/email.png' %}" alt="Email Icon" class="me-2" style="width:24px; height:24px;" />
-            <span>dyslexiacore@gmail.com</span>
-          </div>
-        </div>
+<!-- About Link -->
+<div class="col-12 col-md-3 mb-3 mb-md-0">
+<a href="/info" class="text-dark text-decoration-underline fw-semibold">
+About DyslexiaCore
+</a>
+</div>
 
-        <hr class="border-secondary mt-4" />
+      <!-- Phone -->
+<div class="col-12 col-md-3 mb-3 mb-md-0 d-flex justify-content-center justify-content-md-start align-items-center">
+<a href="https://wa.me/264813858181" target="_blank" class="d-flex align-items-center text-dark text-decoration-none">
+<img src="{% static 'site/app.png' %}" alt="Phone Icon" class="me-2" style="width:24px; height:24px;">
+<span>+264 81 385 8181</span>
+</a>
+</div>
 
-        <!-- Payment Method -->
-        <div class="row">
-          <div class="col text-center mb-2">
-            <a href="/payment_method" class="text-dark text-decoration-underline fw-semibold">
-              Payment Method
-            </a>
-          </div>
-        </div>
 
-        <!-- Copyright -->
-        <div class="row">
-          <div class="col text-center text-dark">
-            © {{ now.year }} DyslexiaCore. All rights reserved.
-          </div>
-        </div>
+      <!-- Email -->
+<div class="col-12 col-md-3 mb-3 mb-md-0 d-flex justify-content-center justify-content-md-start align-items-center">
+<img src="{% static 'site/email.png' %}" alt="Email Icon" class="me-2" style="width:24px; height:24px;">
+<span>dyslexiacore@gmail.com</span>
+</div>
+
+      <!-- Instagram -->
+<div class="col-12 col-md-3 d-flex justify-content-center justify-content-md-start align-items-center">
+<a href="https://instagram.com/cre.ativenovice_" target="_blank" class="d-flex align-items-center text-dark text-decoration-none">
+<img src="{% static 'site/insta.JPEG' %}" alt="Instagram Icon" class="me-2" style="width:24px; height:24px;">
+<span>cre.ativenovice_</span>
+</a>
+</div>
+
+
+    <hr class="border-secondary mt-4">
+
+    <!-- Payment Method -->
+    <div class="row">
+      <div class="col text-center mb-2">
+        <a href="/payment_method" class="text-dark text-decoration-underline fw-semibold">
+          Payment Method
+        </a>
       </div>
-    </footer>
+    </div>
+
+    <!-- Copyright -->
+    <div class="row">
+      <div class="col text-center text-dark">
+        © {{ now.year }} DyslexiaCore. All rights reserved.
+      </div>
+    </div>
+
+  </div>
+</footer>
+
 
     <!-- Optional: Add some spacing below footer on mobile -->
     <style>

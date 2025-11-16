@@ -16,4 +16,5 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('info/', views.info, name='info'),
     path('payment_method/', views.payment_method, name='payment_method'),
+    path('advert/', views.advert, name='advert'),
 ]

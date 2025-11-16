@@ -88,62 +88,72 @@
                 </li>
                 <li>
                   <a
+                  class="dropdown-item"
+                  href="{% url 'category' 'Technology' %}"
+                  >Technology</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'category' 'Hats' %}"
+                  >Hats</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'category' 'Shirts' %}"
+                  >Shirts</a
+                  >
+                </li>
+                <li>
+                  <a
+                  class="dropdown-item"
+                  href="{% url 'category' 'Outerwear' %}"
+                  >Outerwear</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'category' 'Pants' %}"
+                  >Pants</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'category' 'Dress' %}"
+                  >Dresses and jumpsuits</a
+                  >
+                </li>
+                <li>
+                  <a
                     class="dropdown-item"
                     href="{% url 'category' 'Undergarments' %}"
                     >Undergarments</a
                   >
                 </li>
                 <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'category' 'Technology' %}"
-                    >Technology</a
+                  <a class="dropdown-item" href="{% url 'category' 'Other' %}"
+                  >Socks</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'category' 'Shoes' %}"
+                  >Shoes</a
                   >
                 </li>
                 <li>
                   <a
-                    class="dropdown-item"
+                  class="dropdown-item"
                     href="{% url 'category' 'Cosmetics' %}"
                     >Cosmetics</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="{% url 'category' 'Shoes' %}"
-                    >Shoes</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="{% url 'category' 'Hats' %}"
-                    >Hats</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="{% url 'category' 'Shirts' %}"
-                    >Shirts</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="{% url 'category' 'Pants' %}"
-                    >Pants</a
-                  >
-                </li>
-                <li>
-                  <a
-                    class="dropdown-item"
-                    href="{% url 'category' 'Outerwear' %}"
-                    >Outerwear</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="{% url 'category' 'Dress' %}"
-                    >Dress</a
+                  <a class="dropdown-item" href="{% url 'category' 'Other' %}"
+                  >Health and wellness</a
                   >
                 </li>
                 <li>
                   <a class="dropdown-item" href="{% url 'category' 'Other' %}"
-                    >Other</a
+                    >special items</a
                   >
-                </li>
+                </li>                
               </ul>
             </li>
             <!--  yyu-->
@@ -198,7 +208,7 @@
                     class="nav-link active"
                     aria-current="page"
                     href="{% url 'register' %}"
-                    >Sign-in</a
+                    >Register</a
                   >
                 </li>
                 {% endif %}

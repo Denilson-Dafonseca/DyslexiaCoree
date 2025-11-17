@@ -44,72 +44,69 @@
      {% if cart_products %}
         	{% for product in cart_products %}
         	
-<div class="card mb-3">
+<div class="card mb-3 mx-auto" style="max-width: 850px;">
   <div class="row g-0">
-    <div class="col-md-4">
+    <div class="col-md-4 col-12">
       <img src="{{ product.image.url }}" 
-           class="img-fluid rounded-start" 
-                  alt="...">
+           class="img-fluid rounded-start w-100 h-100 object-fit-cover" 
+           alt="...">
     </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <center>
+
+    <div class="col-md-8 col-12">
+      <div class="card-body text-center">
+
         <h5 class="card-title">{{ product.name }}</h5>
-        <br/>
+
         <p class="card-text justified">{{ product.description }}</p>
-        
+
         {% if product.is_sale %}
         <div class="d-flex justify-content-center small text-warning mb-2">
-                <div class="bi-star-fill"></div>
-                &nbsp;&nbsp;Sale!&nbsp;&nbsp;
-                <div class="bi-star-fill"></div>
-                </div>
+          <div class="bi-star-fill"></div>
+          &nbsp;&nbsp;Sale!&nbsp;&nbsp;
+          <div class="bi-star-fill"></div>
+        </div>
 
-                <!-- Product price-->
-                <strike>
-                N${{ product.price }}
-                </strike>
-                &nbsp;
-                N${{ product.sale_price }}
-
-
+        <strike>N${{ product.price }}</strike>
+        &nbsp;
+        <span class="fw-bold">N${{ product.sale_price }}</span>
 
         {% else %}
-            N${{ product.price }}
-            
+        <span class="fw-bold">N${{ product.price }}</span>
         {% endif %}
-            <br/><br/>
+
+        <br><br>
+
         <div class="row justify-content-center">
-    <div class="col-md-2">Quantity:</div>
-                <div class="col-md-2">
-                <select class="form-select form-select-sm" id="select{{product.id}}">
-                  
-            {% for key, value in quantities.items %}
-                {% if key == product.id|slugify %}
-            <option selected>{{ value }}</option>
-                {% endif %}
-            {% endfor %}
-                           
+          <div class="col-md-3 col-4 text-end">Quantity:</div>
+          <div class="col-md-3 col-4">
+            <select class="form-select form-select-sm" id="select{{product.id}}">
+              {% for key, value in quantities.items %}
+              {% if key == product.id|slugify %}
+              <option selected>{{ value }}</option>
+              {% endif %}
+              {% endfor %}
+              <option value="1">1</option>
+            </select>
+          </div>
+        </div>
 
-                  <option value="1">1</option>
+        <br>
 
-                </select>
-                </div>
-            </div>
-            <br/><br/>
-        <a href="{% url 'main'%}" class="btn btn-secondary">Home</a>
-        <button type="button" data-index="{{product.id}}" class="btn btn-secondary update-cart">Update</button>
-        <button type="button" data-index="{{product.id}}" class="btn btn-danger delete-product">Remove</button>
-        
-    </center>
+        <div class="d-flex justify-content-center gap-2 flex-wrap">
+          <a href="{% url 'main' %}" class="btn btn-secondary btn-sm">Home</a>
+          <button type="button" data-index="{{product.id}}" class="btn btn-secondary btn-sm update-cart">Update</button>
+          <button type="button" data-index="{{product.id}}" class="btn btn-danger btn-sm delete-product">Remove</button>
+        </div>
+
       </div>
     </div>
   </div>
 </div>
 
+
         	{% endfor %}
             <div align="right">
-           <center> <h3 class="w-40 bg-light">Total: N${{ totals }}</h3></center>
+           <center> <h3 class="w-50 bg-light">Total: N${{ totals }}</h3></center>
            <center><a href="{% url 'checkout' %}" class="btn w-25% btn-success">Checkout</a></center>
 
             </div>

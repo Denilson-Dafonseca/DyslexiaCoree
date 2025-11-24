@@ -1,0 +1,7 @@
+[http]
+# Allows uploading large files (videos)
+bodySizeLimit = "500mb"
+
+[service]
+# Some older Railway deployments still use this
+clientMaxBodySize = "500mb"

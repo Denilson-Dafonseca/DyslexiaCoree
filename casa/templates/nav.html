@@ -12,14 +12,13 @@
     ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
-.circle-icon {
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    background-color: white;
-    border-radius: 50%;
+.navbar-toggler {
+    border-color: white !important; /* white border */
 }
 
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
     </style>
   </head>
   <body>
@@ -35,7 +34,7 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="circle-icon"></span>
+          <span class="navbar-toggler-icon"></span>
         </button>
         <div
         class="collapse navbar-collapse fw-bolder"

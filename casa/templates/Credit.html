@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Author" content="Denilson Bernardo Da Fonseca" />
+    <meta name="description" content="E-store" />
+    <title>Advert page</title>
+    <link href="{% static 'styles.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
+    <link rel="icon" type="image/png" href="{% static 'site/images/favicon.png' %}">
+    <script defer src="{% static 'bootstrap.bundle.min.js' %}"></script>
+    <script type='text/javascript'>
+  window.smartlook||(function(d) {
+    var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+    var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+    c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+    })(document);
+    smartlook('init', 'b98a0116dbf3964155782c1e804c58c2d3e8b747', { region: 'eu' });
+</script>
+  </head>
+  <body>
+{% block content %}
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    {% endfor %} {% endif %} 
+    <!-- Header-->
+    <nav class="bg-dark py-2">
+      <a class="d-flex" href="{% url 'main' %}">
+    <img src="{% static 'site/ventro.png' %}" alt="Dyslexia Logo" class="img-fluid" style="max-height: 40px; width: auto" />
+      </a>
+      <div class="container px-2 px-lg-5 my-2">
+        <div class="text-center text-dark">
+          <h1 class="display-4 fw-bolder text-decoration-underline">Credit Purchases</h1>
+          <p class="lead fw-normal text-white-50 mb-0">
+          </p>
+        </div>
+      </div>
+    </nav>
+
+<section class="payment-info" style="max-width: 850px; margin: 40px auto; padding: 30px;background: #3763df; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-family: 'Poppins', sans-serif;">
+
+
+  <h2 style="text-align: center; color: #222; margin-bottom: 20px;"> <ins>Buying products on Credit from DyslexiaCore.</ins> </h2>
+  
+  <div style="margin-bottom: 25px;">
+    <p style="color: #0b0b0b; line-height: 1.6;">
+Understanding "consumer behavior" is essential to running a successful business.
+<br><br>
+Based on our experience with the Walvis Bay market, we have introduced a credit purchase option on our website.
+
+What Does This Mean?
+
+If you find a product you would like to own and you are confident that you can settle the payment within 30 days, you may purchase it on credit. Simply follow the normal checkout process, and once your order is submitted, we will forward your details to the vendor and record the transaction until payment is received.
+<br><br>
+Important Information
+
+Credit is a privilege, not a free service, and it must be used responsibly. If you know you struggle to settle debts in a timely manner, we strongly advise against using the credit option, as it carries financial consequences.
+
+If payment is not made within the 30-day period, a 15% interest fee will be added to the product cost.
+
+If payment remains unsettled after 60 days, legal action may be taken.
+
+By purchasing a product on credit, you acknowledge and accept all associated terms and conditions.
+<br><br>
+Please make responsible decisions when choosing this payment method. It is not worth facing legal consequences over a simple purchase.
+
+If you understand and accept our credit terms, feel free to visit our website and enjoy shopping. We want you to have access to the products you love, responsibly.      
+
+    </p>
+  </div>
+
+
+
+</section>
+
+{% include 'footer.html' %}
+{% endblock %}
+  </body>
+</html>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Author" content="Denilson Bernardo Da Fonseca" />
 
-    <meta name="description" content="E-store" />
+    <meta name="description" content="online store" />
     <title>DyslexiaCore</title>
     <link rel="icon" type="image/png" href="{% static 'site/images/favicon.png' %}">
     <link href="{% static 'styles.css' %}" rel="stylesheet" />
@@ -36,29 +36,29 @@
     {% endfor %} {% endif %}  
     <!-- Actual Content -->
     <div class="content">
-      <nav class="navbar navbar-expand-lg bg-dark py-2 skeleton-item">
-        <div class="container-fluid d-flex justify-content-between align-items-center flex-nowrap">
+      <nav class="navbar navbar-expand-lg bg-dark py-2 ">
+        <div class="container-fluid d-flex align-items-start  flex-nowrap">
           <!-- Brand Logo -->
-          <a class="navbar-brand d-flex align-items-center" href="{% url 'main' %}">
-            <img src="{% static 'site/Dx.png' %}" alt="Dyslexia Logo" class="img-fluid" style="max-height: 80px; width: auto" />
+          <a class="navbar-brand d-flex align-items-start" href="{% url 'main' %}">
+            <img src="{% static 'site/ventro.png' %}" alt="Dyslexia Logo" class="img-fluid" style="max-height: 40px; width: auto" />
           </a>
 
           <!-- Site Title -->
 <div class="text-dark fw-bolder text-center" 
      style="font-size: clamp(1.2rem, 2.5vw, 2rem);">
-  DyslexiaCore
+DyslexiaCore
 
   <p class="text-center text-dark mt-2"
      style="font-size: clamp(0.9rem, 1.6vw, 1.1rem); 
             line-height: 1.5; 
             max-width: 600px; 
             margin: 0.5rem auto;">
-  Your local Walvis Bay platform for buying and selling goods.
+  The online store, for the people of Walvis Bay.
   </p>
 </div>
 
           <!-- Search Icon -->
-          <a class="d-flex align-items-center justify-content-center" href="{% url 'search' %}">
+          <a class="d-flex align-items-end justify-content-end" href="{% url 'search' %}">
             <img src="{% static 'site/seaa.png' %}" alt="Search" class="img-fluid" style="height: 35px; width: auto" />
           </a>
 
@@ -70,7 +70,7 @@
 
  <div class="row">
   <div class="col-12 d-flex justify-content-center">
-   <a href="{% url 'advert' %}"> <div class="text-white fw-bolder text-center bg-black p-2" title="link to the advert page">
+   <a href="{% url 'advert' %}"> <div class="text-dark fw-bolder text-center p-2" title="link to the advert page" style="background-color: #5178e5;">
       DyslexiaCore adverts area.
     </div></a>
   </div>

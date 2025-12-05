@@ -183,6 +183,18 @@ def advert(request):
     
     return render(request, 'advert.html',{})
 
+def Affiliate(request):
+    
+    return render(request, 'Affiliate.html',{})
+
+def Credit(request):
+    
+    return render(request, 'Credit.html',{})
+
+def Vendor(request):
+    
+    return render(request, 'Vendor.html',{})
+
 
 
 

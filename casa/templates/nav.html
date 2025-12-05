@@ -11,20 +11,18 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
     ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <style>
-.navbar-toggler {
-    border-color: white !important; /* white border */
+
+  </head>
+  <style>
+    .navbar-toggler {
+    border-color: rgb(255, 255, 255) !important; /* white border */
 }
 
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-}
-    </style>
-  </head>
+  </style>
   <body>
     <nav class="navbar navbar-expand-lg">
       <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="{% url 'main' %}">DyslexiaCore</a>
+        <a class="navbar-brand" href="{% url 'main' %}">Home</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -49,21 +47,38 @@
               >Receipt page</a
             >
           </li>              
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'door_to_door_relief' %}"
-                >Door_to_door_relief</a
-              >
-            </li>
-
-            <li class="nav-item dropdown fw-bolder">
-              <a
-                class="nav-link dropdown-toggle"
-                id="navbarDropdown"
-                href="#"
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'Affiliate' %}"
+            >Affiliate commission</a
+            >
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'Vendor' %}"
+            >Vendor partnership</a
+            >
+          </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'Credit' %}"
+            >Credit purchases</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'door_to_door_relief' %}"
+              >Door_to_door_relief</a
+            >
+          </li>
+          
+          <li class="nav-item dropdown fw-bolder">
+            <a
+            class="nav-link dropdown-toggle"
+            id="navbarDropdown"
+            href="#"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-                >Category</a
+                >Products</a
               >
               <ul
                 class="dropdown-menu fw-bolder"
@@ -71,7 +86,7 @@
               >
                 <li>
                   <a class="dropdown-item fw-bolder" href="{% url 'stand' %}"
-                    >Products</a
+                    >All items</a
                   >
                 </li>
                 <li><hr class="dropdown-divider" /></li>
@@ -95,8 +110,8 @@
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="{% url 'category' 'Hats' %}"
-                  >Hats</a
+                  <a class="dropdown-item" href="{% url 'category' 'Head wear' %}"
+                  >Head wear</a
                   >
                 </li>
                 <li>
@@ -117,8 +132,8 @@
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="{% url 'category' 'Dresses and jumpsuits' %}"
-                  >Dresses and jumpsuits</a
+                  <a class="dropdown-item" href="{% url 'category' 'Dresses' %}"
+                  >Dresses</a
                   >
                 </li>
                 <li>
@@ -154,7 +169,12 @@
                   <a class="dropdown-item" href="{% url 'category' 'special items' %}"
                     >special items</a
                   >
-                </li>                
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'category' 'Take out' %}"
+                    >Take out</a
+                  >
+                </li>                 
               </ul>
             </li>
             <!--  yyu-->

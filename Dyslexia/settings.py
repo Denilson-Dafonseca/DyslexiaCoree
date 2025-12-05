@@ -23,15 +23,15 @@ SECRET_KEY = 'django-insecure-9+_@mp%sklldf6l7lq0o*1=h=y!y$@mb#n1#v(i4sptl-aoysm
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'localhost',
-    'your-railway-domain.up.railway.app',
-    'your-custom-domain.xyz',
+    'dyslexiacore.xyz',
+    'www.dyslexiacore.xyz',
+    'dyslexiacoree-production.up.railway.app',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://your-railway-domain.up.railway.app',
-    'https://your-custom-domain.xyz',
+    'https://dyslexiacore.xyz',
+    'https://www.dyslexiacore.xyz',
+    'https://dyslexiacoree-production.up.railway.app',
 ]
 
 

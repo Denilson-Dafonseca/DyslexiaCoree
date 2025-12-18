@@ -34,8 +34,6 @@ CSRF_TRUSTED_ORIGINS = [
     'https://dyslexiacoree-production.up.railway.app',
 ]
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -91,6 +89,7 @@ DATABASES = {
 }
 
 DATABASES["default"] = dj_database_url.parse('postgresql://postgres:KEKHvVyQKupUEBzWNqsFmQBFBmbNOetV@interchange.proxy.rlwy.net:44571/railway')
+
 
 
 

@@ -36,7 +36,7 @@
     {% endfor %} {% endif %}  
     <!-- Actual Content -->
     <div class="content">
-      <nav class="navbar navbar-expand-lg bg-dark py-2 ">
+      <nav class="navbar navbar-expand-lg bg-dark ">
         <div class="container-fluid d-flex align-items-start  flex-nowrap">
           <!-- Brand Logo -->
           <a class="navbar-brand d-flex align-items-start" href="{% url 'main' %}">
@@ -53,13 +53,13 @@ DyslexiaCore
             line-height: 1.5; 
             max-width: 600px; 
             margin: 0.5rem auto;">
-  The online store, for the people of Walvis Bay.
+  The online store for the people of Walvis Bay.
   </p>
 </div>
 
           <!-- Search Icon -->
           <a class="d-flex align-items-end justify-content-end" href="{% url 'search' %}">
-            <img src="{% static 'site/seaa.png' %}" alt="Search" class="img-fluid" style="height: 35px; width: auto" />
+            <img src="{% static 'site/winn.PNG' %}" alt="Search" title="Search" class="img-fluid" style="height: 35px; width: auto" />
           </a>
 
         </div>
@@ -70,7 +70,7 @@ DyslexiaCore
 
  <div class="row">
   <div class="col-12 d-flex justify-content-center">
-   <a href="{% url 'advert' %}"> <div class="text-dark fw-bolder text-center p-2" title="link to the advert page" style="background-color: #5178e5;">
+   <a href="{% url 'advert' %}"> <div class="text-dark fw-bolder text-center p-2" title="link to the advert page" style="background-color: #73A6D8;">
       DyslexiaCore adverts area.
     </div></a>
   </div>
@@ -96,7 +96,7 @@ DyslexiaCore
       style="max-height: 70vh; object-fit: contain; margin: 0 auto;"
     />
     <div class="carousel-caption">
-      <h3 class="text-dark">{{ slide.title }}</h3>
+      <h3 class="text-warning ">{{ slide.title }}</h3>
       <p class="text-dark">{{ slide.caption }}</p>
     </div>
   </div>

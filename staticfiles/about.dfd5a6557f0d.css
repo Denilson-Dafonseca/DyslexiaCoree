@@ -1,18 +1,18 @@
 body {
   background-color: #73A6D8;
-  min-height: 100vh;
-  margin: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
 }
-
 header {
   width: 100%;
-  background: url(site/water.gif);
+  background: url("site/water.c69fca48df0e.gif");
   background-size: cover;
   background-position: center;
 }
 footer {
   width: 100%;
-  background: url(site/water.gif);
+  background: url("site/water.c69fca48df0e.gif");
   background-size: cover;
   background-position: center;
 }

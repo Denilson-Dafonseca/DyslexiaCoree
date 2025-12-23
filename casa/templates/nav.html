@@ -45,30 +45,56 @@
               aria-current="page"
               href="{% url 'receipt' %}"
               >Receipt page</a
-            >
-          </li>              
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'Affiliate' %}"
-            >Affiliate rewards</a
-            >
-          </li>
-          
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'Vendor' %}"
-            >Vendor</a
-            >
-          </li>
-          
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'Credit' %}"
-            >Credit purchases</a
-            >
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'door_to_door_relief' %}"
-              >Door_to_door_relief</a
-            >
-          </li>
+              >
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'Purchasing_steps' %}"
+                >How to purchase products.</a
+              >
+            </li>
+          <li class="nav-item dropdown fw-bolder">
+              <a
+                class="nav-link dropdown-toggle "
+                id="navbarDropdown"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                >User benefits</a
+              >
+              <ul class="dropdown-menu " 
+                  aria-labelledby="navbarDropdown">
+                <li class="nav-item">
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'Affiliate' %}"
+                    >Affiliate commission</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'Vendor' %}"
+                    >Vendor Partnership</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'Credit' %}"
+                    >Credit Purchases</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="dropdown-item"
+                    href="{% url 'door_to_door_relief' %}"
+                    >Door to door relief</a
+                  >
+                </li>
+              </ul>
+            </li>
           
           <li class="nav-item dropdown fw-bolder">
             <a
@@ -193,24 +219,21 @@
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                   <a
-                    class="nav-link active"
-                    aria-current="page"
+                    class="dropdown-item fw-bolder"
                     href="{% url 'logout' %}"
                     >Logout</a
                   >
                 </li>
                 <li class="nav-item">
                   <a
-                    class="nav-link active"
-                    aria-current="page"
+                    class="dropdown-item fw-bolder"
                     href="{% url 'update_user' %}"
                     >Update_user</a
                   >
                 </li>
                 <li class="nav-item">
                   <a
-                    class="nav-link active"
-                    aria-current="page"
+                    class="dropdown-item fw-bolder"
                     href="{% url 'update_password' %}"
                     >Update_password</a
                   >
@@ -218,16 +241,14 @@
                 {% else %}
                 <li class="nav-item">
                   <a
-                    class="nav-link active"
-                    aria-current="page"
+                    class="dropdown-item fw-bolder"
                     href="{% url 'login' %}"
                     >Log_in</a
                   >
                 </li>
                 <li class="nav-item">
                   <a
-                    class="nav-link active"
-                    aria-current="page"
+                    class="dropdown-item fw-bolder"
                     href="{% url 'register' %}"
                     >Register</a
                   >

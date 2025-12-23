@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Author" content="Denilson Bernardo Da Fonseca" />
+    <meta name="description" content="Online store" />
+    <title>Purchasing_steps</title>
+    <link rel="icon" type="image/png" href="{% static 'site/images/favicon.png' %}">
+    <link href="{% static 'styles.css' %}" rel="stylesheet" />
+    <link href="{% static 'about.css' %}" rel="stylesheet" />
+    <script type='text/javascript'>
+  window.smartlook||(function(d) {
+    var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+    var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+    c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+    })(document);
+    smartlook('init', 'b98a0116dbf3964155782c1e804c58c2d3e8b747', { region: 'eu' });
+</script>
+  </head>
+
+  <body style="background: #73A6D8">
+    {% block content %}
+
+    <!-- Header-->
+    <header class="py-2">
+      <a class="d-flex" href="{% url 'main' %}">
+    <img src="{% static 'site/ventro.png' %}" alt="Dyslexia Logo" class="img-fluid" style="max-height: 40px; width: auto" />
+      </a>
+      <div class="container px-2 px-lg-5">
+        <div class="text-center text-light text-decoration-underline">
+          <h1 class="display-4 fw-bolder">
+            Steps to purchase products on the site.
+           
+          </h1>
+        </div>
+      </div>
+    </header>
+
+    <!-- text-->
+    <div class="row">
+      <p class="col text-center">
+        <h3 class="text-center text-light display-2 fw-bolder text-decoration-underline">Go to product section</h3>
+<p>  <img src="{% static 'site/pp.jpg' %}"
+      class="d-block w-100 img-fluid" 
+      alt="items" 
+      style="max-height: 70vh; object-fit: contain; margin: 0 auto;"/>
+    
+    </p>        
+<p class="text-center">
+Go to the product section and select a category to browse.
+</p>
+
+<h3 class="text-center text-light display-2 fw-bolder text-decoration-underline">Preview item</h3>
+<p>  <img src="{% static 'site/preview.jpg' %}"
+      class="d-block w-100 img-fluid" 
+      alt="items" 
+      style="max-height: 70vh; object-fit: contain; margin: 0 auto;"/>
+    
+    </p>   
+
+<p class="text-center">
+ When you find an item you are interested in, click “Preview Item” to view detailed information about the product.
+</p>
+<h3 class="text-center text-light display-2 fw-bolder text-decoration-underline"> Add to cart.</h3>
+
+<p>  <img src="{% static 'site/atc.jpg' %}"
+      class="d-block w-100 img-fluid" 
+      alt="items" 
+      style="max-height: 70vh; object-fit: contain; margin: 0 auto;"/>
+    
+    </p>   
+<p class="text-center">
+Once you’ve reviewed the product and wish to buy it, click “Add to Cart.” Just like in a store, the item is added to your cart but hasn’t been purchased yet. 
+</p>
+
+<h3 class="text-center text-light display-2 fw-bolder text-decoration-underline">Go to cart.</h3>
+<p>  <img src="{% static 'site/cart.jpg' %}"
+      class="d-block w-100 img-fluid" 
+      alt="items" 
+      style="max-height: 70vh; object-fit: contain; margin: 0 auto;"/>
+    
+    </p>   
+
+<p class="text-center">
+Go towards the cart icon.
+</p>
+
+<h3 class="text-center text-light display-2 fw-bolder text-decoration-underline">In the cart</h3>
+<p>  <img src="{% static 'site/gcheckout.jpg' %}"
+      class="d-block w-100 img-fluid" 
+      alt="items" 
+      style="max-height: 70vh; object-fit: contain; margin: 0 auto;"/>
+    
+    </p>   
+<p class="text-center">
+Here you can view all the items you have added to your cart. You may add multiple items, and the cart will automatically calculate the total amount payable.
+</p>
+
+<h3 class="text-center text-light display-2 fw-bolder text-decoration-underline"> Checkout area </h3>
+<p>  <img src="{% static 'site/checkout.jpg' %}"
+      class="d-block w-100 img-fluid" 
+      alt="items" 
+      style="max-height: 70vh; object-fit: contain; margin: 0 auto;"/>
+    
+    </p> 
+
+<p class="text-center">
+Here, you simply fill in your information. This process is straightforward. Your details will be sent to the vendor so they know where to deliver the items. 
+</p>
+
+<h3 class="text-center text-light display-2 fw-bolder text-decoration-underline">Order successful </h3>
+
+<p>  <img src="{% static 'site/order.jpg' %}"
+      class="d-block w-100 img-fluid" 
+      alt="items" 
+      style="max-height: 70vh; object-fit: contain; margin: 0 auto;"/>
+    
+    </p> 
+<p class="text-center">
+Reaching this page confirms that your order has been successfully placed. You may now send the payment to 081 849 3832 using the bank and payment method you previously selected. We currently accept E-Wallet, Blue Voucher, and EasyWallet payments only. If you have forgotten the total amount due, please visit the Receipt page, where the full total is displayed
+</p>
+
+
+<h3 class="text-center text-light display-2 fw-bolder text-decoration-underline">Receipt page</h3>
+<p>  <img src="{% static 'site/rw.jpg' %}"
+      class="d-block w-100 img-fluid" 
+      alt="items" 
+      style="max-height: 70vh; object-fit: contain; margin: 0 auto;"/>
+    
+    </p> 
+
+<p class="text-center">
+This page keeps track of all the orders that you made. 
+</p>
+
+</div>
+{% include 'footer.html' %} {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,32 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background-color: #73A6D8;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Header */
+header {
+  width: 100%;
+  min-height: 150px; /* IMPORTANT */
+  background-image: url("/site/water.gif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Footer */
+footer {
+  width: 100%;
+  min-height: 150px; /* IMPORTANT */
+  background-image: url("/site/water.gif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+

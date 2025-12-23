@@ -20,5 +20,6 @@ urlpatterns = [
     path('Affiliate/', views.Affiliate, name="Affiliate"),
     path('Credit/', views.Credit, name="Credit"),
     path('Vendor/', views.Vendor, name="Vendor"),
+    path('Purchasing_steps/', views.Purchasing_steps, name="Purchasing_steps"),
     
 ]

@@ -1,10 +1,4 @@
 body {
-  background-image: linear-gradient(
-    to bottom right,
-    rgb(196, 230, 228),
-    rgb(31, 69, 149),
-    rgb(137, 231, 226)
-  );
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;

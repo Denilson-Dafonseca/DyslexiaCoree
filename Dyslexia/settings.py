@@ -34,6 +34,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://dyslexiacoree-production.up.railway.app',
 ]
 
+
 # Application definition
 
 INSTALLED_APPS = [

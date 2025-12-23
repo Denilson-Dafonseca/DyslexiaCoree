@@ -195,6 +195,10 @@ def Vendor(request):
     
     return render(request, 'Vendor.html',{})
 
+def Purchasing_steps(request):
+    
+    return render(request, 'Purchasing_steps.html',{})
+
 
 
 

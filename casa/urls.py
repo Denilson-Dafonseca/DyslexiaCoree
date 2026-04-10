@@ -21,5 +21,10 @@ urlpatterns = [
     path('Credit/', views.Credit, name="Credit"),
     path('Vendor/', views.Vendor, name="Vendor"),
     path('Purchasing_steps/', views.Purchasing_steps, name="Purchasing_steps"),
+    path('Privacy_Policy/', views.Privacy_Policy, name="Privacy_Policy"),
+    path('Terms_of_service/', views.Terms_of_service, name="Terms_of_service"),
+    path('Car_order/', views.Car_order, name="Car_order"),
+    path('done/<int:id>/', views.mark_done, name='mark_done'),
+    
     
 ]

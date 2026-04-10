@@ -1,0 +1,40 @@
+/* body*/
+body {
+  background-image: url("site/Bk.a1c84f927f8d.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+}
+
+nav {
+  background: url("site/water.c69fca48df0e.gif");
+  background-size: cover;
+  
+}
+
+.hero-section {
+  min-height: 90vh;
+  background: 
+              url("site/Bk.a1c84f927f8d.jpg") center/cover no-repeat;
+  color: rgb(0, 0, 0);
+  
+}
+
+.hero-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: #070707;
+  max-width: 500px;
+}
+
+.hero-img {
+  max-height: 200px;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+

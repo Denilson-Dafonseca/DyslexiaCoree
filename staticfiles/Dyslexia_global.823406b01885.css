@@ -1,0 +1,24 @@
+/* body*/
+body {
+  background-image: url("site/Bk.a1c84f927f8d.jpg");
+  background-repeat: no-repeat;
+  background-attachment:fixed;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+nav {
+  width: 100%;
+  background: url("site/water.c69fca48df0e.gif");
+  background-size: cover;
+  background-position: center;
+}
+
+
+footer {
+  width: 100%;
+  background: url("site/water.c69fca48df0e.gif");
+  background-size: cover;
+  background-position: center;
+}

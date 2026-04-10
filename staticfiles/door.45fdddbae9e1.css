@@ -1,0 +1,13 @@
+body {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  
+}
+
+nav {
+  background: url("site/water.c69fca48df0e.gif");
+  background-size: cover;
+}
+

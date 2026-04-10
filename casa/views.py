@@ -1,11 +1,12 @@
-from django.shortcuts import render, redirect 
+from django.shortcuts import render, redirect, get_object_or_404 
 from django.http import HttpResponse
 from django.template import loader
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import Product, CarouselSlide, Category, Profile, Relief, Video
+
 
 from .forms import SignUpForm, UpdateUserForm, ChangePasswordForm, UserInfoForm
 from cart.cart import Cart
@@ -14,6 +15,16 @@ from pay.models import ShippingAddress, Order, OrderItem
 from django import forms
 import json
 from django.db.models import Q
+
+from django.core.mail import send_mail
+from .forms import VehicleRequestForm
+from .models import VehicleRequest
+
+from django.utils import timezone
+
+from django.conf import settings
+
+
 
 def main(request):
     slides = CarouselSlide.objects.all()  # Always load slides
@@ -199,6 +210,68 @@ def Purchasing_steps(request):
     
     return render(request, 'Purchasing_steps.html',{})
 
+def Privacy_Policy(request):
+    
+    return render(request, 'Privacy_Policy.html',{})
 
+def Terms_of_service(request):
+    
+    return render(request, 'Terms_of_service.html',{}) 
+
+def Car_order(request):
+    success = False
+    created_timestamp = None
+    request_id = None
+
+    if request.method == "POST":
+        form = VehicleRequestForm(request.POST)
+        if form.is_valid():
+            data = form.save()
+
+            # ✅ EMAIL LOGIC (THIS WAS MISSING)
+            message = f"""
+🔥 NEW VEHICLE LEAD
+
+Name: {data.name}
+Phone: {data.phone}
+
+Vehicle: {data.vehicle}
+Budget: {data.budget}
+
+Message:
+{data.message or 'N/A'}
+            """
+
+            send_mail(
+                subject="🚗 New Vehicle Request",
+                message=message,
+                from_email="dyslexiacore@gmail.com",
+                recipient_list=["denilkson.dafonseca99@gmail.com", "danielesau480@gmail.com", "tunabutkus@gmail.com", "yashesauto@gmail.com", "thimothshangadi@gmail.com", "gerhaldmutukuta@gmail.com", "alfarythms@gmail.com"],
+                fail_silently=False,
+            )
+
+            # ✅ COUNTDOWN DATA
+            success = True
+            created_timestamp = data.created_at.timestamp()
+            request_id = data.id
+
+    else:
+        form = VehicleRequestForm()
+
+    return render(request, "Car_order.html", {
+        "form": form,
+        "success": success,
+        "created_timestamp": created_timestamp,
+        "request_id": request_id
+    })
+
+
+# ✅ DONE BUTTON VIEW
+def mark_done(request, id):
+    data = get_object_or_404(VehicleRequest, id=id)
+    data.status = "completed"
+    data.save()
+
+    return redirect('Car_order')  
 
 

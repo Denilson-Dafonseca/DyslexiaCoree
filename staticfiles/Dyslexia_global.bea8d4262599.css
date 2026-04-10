@@ -1,0 +1,19 @@
+/* body*/
+body {
+  width: 100%;
+
+}
+
+nav {
+  width: 100%;
+  background: url("site/water.c69fca48df0e.gif");
+  background-size: cover;
+  position: fixed;
+}
+
+
+footer {
+  width: 100%;
+  background: url("site/water.c69fca48df0e.gif");
+  background-size: cover;
+}

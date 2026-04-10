@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <meta name="Author" content="Denilson Bernardo Da Fonseca" />
+    <meta name="description" content="Online store" />
+    <title>Terms of condition</title>
+    <link href="{% static 'styles.css' %}" rel="stylesheet" />
+  
+    <link rel="stylesheet" href="{% static 'door.css' %}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{% static 'site/images/favicon.png' %}">
+    <script defer src="{% static 'bootstrap.bundle.min.js' %}"></script>
+    <script type='text/javascript'>
+  window.smartlook||(function(d) {
+    var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+    var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+    c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+    })(document);
+    smartlook('init', 'b98a0116dbf3964155782c1e804c58c2d3e8b747', { region: 'eu' });
+</script>
+
+
+
+  </head>
+  <body style=" background: linear-gradient(
+    to bottom,
+    #2b90e7 0%,
+    #68a1ac47 45%,
+    #edf8fc 100%
+  )">
+
+{% include "nav.html" %}
+
+{% block content %}
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    {% endfor %} {% endif %} 
+    <!-- Header-->
+
+
+<div class="container py-5">
+
+    <h1 class="text-center mb-4">Terms of Service</h1>
+    <p class="text-center">Effective Date: 20-10-2025</p>
+
+    <hr>
+
+    <h2>1. Introduction</h2>
+    <p>
+        Welcome to Dyslexiacore. By accessing or using our platform, you agree to be bound by these Terms of Service.
+        Dyslexiacore operates as an online marketplace where products are listed and sold on behalf of third-party sellers.
+    </p>
+
+    <h2>2. Nature of Service</h2>
+    <p>
+        Dyslexiacore provides a platform that connects buyers with independent sellers. We do not manufacture, own, or directly sell
+        most of the products listed on the platform. All transactions are conducted between buyers and sellers, facilitated by our system.
+    </p>
+
+    <h2>3. User Responsibilities</h2>
+    <p>
+        By using our platform, you agree to:
+        <ul>
+            <li>Provide accurate and complete information</li>
+            <li>Use the platform lawfully</li>
+            <li>Not engage in fraudulent or misleading activities</li>
+        </ul>
+    </p>
+
+    <h2>4. Product Listings</h2>
+    <p>
+        Sellers are responsible for ensuring that all product descriptions, pricing, and availability are accurate.
+        Dyslexiacore does not guarantee the accuracy or completeness of any listing.
+    </p>
+
+    <h2>5. Payments</h2>
+    <p>
+        Payments may be processed through third-party payment providers. Dyslexiacore is not responsible for any issues arising
+        from payment processing services.
+    </p>
+
+    <h2>6. Delivery and Fulfillment</h2>
+    <p>
+        Delivery of products is the responsibility of the seller unless otherwise stated.
+        Dyslexiacore is not liable for delays, damages, or failures in delivery.
+    </p>
+
+    <h2>7. Returns and Refunds</h2>
+    <p>
+        Return and refund policies are determined by individual sellers.
+        Dyslexiacore may assist in dispute resolution but is not obligated to issue refunds.
+    </p>
+
+    <h2>8. Limitation of Liability</h2>
+    <p>
+        Dyslexiacore shall not be held liable for any indirect, incidental, or consequential damages arising from the use of the platform.
+    </p>
+
+    <h2>9. Account Termination</h2>
+    <p>
+        We reserve the right to suspend or terminate accounts that violate these terms.
+    </p>
+
+    <h2>10. Changes to Terms</h2>
+    <p>
+        Dyslexiacore may update these Terms at any time. Continued use of the platform constitutes acceptance of the updated terms.
+    </p>
+
+    <h2>11. Contact Information</h2>
+    <p>
+        For any questions, please contact us at:
+        <br>Email: dyslexiacore@gmail.com  
+        <br>Phone: 081 385 8181
+    </p>
+
+    <hr>
+
+    <p class="text-center text-muted">
+        © 2026 Dyslexiacore. All rights reserved.
+    </p>
+
+</div>    
+
+
+{% include 'footer.html' %}
+{% endblock %}
+  </body>
+</html>

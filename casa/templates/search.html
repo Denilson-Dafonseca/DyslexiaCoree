@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <meta name="Author" content="Denilson Bernardo Da Fonseca" />
     <meta name="description" content="E-store" />
     <title>Search page</title>
@@ -14,6 +14,7 @@
     <link href="{% static 'styles.css' %}" rel="stylesheet" />
     <link rel="icon" type="image/png" href="{% static 'site/images/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
+   
     <script defer src="{% static 'jquery-3.7.1.js' %}"></script>
     <script type='text/javascript'>
   window.smartlook||(function(d) {
@@ -165,5 +166,6 @@
     <br /><br />
 
     {% include 'footer.html' %}
+    <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
   </body>
 </html>

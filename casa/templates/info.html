@@ -3,13 +3,13 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
     <meta name="Author" content="Denilson Bernardo Da Fonseca" />
     <meta name="description" content="Online store" />
     <title>About DyslexiaCore</title>
     <link rel="icon" type="image/png" href="{% static 'site/images/favicon.png' %}">
     <link href="{% static 'styles.css' %}" rel="stylesheet" />
-    <link href="{% static 'about.css' %}" rel="stylesheet" />
+    <link href="{% static 'Dyslexia_global.css' %}" rel="stylesheet" />
     <script type='text/javascript'>
   window.smartlook||(function(d) {
     var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
@@ -20,11 +20,16 @@
 </script>
   </head>
 
-  <body style="background: #73A6D8;">
+  <body style=" background: linear-gradient(
+    to bottom,
+    #2b90e7 0%,
+    #68a1ac47 45%,
+    #edf8fc 100%
+  )">
     {% block content %}
 
     <!-- Header-->
-    <header class="bg-dark py-2">
+    <nav class="row bg-dark py-2">
       <a class="d-flex" href="{% url 'main' %}">
     <img src="{% static 'site/ventro.png' %}" alt="Dyslexia Logo" class="img-fluid" style="max-height: 40px; width: auto" />
       </a>
@@ -37,7 +42,7 @@
           <p class="lead fw-normal text-dark-50 mb-0">Take the deep dive.</p>
         </div>
       </div>
-    </header>
+    </nav>
 
     <!-- text-->
     <div class="row">

@@ -1,15 +1,16 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+  
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <meta name="Author" content="Denilson Bernardo Da Fonseca" />
     <meta name="description" content="Online store" />
     <title>Purchasing_steps</title>
     <link rel="icon" type="image/png" href="{% static 'site/images/favicon.png' %}">
     <link href="{% static 'styles.css' %}" rel="stylesheet" />
-    <link href="{% static 'about.css' %}" rel="stylesheet" />
+    <link href="{% static 'door.css' %}" rel="stylesheet" />
     <script type='text/javascript'>
   window.smartlook||(function(d) {
     var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
@@ -20,11 +21,16 @@
 </script>
   </head>
 
-  <body style="background: #73A6D8">
+  <body style=" background: linear-gradient(
+    to bottom,
+    #2b90e7 0%,
+    #68a1ac47 45%,
+    #edf8fc 100%
+  )">
     {% block content %}
 
     <!-- Header-->
-    <header class="py-2">
+    <nav class="row py-2">
       <a class="d-flex" href="{% url 'main' %}">
     <img src="{% static 'site/ventro.png' %}" alt="Dyslexia Logo" class="img-fluid" style="max-height: 40px; width: auto" />
       </a>
@@ -32,14 +38,13 @@
         <div class="text-center text-light text-decoration-underline">
           <h1 class="display-4 fw-bolder">
             Steps to purchase products on the site.
-           
           </h1>
         </div>
       </div>
-    </header>
+    </nav>
 
     <!-- text-->
-    <div class="row">
+    <div>
       <p class="col text-center">
         <h3 class="text-center text-light display-2 fw-bolder text-decoration-underline">Go to product section</h3>
 <p>  <img src="{% static 'site/pp.jpg' %}"
@@ -136,6 +141,7 @@ This page keeps track of all the orders that you made.
 </p>
 
 </div>
-{% include 'footer.html' %} {% endblock %}
+{% include 'footer.html' %}
+{% endblock %}
   </body>
 </html>

@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <meta name="Author" content="Denilson Bernardo Da Fonseca" />
+    <meta name="description" content="Online store" />
+    <title>20 min deals</title>
+    <link href="{% static 'styles.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
+    <link rel="icon" type="image/png" href="{% static 'site/images/favicon.png' %}">
+    
+    <script type='text/javascript'>
+  window.smartlook||(function(d) {
+    var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+    var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+    c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+    })(document);
+    smartlook('init', 'b98a0116dbf3964155782c1e804c58c2d3e8b747', { region: 'eu' });
+</script>
+
+<style>
+        body {
+            background: #0d0d0d;
+        }
+
+        .card {
+            border-radius: 15px;
+        }
+
+        input, textarea {
+            background-color: #1a1a1a !important;
+            border: none !important;
+            color: white !important;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #aaa;
+        }
+
+        #countdown {
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+    </style>
+
+  </head>
+
+
+   <body style=" background: linear-gradient(
+    to bottom,
+    #2b90e7 0%,
+    #68a1ac47 45%,
+    #edf8fc 100%
+  )">
+{% block content %}
+
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+    {% endfor %} {% endif %} 
+
+    <!-- Header-->
+
+<nav class="row py-2">
+    <a class="d-flex" href="{% url 'main' %}">
+<img src="{% static 'site/ventro.png' %}" alt="Dyslexia Logo" class="img-fluid" style="max-height: 40px; width: auto" />
+    </a>
+    <div class="container px-2 px-lg-5">
+    <div class="text-center text-light">
+        <h1 class="display-4 fw-bolder text-decoration-underline">
+        20 min deals
+        </h1>
+        <p class="lead fw-normal text-dark-50 mb-0">
+        Securing viewings and deals under 20.
+        </p>
+    </div>
+    </div>
+</nav>
+
+
+
+<div class="w-10 bg-light mx-auto mt-5 border border-5 border-info">
+    <div class="container">
+        <h2 class="d-flex justify-content-center text-dark">Rules and Guidelines</h2>
+        <ul class=" ">
+            <li>We specialize in getting Vehicles for our clients under 20 minutes.</li>
+            <li>There are over 9 individuals in this system that specialize in different vehicle types.</li>
+            <li>Once you post your request, it will be sent to all our associate's emails and they will contact you under 5 mins.</li>
+            <li>Vehicles you can order with Dyslexiacore: Lowest budget 40k, Max budget Unlimited, Trucks, Buses and Construction vehicles</li>
+            <li>And the most important criteria of doing business with us is seriousness, if you aren't a serious client go somewhere else. The system was designed for efficiency.</li>
+  
+        </ul>
+    </div>
+</div>    
+
+
+
+    
+
+<div class="container py-5">
+    <div class="col-md-6 mx-auto">
+
+        <div class="card text-white shadow-lg p-4" style="background: #73A6D8;">
+
+            <h2 class="text-center mb-4"> Let's get your car under 20 mins.</h2>
+
+            {% if success %}
+            <div class="alert alert-success text-center">
+                ✅ Request sent successfully! We’ll contact you shortly.
+            </div>
+
+            <!-- COUNTDOWN -->
+            <div class="text-center mt-3">
+                <div id="countdown"></div>
+
+                <!-- DONE BUTTON -->
+                {% if request_id %}
+                <a href="{% url 'mark_done' request_id %}" 
+                   class="btn btn-danger mt-3 w-100">
+                   ✅ Mark Deal as Done
+                </a>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <!-- FORM -->
+            <form id="vehicleForm" method="POST">
+                {% csrf_token %}
+
+                <input type="text" name="name" class="form-control mb-3" placeholder="Your Name" required>
+
+                <input type="text" name="phone" class="form-control mb-3" placeholder="Your Phone Number" required>
+
+                <input type="text" name="vehicle" class="form-control mb-3" placeholder="Vehicle (e.g. Toyota Hilux 2020)" required>
+
+                <input type="text" name="budget" class="form-control mb-3" placeholder="Budget (e.g. N$250,000)" required>
+
+                <textarea name="message" class="form-control mb-3" placeholder="Additional details (optional)"></textarea>
+
+                <button class="btn btn-success w-100">Submit Request</button>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+{% if created_timestamp %}
+<script>
+    const form = document.getElementById("vehicleForm");
+    const countdownElement = document.getElementById("countdown");
+
+    const createdAt = {{ created_timestamp }} * 1000;
+    const duration = 20 * 60 * 1000;
+    const endTime = createdAt + duration;
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const timeLeft = endTime - now;
+
+        if (timeLeft <= 0) {
+            countdownElement.innerHTML = "Deal is complete";
+
+            // Disable form inputs
+            Array.from(form.elements).forEach(el => el.disabled = true);
+
+            return;
+        }
+
+        const minutes = Math.floor(timeLeft / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        countdownElement.innerHTML = `⏳ Time left: ${minutes}m ${seconds}s`;
+
+        setTimeout(updateCountdown, 1000);
+    }
+
+    updateCountdown();
+</script>
+{% endif %}
+
+
+{% include 'footer.html' %}
+{% endblock %}
+  </body>
+</html>

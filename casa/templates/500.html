@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>404 page, wrong page.</title>
+    <meta charset="UTF-8" />
+    <meta name="Author" content="Denilson Bernardo Da Fonseca" />
+    <meta name="discription" content="E-store" />
+    <meta name="viewport" content="width=width-device,intial scale=1.0" />
+    <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
+    <link rel="icon" type="image/x-icon" href="image/icon.png" />
+    <link href="info.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    {% block content %}
+    <!-- header-->
+    {% include 'header.html' %}
+
+    <!-- body-->
+    <center>
+      <h1 class="display-1 fw-bolder">Sir Da Fonseca didn't get all the dugs <br>Email him and tell him about this Error dyslexiacore@gmail.com .</h1>
+    </center>
+    <!-- footer-->
+    {% include 'footer.html' %}
+
+    {% endblock %}
+  </body>
+</html>

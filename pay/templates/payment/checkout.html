@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
   <title>Checkout - DyslexiaCore</title>
   <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
   <link rel="icon" type="image/png" href="{% static 'site/images/favicon.png' %}">
@@ -18,7 +18,12 @@
 </script>
 </head>
 
-<body>
+<body style=" background: linear-gradient(
+    to bottom,
+    #2b90e7 0%,
+    #68a1ac47 45%,
+    #edf8fc 100%
+  );">
   {% if messages %} {% for message in messages %}
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
     {{ message }}
@@ -106,6 +111,13 @@
                 <option value="FNB eWallet">FNB eWallet (081 849 3832)</option>
                 <option value="Bank Windhoek EasyWallet">Bank Windhoek EasyWallet (081 849 3832)</option>
                 <option value="Standard Bank Blue Voucher">Standard Bank BlueVoucher (081 849 3832)</option>
+                <option value="Visa / Mastercard">Bank Windhoek <br>
+                                                  Account Number: 80283852272 <br>
+                                                  Branch Code: 481-872 <br>
+                                                  Branch Name: Walvis Bay <br>
+
+                                                  
+                </option>
               </select>
             </div>
 

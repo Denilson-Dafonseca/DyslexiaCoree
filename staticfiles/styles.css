@@ -80,8 +80,8 @@
   --bs-border-radius-xl: 1rem;
   --bs-border-radius-2xl: 2rem;
   --bs-border-radius-pill: 50rem;
-  --bs-link-color: #000000;
-  --bs-link-hover-color: #175cca;
+  --bs-link-color: #dde8f6;
+  --bs-link-hover-color: #020303;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #fff3cd;
 }
@@ -115,7 +115,7 @@ hr {
   margin: 1rem 0;
   color: inherit;
   border: 0;
-  border-top: 1px solid;
+  border-top: 3px solid;
   opacity: 0.25;
 }
 

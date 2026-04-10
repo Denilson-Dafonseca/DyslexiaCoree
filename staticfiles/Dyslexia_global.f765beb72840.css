@@ -1,0 +1,33 @@
+/* body*/
+body {
+  
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+}
+
+nav {
+  background: url("site/water.c69fca48df0e.gif");
+  background-size: cover;
+  
+}
+
+.card {
+    border-radius: 15px;
+}
+
+input, textarea {
+    background-color: #1a1a1a !important;
+    border: none !important;
+    color: white !important;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #aaa;
+}
+
+#countdown {
+    font-weight: bold;
+    font-size: 1.3rem;
+}

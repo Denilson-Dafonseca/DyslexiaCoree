@@ -1,0 +1,17 @@
+body {
+  background: url("site/bk2.2943b6446420.jpg"); 
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+}
+
+p {
+  color: rgb(5, 14, 184);
+}
+
+nav {
+  background: url("site/water.c69fca48df0e.gif");
+  background-size: cover;
+}
+

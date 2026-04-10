@@ -25,13 +25,11 @@ class ShippingAddress(models.Model):
     def __str__(self):
         return f"{self.shipping_full_name} - {self.shipping_district}"
 
-
 # Auto-create a shipping address profile when a new user registers
 @receiver(post_save, sender=User)
 def create_shipping(sender, instance, created, **kwargs):
     if created:
         ShippingAddress.objects.create(user=instance)
-
 
 # -------------------------------
 # ORDER MODEL
@@ -66,7 +64,6 @@ class Order(models.Model):
 
     class Meta:
         ordering = ["-date_ordered"]
-
 
 # -------------------------------
 # ORDER ITEM MODEL

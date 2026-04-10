@@ -1,14 +1,14 @@
 {% load static %}
-{% load cart_extras %}  {# Custom template filter to get quantity by product ID #}
+{% load cart_extras %} 
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <title>Receipt Page</title>
-  <link rel="stylesheet" href="{% static 'styles.css' %}">
+  <link href="{% static 'styles.css' %}" rel="stylesheet">
   <link rel="icon" type="image/png" href="{% static 'site/images/favicon.png' %}">
-  <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
+  <link href="{% static 'door.css' %}" rel="stylesheet" />
   <script type='text/javascript'>
   window.smartlook||(function(d) {
     var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
@@ -18,16 +18,18 @@
     smartlook('init', 'b98a0116dbf3964155782c1e804c58c2d3e8b747', { region: 'eu' });
 </script>
 </head>
+
 <body>
+  {% block content %}
   <!-- Header -->
   <div class="container mt-4">
-    <h2 class="w-25 bg-light text-dark">Receipt</h2>
+    <h2 class="w-27 bg-light text-dark">Receipt</h2>
 
     <!-- Order Summary Card -->
-    <div class="card w-25 mb-4 justify-content-center">
+    <div class="card w-27 mb-4 justify-content-center">
       <div class="card-body">
         {% for product in cart_products %}
-          <strong>{{ product.name }}</strong> :
+          <strong class="flex-nowrap">{{ product.name }}</strong> :
           {% if product.is_sale %}
             ${{ product.sale_price }}
           {% else %}
@@ -46,5 +48,7 @@
     <a href="{% url 'main' %}" class="btn btn-primary">Back to Home</a>
   </div>
 </center>
+
+{% endblock %}
 </body>
 </html>

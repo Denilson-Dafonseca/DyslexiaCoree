@@ -1,6 +1,5 @@
 from pathlib import Path
 import os
-import dj_database_url
 
 
 # from dotenv import load_dotenv
@@ -22,18 +21,7 @@ SECRET_KEY = 'django-insecure-9+_@mp%sklldf6l7lq0o*1=h=y!y$@mb#n1#v(i4sptl-aoysm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'dyslexiacore.xyz',
-    'www.dyslexiacore.xyz',
-    'dyslexiacoree-production.up.railway.app',
-]
-
-CSRF_TRUSTED_ORIGINS = [
-    'https://dyslexiacore.xyz',
-    'https://www.dyslexiacore.xyz',
-    'https://dyslexiacoree-production.up.railway.app',
-]
-
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 
@@ -44,7 +32,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap5',
     'casa',
     'cart',
     'pay',
@@ -56,12 +43,12 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'Dyslexia.middleware.RateLimitMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',  
 ]
-
 ROOT_URLCONF = 'Dyslexia.urls'
 
 TEMPLATES = [
@@ -87,10 +74,14 @@ WSGI_APPLICATION = 'Dyslexia.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'casa',
+        'USER': 'postgres',
+        'PASSWORD': 'Trill635',
+        'PORT': '5432',
+    }
 }
-
-DATABASES["default"] = dj_database_url.parse('postgresql://postgres:KEKHvVyQKupUEBzWNqsFmQBFBmbNOetV@interchange.proxy.rlwy.net:44571/railway')
-
 
 
 # Password validation
@@ -142,11 +133,18 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 524288000
 FILE_UPLOAD_MAX_MEMORY_SIZE = 524288000
 
 
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CLOUDINARY CONFIG
+
+#Email info
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'dyslexiacore@gmail.com'
+EMAIL_HOST_PASSWORD = 'yfndqozygwrbgnyg'
+
+
 

@@ -1,72 +1,66 @@
 /* body*/
 body {
-  background-image: url(site/Bk.jpg);
   background-repeat: no-repeat;
-  background-attachment: fixed;
   background-size: cover;
   background-position: center;
-  width: 100%;
 }
 
 nav {
-  width: 100%;
   background: url(site/water.gif);
   background-size: cover;
-  background-position: center;
 }
 
-/* Animation field */
-.will {
-  width: auto;
-  height: auto;
-  position: relative;
-  animation-name: logo;
-  animation-duration: 5s;
-  animation-timing-function: linear;
-  animation-delay: -2s;
+.hero-gradient {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+
+  background: linear-gradient(
+    to bottom,
+    #98d7ee 0%,
+    #528dee47 45%,
+    #5a85c5 100%
+  );
+
+  color: white;
+  padding: 80px 20px;
 }
 
-@keyframes logo {
-  0% {
-    left: 0px;
-    top: 0px;
-    transform: rotateY(90deg);
-  }
-  16.6% {
-    left: 100px;
-    top: 0px;
-    transform: rotateY(-90deg);
-  }
-  49.8% {
-    left: 80px;
-    top: 0px;
-    transform: rotateY(90deg);
-  }
-  66.4% {
-    left: 60px;
-    top: 0px;
-    transform: rotateY(-90deg);
-  }
-  83% {
-    left: 40px;
-    top: 0px;
-    transform: rotateY(90deg);
-  }
-  99.6% {
-    left: 20px;
-    top: 0px;
-    transform: rotateY(-90deg);
-  }
-  100% {
-    left: 0px;
-    top: 0px;
-    transform: rotateY(90deg);
-  }
+/* Headline */
+.hero-title {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  line-height: 1.2;
+  color: #fff;
 }
 
-footer {
-  width: 100%;
-  background: url(site/water.gif);
-  background-size: cover;
-  background-position: center;
+/* Highlight word */
+.text-highlight {
+  background: linear-gradient(90deg, #3b80e9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
+/* Subtitle */
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #4e69f5;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Buttons */
+.btn-dark {
+  background-color: #000;
+  border: none;
+}
+
+.btn-dark:hover {
+  background-color: #222;
+}
+
+.btn-outline-light:hover {
+  background-color: rgb(66, 189, 237);
+  color: black;
+}
+
+

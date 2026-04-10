@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <meta name="Author" content="Denilson Bernardo Da Fonseca" />
     <meta name="description" content="Online store" />
     <title>Advert page</title>
@@ -34,11 +34,11 @@
     </div>
     {% endfor %} {% endif %} 
     <!-- Header-->
-    <nav class="bg-dark py-2">
+    <nav class="row bg-dark py-2">
       <a class="d-flex" href="{% url 'main' %}">
     <img src="{% static 'site/ventro.png' %}" alt="Dyslexia Logo" class="img-fluid" style="max-height: 40px; width: auto" />
       </a>
-      <div class="container px-2 px-lg-5 my-2">
+      <div class="row container px-2 px-lg-5 my-2">
         <div class="text-center text-dark">
           <h1 class="display-4 fw-bolder text-decoration-underline">Advert area explained</h1>
           <p class="lead fw-normal text-white-50 mb-0">

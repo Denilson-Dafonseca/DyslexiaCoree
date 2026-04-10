@@ -1,0 +1,64 @@
+/* body*/
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+nav {
+  background: url("site/water.c69fca48df0e.gif");
+  background-size: cover;
+}
+
+.hero-gradient {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+
+  background: linear-gradient(
+    to bottom,
+    #eae1e1 0%,
+    #493232 45%,
+    #7daaee 100%
+  );
+
+  color: white;
+  padding: 80px 20px;
+}
+
+/* Headline */
+.hero-title {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  line-height: 1.2;
+  color: #fff;
+}
+
+/* Highlight word */
+.text-highlight {
+  background: linear-gradient(90deg, #ffffff, #0d6efd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Subtitle */
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #d1d1d1;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Buttons */
+.btn-dark {
+  background-color: #000;
+  border: none;
+}
+
+.btn-dark:hover {
+  background-color: #222;
+}
+
+.btn-outline-light:hover {
+  background-color: white;
+  color: black;
+}

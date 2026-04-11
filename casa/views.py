@@ -24,6 +24,9 @@ from django.utils import timezone
 import threading
 from django.conf import settings
 
+import threading
+
+
 
 
 def main(request):
@@ -291,6 +294,16 @@ Message:
         "created_timestamp": created_timestamp,
         "request_id": request_id
     })
+    
+    
+def async_email(message):
+    try:
+        send_vehicle_email(message)
+    except Exception as e:
+        print("EMAIL FAILED:", e)
+
+
+threading.Thread(target=async_email, args=(message,), daemon=True).start()    
 
 
 # ✅ DONE BUTTON VIEW

@@ -86,6 +86,55 @@ class SignUpForm(UserCreationForm):
 		self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
   
 class VehicleRequestForm(forms.ModelForm):
-    class Meta:
-        model = VehicleRequest
-        fields = ['name', 'phone', 'vehicle', 'budget', 'message']  
+
+	class Meta:
+		model = VehicleRequest
+		fields = ['name', 'phone', 'vehicle', 'budget', 'message']
+
+		widgets = {
+			'name': forms.TextInput(attrs={
+				'class': 'form-control',
+				'placeholder': 'Full Name'
+			}),
+
+			'phone': forms.TextInput(attrs={
+				'class': 'form-control',
+				'placeholder': 'Phone Number (e.g. +264...)'
+			}),
+
+			'vehicle': forms.TextInput(attrs={
+				'class': 'form-control',
+				'placeholder': 'Vehicle Type (e.g. Toyota Hilux, Truck, Bus)'
+			}),
+
+			'budget': forms.TextInput(attrs={
+				'class': 'form-control',
+				'placeholder': 'Your Budget (e.g. NAD 40,000+)'
+			}),
+
+			'message': forms.Textarea(attrs={
+				'class': 'form-control',
+				'placeholder': 'Any extra details (optional)',
+				'rows': 4
+			}),
+		}
+
+	# CLEAN VALIDATION (IMPORTANT)
+	def clean_phone(self):
+		phone = self.cleaned_data.get('phone')
+
+		if not phone:
+			raise forms.ValidationError("Phone number is required.")
+
+		if len(phone) < 7:
+			raise forms.ValidationError("Enter a valid phone number.")
+
+		return phone
+
+	def clean_name(self):
+		name = self.cleaned_data.get('name')
+
+		if not name:
+			raise forms.ValidationError("Name is required.")
+
+		return name

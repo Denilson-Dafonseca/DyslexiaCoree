@@ -220,11 +220,14 @@ def Terms_of_service(request):
 
 def send_vehicle_email(message):
     try:
-        print("EMAIL FUNCTION TRIGGERED")
+        print("🔥 EMAIL FUNCTION TRIGGERED")
+        print("EMAIL USER:", settings.EMAIL_HOST_USER)
+        print("EMAIL PASS:", settings.EMAIL_HOST_PASSWORD)
+
         send_mail(
-            subject="🚗 New Vehicle Request",
+            subject="🚗 New Vehicle Request - Dyslexiacore",
             message=message,
-            from_email="dyslexiacore@gmail.com",
+            from_email=settings.EMAIL_HOST_USER,  # ✅ uses settings
             recipient_list=[
                 "denilkson.dafonseca99@gmail.com",
                 "danielesau480@gmail.com",
@@ -235,12 +238,16 @@ def send_vehicle_email(message):
                 "alfarythms@gmail.com",
                 "hambekombada@gmail.com"
             ],
-            fail_silently=True,  # prevents crashes in production
+            fail_silently=False,  # 🔥 SHOW ERRORS
         )
+
+        print("✅ EMAIL SENT SUCCESSFULLY")
+
     except Exception as e:
-        print("EMAIL ERROR:", e)
+        print("❌ EMAIL ERROR:", e)
 
 
+# ✅ MAIN VIEW
 def Car_order(request):
     success = False
     created_timestamp = None
@@ -266,11 +273,8 @@ Message:
 {data.message or 'N/A'}
             """
 
-            # 🚀 RUN EMAIL IN BACKGROUND (THIS FIXES YOUR TIMEOUT)
-            threading.Thread(
-                target=send_vehicle_email,
-                args=(message,)
-            ).start()
+            # ✅ SEND EMAIL (NO THREADING FOR NOW)
+            send_vehicle_email(message)
 
             # ✅ COUNTDOWN DATA
             success = True
@@ -294,6 +298,5 @@ def mark_done(request, id):
     data.status = "completed"
     data.save()
 
-    return redirect('Car_order')  
-
+    return redirect('Car_order')
 

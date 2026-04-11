@@ -104,17 +104,22 @@ class Video(models.Model):
         return None
     
 # models.py
+from django.db import models
+
 class VehicleRequest(models.Model):
     name = models.CharField(max_length=100)
     phone = models.CharField(max_length=20)
-    vehicle = models.CharField(max_length=200)
-    budget = models.CharField(max_length=100)
-    message = models.TextField(blank=True)
+    vehicle = models.CharField(max_length=100)
+    budget = models.CharField(max_length=50)
+    message = models.TextField(blank=True, null=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
 
-    status = models.CharField(max_length=20, default="active")  # NEW
+    status = models.CharField(
+        max_length=20,
+        default="pending"
+    )
 
     def __str__(self):
-        return self.vehicle
-    
+        return f"{self.name} - {self.vehicle}"
     

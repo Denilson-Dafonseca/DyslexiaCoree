@@ -221,13 +221,15 @@ def Terms_of_service(request):
 def send_vehicle_email(message):
     try:
         print("🔥 EMAIL FUNCTION TRIGGERED")
-        print("EMAIL USER:", settings.EMAIL_HOST_USER)
-        print("EMAIL PASS:", settings.EMAIL_HOST_PASSWORD)
+
+        if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
+            print("❌ EMAIL SETTINGS MISSING")
+            return
 
         send_mail(
-            subject="🚗 New Vehicle Request - Dyslexiacore",
+            subject="🚗 New Vehicle Request",
             message=message,
-            from_email=settings.EMAIL_HOST_USER,  # ✅ uses settings
+            from_email=settings.EMAIL_HOST_USER,
             recipient_list=[
                 "denilkson.dafonseca99@gmail.com",
                 "danielesau480@gmail.com",
@@ -238,14 +240,13 @@ def send_vehicle_email(message):
                 "alfarythms@gmail.com",
                 "hambekombada@gmail.com"
             ],
-            fail_silently=False,  # 🔥 SHOW ERRORS
+            fail_silently=False,
         )
 
-        print("✅ EMAIL SENT SUCCESSFULLY")
+        print("✅ EMAIL SENT")
 
     except Exception as e:
-        print("❌ EMAIL ERROR:", e)
-
+        print("❌ EMAIL ERROR:", str(e))
 
 # ✅ MAIN VIEW
 def Car_order(request):

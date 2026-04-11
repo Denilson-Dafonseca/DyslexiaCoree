@@ -220,17 +220,22 @@ def Privacy_Policy(request):
 def Terms_of_service(request):
     
     return render(request, 'Terms_of_service.html',{}) 
+ 
+    
+# ✅ DONE BUTTON VIEW
+def mark_done(request, id):
+    data = get_object_or_404(VehicleRequest, id=id)
+    data.status = "completed"
+    data.save()
+
+    return redirect('Car_order')
 
 def send_vehicle_email(message):
     try:
-        print("🔥 EMAIL FUNCTION TRIGGERED")
-
-        if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
-            print("❌ EMAIL SETTINGS MISSING")
-            return
+        print("🔥 EMAIL TRIGGERED")
 
         send_mail(
-            subject="🚗 New Vehicle Request",
+            subject="🚗 New Vehicle Request - Dyslexiacore",
             message=message,
             from_email=settings.EMAIL_HOST_USER,
             recipient_list=[
@@ -251,11 +256,11 @@ def send_vehicle_email(message):
     except Exception as e:
         print("❌ EMAIL ERROR:", str(e))
 
-# ✅ MAIN VIEW
+
+# 🚀 MAIN VIEW (FIXED + CLEAN)
 def Car_order(request):
     success = False
-    created_timestamp = None
-    request_id = None
+    form = VehicleRequestForm()
 
     if request.method == "POST":
         form = VehicleRequestForm(request.POST)
@@ -263,81 +268,31 @@ def Car_order(request):
         if form.is_valid():
             data = form.save()
 
-            # ✅ EMAIL MESSAGE
             message = f"""
 🔥 NEW VEHICLE LEAD
 
 Name: {data.name}
 Phone: {data.phone}
-
 Vehicle: {data.vehicle}
 Budget: {data.budget}
 
 Message:
 {data.message or 'N/A'}
-            """
-
-            # ✅ SEND EMAIL (NO THREADING FOR NOW)
-            send_vehicle_email(message)
-
-            # ✅ COUNTDOWN DATA
-            success = True
-            created_timestamp = data.created_at.timestamp()
-            request_id = data.id
-
-    else:
-        form = VehicleRequestForm()
-
-    return render(request, "Car_order.html", {
-        "form": form,
-        "success": success,
-        "created_timestamp": created_timestamp,
-        "request_id": request_id
-    })
-    
-    
-# ✅ DONE BUTTON VIEW
-def mark_done(request, id):
-    data = get_object_or_404(VehicleRequest, id=id)
-    data.status = "completed"
-    data.save()
-
-    return redirect('Car_order')
-
-def async_email(message):
-    send_vehicle_email(message)
-
-
-def Car_order(request):
-    success = False
-
-    if request.method == "POST":
-        form = VehicleRequestForm(request.POST)
-
-        if form.is_valid():
-            data = form.save()
-
-            message = f"""
-🔥 NEW VEHICLE LEAD
-
-Name: {data.name}
-Phone: {data.phone}
-Vehicle: {data.vehicle}
-Budget: {data.budget}
 """
 
-            # ✅ THREADING MUST BE HERE (INSIDE VIEW)
+            # 🚀 NON-BLOCKING EMAIL (SAFE THREAD)
             threading.Thread(
-                target=async_email,
+                target=send_vehicle_email,
                 args=(message,),
                 daemon=True
             ).start()
 
             success = True
 
-    else:
-        form = VehicleRequestForm()
+    return render(request, "Car_order.html", {
+        "form": form,
+        "success": success
+    })
 
-    return render(request, "Car_order.html", {"form": form, "success": success})
 
 

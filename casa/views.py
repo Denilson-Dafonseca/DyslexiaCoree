@@ -222,15 +222,6 @@ def Terms_of_service(request):
     return render(request, 'Terms_of_service.html',{}) 
  
     
-# DONE BUTTON VIEW
-def mark_done(request, id):
-    data = get_object_or_404(VehicleRequest, id=id)
-    data.status = "completed"
-    data.save()
-    
-    return redirect('Car_order')
-
-
 
 def send_vehicle_email(message):
     try:
@@ -297,3 +288,10 @@ Message:
     })
 
 
+# DONE BUTTON VIEW
+def mark_done(request, id):
+    data = get_object_or_404(VehicleRequest, id=id)
+    data.status = "completed"
+    data.save()
+    
+    return redirect('Car_order')

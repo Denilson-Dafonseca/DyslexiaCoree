@@ -153,3 +153,5 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = os.environ.get("BREVO_LOGIN")
 EMAIL_HOST_PASSWORD = os.environ.get("BREVO_KEY")
+
+EMAIL_TIMEOUT = 10

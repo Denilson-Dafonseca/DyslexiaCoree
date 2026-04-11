@@ -222,13 +222,15 @@ def Terms_of_service(request):
     return render(request, 'Terms_of_service.html',{}) 
  
     
-# ✅ DONE BUTTON VIEW
+# DONE BUTTON VIEW
 def mark_done(request, id):
     data = get_object_or_404(VehicleRequest, id=id)
     data.status = "completed"
     data.save()
-
+    
     return redirect('Car_order')
+
+
 
 def send_vehicle_email(message):
     try:
@@ -241,8 +243,8 @@ def send_vehicle_email(message):
             recipient_list=[
                 "denilkson.dafonseca99@gmail.com",
                 "danielesau480@gmail.com",
-                "tunabutkus@gmail.com",
                 "yashesauto@gmail.com",
+                "tunabutkus@gmail.com",
                 "thimothshangadi@gmail.com",
                 "gerhaldmutukuta@gmail.com",
                 "alfarythms@gmail.com",
@@ -257,7 +259,7 @@ def send_vehicle_email(message):
         print("❌ EMAIL ERROR:", str(e))
 
 
-# 🚀 MAIN VIEW (FIXED + CLEAN)
+# 🚀 MAIN VIEW
 def Car_order(request):
     success = False
     form = VehicleRequestForm()
@@ -293,6 +295,5 @@ Message:
         "form": form,
         "success": success
     })
-
 
 

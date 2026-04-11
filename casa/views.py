@@ -225,7 +225,7 @@ def Terms_of_service(request):
 
 def send_vehicle_email(message):
     try:
-        print("🔥 EMAIL TRIGGERED")
+        print("EMAIL TRIGGERED")
 
         send_mail(
             subject="🚗 New Vehicle Request - Dyslexiacore",
@@ -244,10 +244,10 @@ def send_vehicle_email(message):
             fail_silently=False,
         )
 
-        print("✅ EMAIL SENT")
+        print("EMAIL SENT")
 
     except Exception as e:
-        print("❌ EMAIL ERROR:", str(e))
+        print("EMAIL ERROR:", str(e))
 
 
 # 🚀 MAIN VIEW

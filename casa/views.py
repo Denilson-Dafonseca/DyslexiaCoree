@@ -246,7 +246,7 @@ Message:
                 subject="🚗 New Vehicle Request",
                 message=message,
                 from_email="dyslexiacore@gmail.com",
-                recipient_list=["denilkson.dafonseca99@gmail.com", "danielesau480@gmail.com", "tunabutkus@gmail.com", "yashesauto@gmail.com", "thimothshangadi@gmail.com", "gerhaldmutukuta@gmail.com", "alfarythms@gmail.com"],
+                recipient_list=["denilkson.dafonseca99@gmail.com", "danielesau480@gmail.com", "tunabutkus@gmail.com", "yashesauto@gmail.com", "thimothshangadi@gmail.com", "gerhaldmutukuta@gmail.com", "alfarythms@gmail.com", "hambekombada@gmail.com", "samjacob4672@gmail.com"],
                 fail_silently=False,
             )
 

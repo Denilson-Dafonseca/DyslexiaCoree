@@ -233,8 +233,7 @@ def send_vehicle_email(message):
                 "thimothshangadi@gmail.com",
                 "gerhaldmutukuta@gmail.com",
                 "alfarythms@gmail.com",
-                "hambekombada@gmail.com",
-                "samjacob4672@gmail.com"
+                "hambekombada@gmail.com"
             ],
             fail_silently=True,  # prevents crashes in production
         )

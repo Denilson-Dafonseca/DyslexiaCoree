@@ -220,6 +220,7 @@ def Terms_of_service(request):
 
 def send_vehicle_email(message):
     try:
+        print("EMAIL FUNCTION TRIGGERED")
         send_mail(
             subject="🚗 New Vehicle Request",
             message=message,

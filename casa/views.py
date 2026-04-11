@@ -21,7 +21,7 @@ from .forms import VehicleRequestForm
 from .models import VehicleRequest
 
 from django.utils import timezone
-
+import threading
 from django.conf import settings
 
 
@@ -218,6 +218,29 @@ def Terms_of_service(request):
     
     return render(request, 'Terms_of_service.html',{}) 
 
+def send_vehicle_email(message):
+    try:
+        send_mail(
+            subject="🚗 New Vehicle Request",
+            message=message,
+            from_email="dyslexiacore@gmail.com",
+            recipient_list=[
+                "denilkson.dafonseca99@gmail.com",
+                "danielesau480@gmail.com",
+                "tunabutkus@gmail.com",
+                "yashesauto@gmail.com",
+                "thimothshangadi@gmail.com",
+                "gerhaldmutukuta@gmail.com",
+                "alfarythms@gmail.com",
+                "hambekombada@gmail.com",
+                "samjacob4672@gmail.com"
+            ],
+            fail_silently=True,  # prevents crashes in production
+        )
+    except Exception as e:
+        print("EMAIL ERROR:", e)
+
+
 def Car_order(request):
     success = False
     created_timestamp = None
@@ -225,10 +248,11 @@ def Car_order(request):
 
     if request.method == "POST":
         form = VehicleRequestForm(request.POST)
+
         if form.is_valid():
             data = form.save()
 
-            # ✅ EMAIL LOGIC (THIS WAS MISSING)
+            # ✅ EMAIL MESSAGE
             message = f"""
 🔥 NEW VEHICLE LEAD
 
@@ -242,13 +266,11 @@ Message:
 {data.message or 'N/A'}
             """
 
-            send_mail(
-                subject="🚗 New Vehicle Request",
-                message=message,
-                from_email="dyslexiacore@gmail.com",
-                recipient_list=["denilkson.dafonseca99@gmail.com", "danielesau480@gmail.com", "tunabutkus@gmail.com", "yashesauto@gmail.com", "thimothshangadi@gmail.com", "gerhaldmutukuta@gmail.com", "alfarythms@gmail.com", "hambekombada@gmail.com", "samjacob4672@gmail.com"],
-                fail_silently=False,
-            )
+            # 🚀 RUN EMAIL IN BACKGROUND (THIS FIXES YOUR TIMEOUT)
+            threading.Thread(
+                target=send_vehicle_email,
+                args=(message,)
+            ).start()
 
             # ✅ COUNTDOWN DATA
             success = True

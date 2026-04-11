@@ -296,16 +296,6 @@ Message:
     })
     
     
-def async_email(message):
-    try:
-        send_vehicle_email(message)
-    except Exception as e:
-        print("EMAIL FAILED:", e)
-
-
-threading.Thread(target=async_email, args=(message,), daemon=True).start()    
-
-
 # ✅ DONE BUTTON VIEW
 def mark_done(request, id):
     data = get_object_or_404(VehicleRequest, id=id)
@@ -313,4 +303,41 @@ def mark_done(request, id):
     data.save()
 
     return redirect('Car_order')
+
+def async_email(message):
+    send_vehicle_email(message)
+
+
+def Car_order(request):
+    success = False
+
+    if request.method == "POST":
+        form = VehicleRequestForm(request.POST)
+
+        if form.is_valid():
+            data = form.save()
+
+            message = f"""
+🔥 NEW VEHICLE LEAD
+
+Name: {data.name}
+Phone: {data.phone}
+Vehicle: {data.vehicle}
+Budget: {data.budget}
+"""
+
+            # ✅ THREADING MUST BE HERE (INSIDE VIEW)
+            threading.Thread(
+                target=async_email,
+                args=(message,),
+                daemon=True
+            ).start()
+
+            success = True
+
+    else:
+        form = VehicleRequestForm()
+
+    return render(request, "Car_order.html", {"form": form, "success": success})
+
 

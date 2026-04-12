@@ -25,6 +25,7 @@ import threading
 from django.conf import settings
 
 import threading
+import requests
 
 
 
@@ -221,31 +222,51 @@ def Terms_of_service(request):
     
     return render(request, 'Terms_of_service.html',{}) 
  
-    
-def send_vehicle_email(message):
+def send_vehicle_email(message, subject="🚗 New Vehicle Request - Dyslexiacore"):
     try:
-        print("EMAIL TRIGGERED")
+        print("EMAIL TRIGGERED (BREVO API)")
 
-        send_mail(
-            subject="🚗 New Vehicle Request - Dyslexiacore",
-            message=message,
-            from_email="dyslexiacore@gmail.com",
-            recipient_list=[
-                "denilkson.dafonseca99@gmail.com",
-                "yashesauto@gmail.com",
-                "tunabutkus@gmail.com",
-                "thimothshangadi@gmail.com",
-                "gerhaldmutukuta@gmail.com",
-                "alfarythms@gmail.com",
-                "hambekombada@gmail.com"
+        url = "https://api.brevo.com/v3/smtp/email"
+
+        headers = {
+            "accept": "application/json",
+            "api-key": settings.BREVO_API_KEY,
+            "content-type": "application/json"
+        }
+
+        payload = {
+            "sender": {
+                "name": "Dyslexiacore",
+                "email": "dyslexiacore@gmail.com"
+            },
+            "to": [
+                {"email": "denilkson.dafonseca99@gmail.com"},
+                {"email": "yashesauto@gmail.com"},
+                {"email": "tunabutkus@gmail.com"},
+                {"email": "thimothshangadi@gmail.com"},
+                {"email": "gerhaldmutukuta@gmail.com"},
+                {"email": "alfarythms@gmail.com"},
+                {"email": "hambekombada@gmail.com"}
             ],
-            fail_silently=False,
-        )
+            "subject": subject,
+            "htmlContent": f"""
+            <h2>🚗 New Vehicle Request</h2>
+            <p>{message.replace('\n', '<br>')}</p>
+            """
+        }
 
-        print("EMAIL SENT")
+        response = requests.post(url, json=payload, headers=headers)
+
+        print("STATUS:", response.status_code)
+        print("RESPONSE:", response.text)
+
+        if response.status_code == 201:
+            print("EMAIL SENT")
+        else:
+            print("EMAIL FAILED")
 
     except Exception as e:
-        print("EMAIL ERROR:", str(e))
+        print("EMAIL ERROR:", str(e))    
 
 
 def Car_order(request):
@@ -259,18 +280,13 @@ def Car_order(request):
             data = form.save()
 
             message = f"""
-🔥 NEW VEHICLE LEAD
-
 Name: {data.name}
 Phone: {data.phone}
 Vehicle: {data.vehicle}
 Budget: {data.budget}
-
-Message:
-{data.message or 'N/A'}
+Message: {data.message or 'N/A'}
 """
 
-            # call EMAIL FUNCTION DIRECTLY
             send_vehicle_email(message)
 
             success = True

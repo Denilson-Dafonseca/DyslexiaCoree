@@ -157,4 +157,6 @@ EMAIL_TIMEOUT = 30
 EMAIL_HOST_USER = os.environ.get("BREVO_LOGIN")
 EMAIL_HOST_PASSWORD = os.environ.get("BREVO_KEY")
 
+BREVO_API_KEY = os.environ.get("BREVO_API_KEY")
+
 

@@ -295,3 +295,6 @@ def mark_done(request, id):
     data.save()
     
     return redirect('Car_order')
+
+print("LOGIN:", settings.EMAIL_HOST_USER)
+print("PASSWORD:", settings.EMAIL_HOST_PASSWORD)

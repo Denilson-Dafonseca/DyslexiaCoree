@@ -230,7 +230,7 @@ def send_vehicle_email(message):
         send_mail(
             subject="🚗 New Vehicle Request - Dyslexiacore",
             message=message,
-            from_email=settings.EMAIL_HOST_USER,
+            from_email="dyslexiacore@gmail.com",
             recipient_list=[
                 "denilkson.dafonseca99@gmail.com",
                 "danielesau480@gmail.com",

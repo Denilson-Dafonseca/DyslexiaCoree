@@ -222,8 +222,7 @@ def Terms_of_service(request):
     return render(request, 'Terms_of_service.html',{}) 
  
     
-
-def Car_order(message):
+def send_vehicle_email(message):
     try:
         print("EMAIL TRIGGERED")
 
@@ -233,7 +232,6 @@ def Car_order(message):
             from_email="dyslexiacore@gmail.com",
             recipient_list=[
                 "denilkson.dafonseca99@gmail.com",
-                "danielesau480@gmail.com",
                 "yashesauto@gmail.com",
                 "tunabutkus@gmail.com",
                 "thimothshangadi@gmail.com",
@@ -250,7 +248,6 @@ def Car_order(message):
         print("EMAIL ERROR:", str(e))
 
 
-# 🚀 MAIN VIEW
 def Car_order(request):
     success = False
     form = VehicleRequestForm()
@@ -273,7 +270,8 @@ Message:
 {data.message or 'N/A'}
 """
 
-            Car_order(message)
+            # call EMAIL FUNCTION DIRECTLY
+            send_vehicle_email(message)
 
             success = True
 
@@ -281,7 +279,6 @@ Message:
         "form": form,
         "success": success
     })
-
 
 # DONE BUTTON VIEW
 def mark_done(request, id):

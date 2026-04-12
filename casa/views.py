@@ -223,7 +223,7 @@ def Terms_of_service(request):
  
     
 
-def send_vehicle_email(message):
+def Car_order(message):
     try:
         print("EMAIL TRIGGERED")
 
@@ -273,12 +273,7 @@ Message:
 {data.message or 'N/A'}
 """
 
-            # 🚀 NON-BLOCKING EMAIL (SAFE THREAD)
-            threading.Thread(
-                target=send_vehicle_email,
-                args=(message,),
-                daemon=True
-            ).start()
+            Car_order(message)
 
             success = True
 
@@ -296,5 +291,3 @@ def mark_done(request, id):
     
     return redirect('Car_order')
 
-print("LOGIN:", settings.EMAIL_HOST_USER)
-print("PASSWORD:", settings.EMAIL_HOST_PASSWORD)

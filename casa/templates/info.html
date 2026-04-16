@@ -4,51 +4,66 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
-    <meta name="Author" content="Denilson Bernardo Da Fonseca" />
-    <meta name="description" content="Online store" />
+
     <title>About DyslexiaCore</title>
+
     <link rel="icon" type="image/png" href="{% static 'site/images/favicon.png' %}">
     <link href="{% static 'styles.css' %}" rel="stylesheet" />
     <link href="{% static 'Dyslexia_global.css' %}" rel="stylesheet" />
-    <script type='text/javascript'>
-  window.smartlook||(function(d) {
-    var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
-    var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
-    c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
-    })(document);
-    smartlook('init', 'b98a0116dbf3964155782c1e804c58c2d3e8b747', { region: 'eu' });
-</script>
+
+    <style>
+      html, body {
+        overflow-x: hidden;
+      }
+
+      iframe, video {
+        max-width: 100%;
+      }
+
+      .ratio {
+        max-width: 100%;
+      }
+    </style>
+
+    <script>
+      window.smartlook||(function(d) {
+        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+        c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+      })(document);
+      smartlook('init', 'b98a0116dbf3964155782c1e804c58c2d3e8b747', { region: 'eu' });
+    </script>
   </head>
 
-  <body style=" background: linear-gradient(
-    to bottom,
-    #2b90e7 0%,
-    #68a1ac47 45%,
-    #edf8fc 100%
-  )">
-    {% block content %}
+  <body style="background: linear-gradient(to bottom,#2b90e7 0%,#68a1ac47 45%,#edf8fc 100%)">
 
-    <!-- Header-->
-    <nav class="row bg-dark py-2">
-      <a class="d-flex" href="{% url 'main' %}">
-    <img src="{% static 'site/ventro.png' %}" alt="Dyslexia Logo" class="img-fluid" style="max-height: 40px; width: auto" />
-      </a>
-      <div class="container px-2 px-lg-5">
-        <div class="text-center text-dark text-decoration-underline">
-          <h1 class="display-4 fw-bolder">
-            What is DyslexiaCore all
-            <span class="text-light">TUOBA</span>?
-          </h1>
-          <p class="lead fw-normal text-dark-50 mb-0">Take the deep dive.</p>
-        </div>
-      </div>
-    </nav>
+{% block content %}
 
-    <!-- text-->
-    <div class="row">
-      <p class="col text-center">
-        <h3 class="text-center text-light display-2 fw-bolder text-decoration-underline">DyslexiaCore</h3>
-<p class="text-center">
+<!-- HEADER -->
+<nav class="container-fluid bg-dark py-2">
+  <div class="container text-center text-light">
+
+    <a href="{% url 'main' %}">
+      <img src="{% static 'site/ventro.png' %}" style="max-height: 40px;">
+    </a>
+
+    <h1 class="display-4 fw-bolder text-decoration-underline mt-3">
+      What is DyslexiaCore <span class="text-primary">TUOBA</span>?
+    </h1>
+
+    <p class="lead">Take the deep dive.</p>
+
+  </div>
+</nav>
+
+<!-- TEXT -->
+<div class="container py-4">
+
+  <h3 class="text-center text-light display-5 fw-bolder text-decoration-underline">
+    DyslexiaCore
+  </h3>
+
+  <p class="text-center">
   DyslexiaCore is a community-driven e-commerce store that sells products on behalf of its vendors. 
   The vendor ratio follows an <strong>90%-10%</strong> split with vendors receiving 90% of the profit. 
   Most of our vendors are students, while the rest come from the broader community. 
@@ -58,8 +73,11 @@
   <span class="text-danger">(Our Cause)</span>.
 </p>
 
-<h3 class="text-center text-light display-2 fw-bolder text-decoration-underline">Our Cause</h3>
-<p class="text-center">
+  <h3 class="text-center text-light display-5 fw-bolder text-decoration-underline mt-5">
+    Our Cause
+  </h3>
+
+  <p class="text-center">
   DyslexiaCore is dedicated to raising awareness and breaking the stigma surrounding learning disabilities. 
   The founder of this initiative studied at IUM and graduated with a Bachelor’s Honours in Education. 
   During teaching practice, they encountered learners with learning disabilities who were already in high school many of whom had gone through their schooling years unaware of their challenges. 
@@ -78,66 +96,80 @@
   they just need understanding, guidance, and support. 
   Together, we can change that narrative, let’s work hand in hand to spread awareness and make a lasting difference.
 </p>
-</p>
-    </div>
-<!-- Video Section -->
+
+</div>
+
+<!-- VIDEO SECTION -->
 <section class="py-5 bg-light" id="videos">
+
   <div class="container">
-    <h2 class="text-center text-success fw-bold mb-4 text-decoration-underline">Our Video Stories</h2>
+
+    <h2 class="text-center text-success fw-bold mb-4 text-decoration-underline">
+      Our Video Stories
+    </h2>
+
     <p class="text-center text-muted mb-5">
       Watch our latest videos about awareness, learning support, and community impact.
     </p>
 
     <div class="row g-4 justify-content-center">
+
       {% for video in videos %}
       <div class="col-md-6 col-lg-4">
-        <!-- Video Embed -->
+
         <div class="ratio ratio-16x9 shadow-sm rounded-3 overflow-hidden">
+
           {% if video.youtube_url %}
-          <iframe
-            src="{{ video.get_embed_url }}"
-            title="{{ video.title }}"
-            allowfullscreen
-          ></iframe>
+            <iframe
+              src="{{ video.get_embed_url }}"
+              title="{{ video.title }}"
+              allowfullscreen
+              style="max-width:100%;"
+            ></iframe>
+
           {% elif video.video_file %}
-          <video controls class="w-100 rounded-3">
-            <source src="{{ video.video_file.url }}" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+            <video controls class="w-100">
+              <source src="{{ video.video_file.url }}" type="video/mp4">
+            </video>
           {% endif %}
+
         </div>
 
-        <!-- Video Title -->
         <p class="text-center mt-2 fw-semibold">{{ video.title }}</p>
+
         {% if video.description %}
         <p class="text-center text-muted small">{{ video.description }}</p>
         {% endif %}
 
-        <!-- AdSense Spot -->
+        <!-- ADS -->
         <div class="text-center my-3">
-          <!-- Replace the ad-client and ad-slot with your AdSense codes -->
+
           <ins class="adsbygoogle"
-               style="display:block"
+               style="display:block; max-width:100%;"
                data-ad-client="ca-pub-XXXXXXXXXXXXXXX"
                data-ad-slot="YYYYYYYYYY"
                data-ad-format="auto"
                data-full-width-responsive="true"></ins>
+
           <script>
-               (adsbygoogle = window.adsbygoogle || []).push({});
+            (adsbygoogle = window.adsbygoogle || []).push({});
           </script>
+
         </div>
 
       </div>
       {% empty %}
-      <p class="text-center">No videos available yet. Check back soon!</p>
+        <p class="text-center">No videos available yet. Check back soon!</p>
       {% endfor %}
+
     </div>
   </div>
+
 </section>
-    
 
+{% include 'footer.html' %}
 
-    <!-- footer-->
-    {% include 'footer.html' %} {% endblock %}
+{% endblock %}
+
   </body>
 </html>

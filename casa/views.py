@@ -26,6 +26,7 @@ from django.conf import settings
 
 import threading
 import requests
+import time
 
 
 
@@ -240,13 +241,8 @@ def send_vehicle_email(message, subject="🚗 New Vehicle Request - Dyslexiacore
                 "email": "dyslexiacore@gmail.com"
             },
             "to": [
-                {"email": "denilkson.dafonseca99@gmail.com"},
-                {"email": "yashesauto@gmail.com"},
-                {"email": "tunabutkus@gmail.com"},
-                {"email": "thimothshangadi@gmail.com"},
-                {"email": "gerhaldmutukuta@gmail.com"},
-                {"email": "alfarythms@gmail.com"},
-                {"email": "hambekombada@gmail.com"}
+                {"email": "denilkson.dafonseca99@gmail.com"}
+              
             ],
             "subject": subject,
             "htmlContent": f"""
@@ -272,6 +268,8 @@ def send_vehicle_email(message, subject="🚗 New Vehicle Request - Dyslexiacore
 def Car_order(request):
     success = False
     form = VehicleRequestForm()
+    created_timestamp = None
+    request_id = None
 
     if request.method == "POST":
         form = VehicleRequestForm(request.POST)
@@ -291,16 +289,20 @@ Message: {data.message or 'N/A'}
 
             success = True
 
+            # ✅ THIS IS WHAT YOU WERE MISSING
+            created_timestamp = int(time.time())
+            request_id = data.id
+
     return render(request, "Car_order.html", {
         "form": form,
-        "success": success
+        "success": success,
+        "created_timestamp": created_timestamp,
+        "request_id": request_id
     })
 
-# DONE BUTTON VIEW
 def mark_done(request, id):
     data = get_object_or_404(VehicleRequest, id=id)
     data.status = "completed"
     data.save()
     
-    return redirect('Car_order')
-
+    return redirect(request, 'Car_order')

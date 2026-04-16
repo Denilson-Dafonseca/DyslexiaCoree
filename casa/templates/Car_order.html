@@ -1,28 +1,29 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <meta name="Author" content="Denilson Bernardo Da Fonseca" />
-    <meta name="description" content="Online store" />
+
     <title>20 min deals</title>
+
     <link href="{% static 'styles.css' %}" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
     <link rel="icon" type="image/png" href="{% static 'site/images/favicon.png' %}">
-    
-    <script type='text/javascript'>
-  window.smartlook||(function(d) {
-    var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
-    var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
-    c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
-    })(document);
-    smartlook('init', 'b98a0116dbf3964155782c1e804c58c2d3e8b747', { region: 'eu' });
-</script>
 
-<style>
-        body {
-            background: #0d0d0d;
+    <script>
+      window.smartlook||(function(d) {
+        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+        c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+      })(document);
+      smartlook('init', 'b98a0116dbf3964155782c1e804c58c2d3e8b747', { region: 'eu' });
+    </script>
+
+    <style>
+        html, body {
+            overflow-x: hidden;
+            background: linear-gradient(to bottom, #2b90e7 0%, #68a1ac47 45%, #edf8fc 100%);
         }
 
         .card {
@@ -44,55 +45,43 @@
             font-size: 1.3rem;
         }
     </style>
+</head>
 
-  </head>
+<body>
 
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endfor %}
+{% endif %}
 
-   <body style=" background: linear-gradient(
-    to bottom,
-    #2b90e7 0%,
-    #68a1ac47 45%,
-    #edf8fc 100%
-  )">
-{% block content %}
-
-    {% if messages %} {% for message in messages %}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      {{ message }}
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="alert"
-        aria-label="Close"
-      ></button>
-    </div>
-    {% endfor %} {% endif %} 
-
-    <!-- Header-->
-
-<nav class="row py-2">
-    <a class="d-flex" href="{% url 'main' %}">
-<img src="{% static 'site/ventro.png' %}" alt="Dyslexia Logo" class="img-fluid" style="max-height: 40px; width: auto" />
-    </a>
-    <div class="container px-2 px-lg-5">
+<!-- HEADER -->
+<nav class="container py-2">
     <div class="text-center text-light">
-        <h1 class="display-4 fw-bolder text-decoration-underline">
-        20 min deals
+        <a href="{% url 'main' %}">
+            <img src="{% static 'site/ventro.png' %}" style="max-height:40px;">
+        </a>
+
+        <h1 class="display-4 fw-bolder text-decoration-underline mt-3">
+            20 min deals
         </h1>
-        <p class="lead fw-normal text-dark-50 mb-0">
-        Securing viewings and deals under 20.
+
+        <p class="lead">
+            Securing viewings and deals under 20 minutes.
         </p>
-    </div>
     </div>
 </nav>
 
+<!-- RULES -->
+<div class="container bg-light mt-5 border border-5 border-info p-3 rounded">
+    <h2 class="text-center">Rules and Guidelines</h2>
+    <ul>
+      <li>We specialize in getting new and pre-owned vehicles for our clients, within under 20, So we can send the to car viewings faster.</li>
 
-
-<div class="w-10 bg-light mx-auto mt-5 border border-5 border-info">
-    <div class="container">
-        <h2 class="d-flex justify-content-center text-dark">Rules and Guidelines</h2>
-        <ul class=" ">
-            <li>We specialize in sourcing vehicles for our clients with rapid turnaround times, often within 20 minutes.</li>
+<li>We also partner with trusted associates who can import vehicles on behalf of our clients, simply provide your details, and we will handle the rest.</li>
 
 <li>Our network consists of over 9 experienced associates, each specializing in different vehicle categories to ensure precise and efficient service.</li>
 
@@ -101,10 +90,10 @@
 <li>We cater to a wide range of vehicle needs, including passenger vehicles, trucks, buses, and construction machinery. Our service accommodates budgets starting from NAD 40,000 with no upper limit.</li>
 
 <li>We prioritize working with serious and committed clients. Our system is designed for speed and efficiency, and we encourage inquiries from individuals ready to proceed with a purchase.</li>
-        </ul>
-    </div>
-</div>    
+    </ul>
+</div>
 
+<!-- FORM -->
 <div class="container py-5">
     <div class="col-md-6 mx-auto">
 
@@ -113,31 +102,29 @@
             <h2 class="text-center mb-4">Get your car in under 20 mins</h2>
 
             {% if success %}
-            <div class="alert alert-success text-center">
-                ✅ Request sent successfully!
-            </div>
-
-            <div class="text-center mt-3">
-                <div id="countdown"></div>
+                <div class="alert alert-success text-center">
+                    ✅ Request sent successfully!
+                </div>
 
                 {% if request_id %}
-                <a href="{% url 'mark_done' request_id %}" class="btn btn-danger mt-3 w-100">
-                    Mark Deal as Done
-                </a>
+                    <div class="text-center mt-3">
+                        <a href="{% url 'mark_done' request_id %}" class="btn btn-danger w-100">
+                            Mark Deal as Done
+                        </a>
+                    </div>
                 {% endif %}
-            </div>
             {% endif %}
+
+            <!-- TIMER -->
+            <div id="countdown" class="text-center mt-3 fw-bold"></div>
 
             <!-- FORM -->
             <form id="vehicleForm" method="POST">
                 {% csrf_token %}
 
                 <input type="text" name="name" class="form-control mb-3" placeholder="Your Name" required>
-
                 <input type="text" name="phone" class="form-control mb-3" placeholder="Your Phone Number" required>
-
                 <input type="text" name="vehicle" class="form-control mb-3" placeholder="Vehicle" required>
-
                 <input type="text" name="budget" class="form-control mb-3" placeholder="Budget" required>
 
                 <textarea name="message" class="form-control mb-3" placeholder="Message"></textarea>
@@ -149,56 +136,69 @@
     </div>
 </div>
 
-{% if created_timestamp %}
+<!-- SCRIPT -->
 <script>
-const STORAGE_KEY = "vehicle_order_start_time";
-const duration = 20 * 60 * 1000;
+document.addEventListener("DOMContentLoaded", function () {
 
-// get stored OR server time
-let createdAt = localStorage.getItem(STORAGE_KEY);
+    const STORAGE_KEY = "vehicle_order_start_time";
+    const duration = 20 * 60 * 1000;
 
-if (!createdAt) {
-    createdAt = {{ created_timestamp }} * 1000;
-    localStorage.setItem(STORAGE_KEY, createdAt);
-} else {
-    createdAt = parseInt(createdAt);
-}
+    const countdownElement = document.getElementById("countdown");
+    const form = document.getElementById("vehicleForm");
 
-const endTime = createdAt + duration;
+    if (!countdownElement) return;
 
-const countdownElement = document.getElementById("countdown");
-const form = document.getElementById("vehicleForm");
+    let createdAt = localStorage.getItem(STORAGE_KEY);
 
-function updateCountdown() {
-    const now = Date.now();
-    const timeLeft = endTime - now;
+    if (!createdAt || createdAt === "null") {
 
-    if (timeLeft <= 0) {
-        countdownElement.innerHTML = "⛔ Deal Expired";
+        const serverTime = "{{ created_timestamp|default:'' }}";
 
-        if (form) {
-            Array.from(form.elements).forEach(el => el.disabled = true);
+        if (!serverTime) {
+            countdownElement.innerHTML = "⏳ Waiting for request...";
+            return;
         }
 
-        localStorage.removeItem(STORAGE_KEY);
-        return;
+        createdAt = parseInt(serverTime) * 1000;
+        localStorage.setItem(STORAGE_KEY, createdAt);
+
+    } else {
+        createdAt = parseInt(createdAt);
     }
 
-    const minutes = Math.floor(timeLeft / 60000);
-    const seconds = Math.floor((timeLeft % 60000) / 1000);
+    const endTime = createdAt + duration;
 
-    countdownElement.innerHTML = `⏳ Time left: ${minutes}m ${seconds}s`;
+    function updateCountdown() {
 
-    setTimeout(updateCountdown, 1000);
-}
+        const now = Date.now();
+        const timeLeft = endTime - now;
 
-updateCountdown();
+        if (timeLeft <= 0) {
+            countdownElement.innerHTML = "⛔ Deal Expired";
+
+            if (form) {
+                Array.from(form.elements).forEach(el => el.disabled = true);
+            }
+
+            localStorage.removeItem(STORAGE_KEY);
+            return;
+        }
+
+        const minutes = Math.floor(timeLeft / 60000);
+        const seconds = Math.floor((timeLeft % 60000) / 1000);
+
+        countdownElement.innerHTML =
+            `⏳ Time left: ${minutes}m ${seconds}s`;
+
+        setTimeout(updateCountdown, 1000);
+    }
+
+    updateCountdown();
+});
 </script>
-  
-{% endif %}
 
+<!-- BOOTSTRAP JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-{% include 'footer.html' %}
-{% endblock %}
-  </body>
+</body>
 </html>

@@ -3,192 +3,195 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />    
-    <meta name="description" content="" />
-    <link rel="icon" type="image/png" href="{% static 'site/images/favicon.png' %}">
-    <meta name="author" content="" />
-    <title>Shopping Cart</title>
-    <!-- Favicon-->
-    <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
-    <!-- Bootstrap icons-->
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="{% static 'styles.css' %}" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type='text/javascript'>
-  window.smartlook||(function(d) {
-    var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
-    var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
-    c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
-    })(document);
-    smartlook('init', 'b98a0116dbf3964155782c1e804c58c2d3e8b747', { region: 'eu' });
-</script>
-  </head>
-  <body>
-    {% if messages %} {% for message in messages %}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      {{ message }}
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="alert"
-        aria-label="Close"
-      ></button>
-    </div>
-    {% endfor %} {% endif %}
-    <!-- Navigation-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 
-    <!-- Header-->
-    <nav>
-      <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-dark">
-          <h1 class="display-4 fw-bolder text-decoration-underline">Shopping Cart</h1>
-          <p class="lead fw-normal text-dark-50 mb-0">have fun shopping,{{user.username}}.</p>
+    <link rel="icon" type="image/png" href="{% static 'site/images/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}" />
+    <link href="{% static 'styles.css' %}" rel="stylesheet" />
+
+    <style>
+      html, body {
+        overflow-x: hidden;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+    .bar {
+        width: 100%;
+      }
+
+      .card {
+        border-radius: 12px;
+      }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+
+  <body>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
+      {% endfor %}
+    {% endif %}
+
+    <!-- HEADER -->
+    <nav class="py-4 bar">
+      <div class="text-center">
+        <h1 class="fw-bolder text-decoration-underline">Shopping Cart</h1>
+        <p class="lead">Have fun shopping, {{ user.username }}.</p>
       </div>
     </nav>
-   {% include 'nav.html' %}
 
+    {% include 'nav.html' %}
 
-     {% if cart_products %}
-        	{% for product in cart_products %}
-        	
-<div class="card mb-3 mx-auto" style="max-width: 850px;">
-  <div class="row g-0">
-    <div class="col-md-4 col-12">
-      <img src="{{ product.image.url }}" 
-           class="img-fluid rounded-start w-100 h-100 object-fit-cover" 
-           alt="...">
-    </div>
+    <!-- CART CONTENT -->
+    <div class="container">
 
-    <div class="col-md-8 col-12">
-      <div class="card-body text-center">
+      {% if cart_products %}
 
-        <h5 class="card-title">{{ product.name }}</h5>
+        {% for product in cart_products %}
 
-        <p class="card-text justified">{{ product.description }}</p>
+        <div class="card mb-4 mx-auto shadow-sm" style="max-width: 850px;">
 
-        {% if product.is_sale %}
-        <div class="d-flex justify-content-center small text-warning mb-2">
-          <div class="bi-star-fill"></div>
-          &nbsp;&nbsp;Sale!&nbsp;&nbsp;
-          <div class="bi-star-fill"></div>
-        </div>
+          <div class="row g-0">
 
-        <strike>N${{ product.price }}</strike>
-        &nbsp;
-        <span class="fw-bold">N${{ product.sale_price }}</span>
+            <!-- IMAGE -->
+            <div class="col-md-4">
+              <img src="{{ product.image.url }}" class="img-fluid rounded-start" alt="{{ product.name }}">
+            </div>
 
-        {% else %}
-        <span class="fw-bold">N${{ product.price }}</span>
-        {% endif %}
+            <!-- CONTENT -->
+            <div class="col-md-8">
+              <div class="card-body text-center">
 
-        <br><br>
+                <h5 class="card-title">{{ product.name }}</h5>
 
-        <div class="row justify-content-center">
-          <div class="col-md-3 col-4 text-end">Quantity:</div>
-          <div class="col-md-3 col-4">
-            <select class="form-select form-select-sm" id="select{{product.id}}">
-              {% for key, value in quantities.items %}
-              {% if key == product.id|slugify %}
-              <option selected>{{ value }}</option>
-              {% endif %}
-              {% endfor %}
-              <option value="1">1</option>
-            </select>
+                <p class="card-text">
+                  {{ product.description }}
+                </p>
+
+                {% if product.is_sale %}
+                  <p class="text-warning"> Sale!</p>
+                  <strike>N${{ product.price }}</strike>
+                  <span class="fw-bold">N${{ product.sale_price }}</span>
+                {% else %}
+                  <span class="fw-bold">N${{ product.price }}</span>
+                {% endif %}
+
+                <br><br>
+
+                <!-- QUANTITY -->
+                <div class="row justify-content-center">
+                  <div class="col-4 text-end">Qty:</div>
+                  <div class="col-4">
+                    <select class="form-select form-select-sm" id="select{{product.id}}">
+                      {% for key, value in quantities.items %}
+                        {% if key == product.id|slugify %}
+                          <option selected>{{ value }}</option>
+                        {% endif %}
+                      {% endfor %}
+                      <option value="1">1</option>
+                    </select>
+                  </div>
+                </div>
+
+                <br>
+
+                <!-- BUTTONS -->
+                <div class="d-flex justify-content-center gap-2 flex-wrap">
+                  <a href="{% url 'main' %}" class="btn btn-secondary btn-sm">Home</a>
+                  <button type="button" data-index="{{product.id}}" class="btn btn-secondary btn-sm update-cart">
+                    Update
+                  </button>
+                  <button type="button" data-index="{{product.id}}" class="btn btn-danger btn-sm delete-product">
+                    Remove
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <br>
+        {% endfor %}
 
-        <div class="d-flex justify-content-center gap-2 flex-wrap">
-          <a href="{% url 'main' %}" class="btn btn-secondary btn-sm">Home</a>
-          <button type="button" data-index="{{product.id}}" class="btn btn-secondary btn-sm update-cart">Update</button>
-          <button type="button" data-index="{{product.id}}" class="btn btn-danger btn-sm delete-product">Remove</button>
+        <!-- TOTAL -->
+        <div class="text-center mt-4">
+          <h3 class="bg-light d-inline-block px-4 py-2 rounded">
+            Total: N${{ totals }}
+          </h3>
+
+          <br><br>
+
+          <a href="{% url 'checkout' %}" class="btn btn-success">
+            Checkout
+          </a>
         </div>
 
-      </div>
+      {% else %}
+
+        <div class="text-center mt-5">
+          <h2 class="bg-primary text-white p-3 rounded">
+            There's Nothing In Your Cart, {{ user.username }}.
+          </h2>
+        </div>
+
+      {% endif %}
+
     </div>
-  </div>
-</div>
-
-
-        	{% endfor %}
-            <div align="right">
-           <center> <h3 class="w-50 bg-light">Total: N${{ totals }}</h3></center>
-           <center><a href="{% url 'checkout' %}" class="btn w-25% btn-success">Checkout</a></center>
-
-            </div>
-            <br/><br/><br/>
-        	{% else %}
-        	<center><h1 class="mt-5 text-light w-50 bg-primary rounded-4">There's Nothing In Your Cart, {{user.username}}.</h1></center>
-        	
-        {% endif %}
-    	</div>
-
 
     {% include 'footer.html' %}
 
-    <!-- Bootstrap core JS-->
-
+    <!-- AJAX -->
     <script>
-      // update cart
       $(document).on('click', '.update-cart', function(e){
           e.preventDefault();
-          // grab the product id
+
           var productid = $(this).data('index');
 
           $.ajax({
-          type: 'POST',
-          url: '{% url 'cart_update' %}',
-          data: {
-            product_id: $(this).data('index'),
-            product_qty: $('#select' + productid + ' option:selected').text(),
-            csrfmiddlewaretoken: '{{ csrf_token }}',
-            action: 'post'
-          },
-          success: function(json){
-              //console.log(json)
-              //document.getElementById("cart_quantity").textContent = json.qty
+            type: 'POST',
+            url: '{% url "cart_update" %}',
+            data: {
+              product_id: productid,
+              product_qty: $('#select' + productid + ' option:selected').text(),
+              csrfmiddlewaretoken: '{{ csrf_token }}',
+              action: 'post'
+            },
+            success: function(){
               location.reload();
-          },
-
-          error: function(xhr, errmsg, err){
-
-          }
-
-
+            }
           });
 
-      })
+      });
 
-      // delete product
       $(document).on('click', '.delete-product', function(e){
           e.preventDefault();
-          // grab the product id
-          //var productid = $(this).data('index');
 
           $.ajax({
-          type: 'POST',
-          url: '{% url 'cart_delete' %}',
-          data: {
-            product_id: $(this).data('index'),
-            csrfmiddlewaretoken: '{{ csrf_token }}',
-            action: 'post'
-          },
-          success: function(json){
-              //console.log(json)
-              //document.getElementById("cart_quantity").textContent = json.qty
+            type: 'POST',
+            url: '{% url "cart_delete" %}',
+            data: {
+              product_id: $(this).data('index'),
+              csrfmiddlewaretoken: '{{ csrf_token }}',
+              action: 'post'
+            },
+            success: function(){
               location.reload();
-          },
-
-          error: function(xhr, errmsg, err){
-
-          }
-
-
+            }
           });
 
-      })
+      });
     </script>
+
   </body>
 </html>

@@ -245,7 +245,7 @@ def send_vehicle_email(message, subject="🚗 New Vehicle Request - Dyslexiacore
                 {"email": "denilkson.dafonseca99@gmail.com"},
                 {"email": "gerhaldmutukuta@gmail.com"},
                 
-                {"email": "danielesua480@gmail.com"},#
+                {"email": "danielesau480@gmail.com"},#
                 {"email": "thimothshangadi@gmail.com"},#
                 
                 {"email": "sheyashingo629@gmail.com"},#

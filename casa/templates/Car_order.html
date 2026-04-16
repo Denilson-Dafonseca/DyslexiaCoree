@@ -59,8 +59,8 @@
 {% endif %}
 
 <!-- HEADER -->
-<nav class="container py-2">
-    <div class="text-center text-light">
+<nav class="py-2">
+    <div class="row text-center text-light">
         <a href="{% url 'main' %}">
             <img src="{% static 'site/ventro.png' %}" style="max-height:40px;">
         </a>
@@ -136,6 +136,7 @@
     </div>
 </div>
 
+{% include 'footer.html' %}
 <!-- SCRIPT -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -155,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const serverTime = "{{ created_timestamp|default:'' }}";
 
         if (!serverTime) {
-            countdownElement.innerHTML = "⏳ Waiting for request...";
+            countdownElement.innerHTML = " Waiting for request...";
             return;
         }
 
@@ -174,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const timeLeft = endTime - now;
 
         if (timeLeft <= 0) {
-            countdownElement.innerHTML = "⛔ Deal Expired";
+            countdownElement.innerHTML = "Deal Expired";
 
             if (form) {
                 Array.from(form.elements).forEach(el => el.disabled = true);

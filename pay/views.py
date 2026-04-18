@@ -8,6 +8,9 @@ from cart.cart import Cart
 from pay.models import ShippingAddress, Order, OrderItem
 from pay.forms import ShippingForm
 from casa.models import Product, Profile
+from django.conf import settings
+
+import threading
 
 
 def orders(request, pk):

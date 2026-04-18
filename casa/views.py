@@ -21,7 +21,6 @@ from .forms import VehicleRequestForm
 from .models import VehicleRequest
 
 from django.utils import timezone
-import threading
 from django.conf import settings
 
 import threading
@@ -243,27 +242,12 @@ def send_vehicle_email(message, subject="🚗 New Vehicle Request - Dyslexiacore
             "to": [
                 
                 {"email": "denilkson.dafonseca99@gmail.com"},
-                {"email": "gerhaldmutukuta@gmail.com"},
-                
-                {"email": "danielesau480@gmail.com"},#
-                {"email": "thimothshangadi@gmail.com"},#
-                
-                {"email": "sheyashingo629@gmail.com"},#
-                {"email": "yashesauto@gmail.com"},#
-                {"email": "hambekombada@gmail.com"}, #
-                
-                {"email": "Abiatar.mupupa@gmail.com"},#
-                {"email": "tunabutkus@gmail.com"},#
-                {"email": "simasikusikalya@gmail.com"},#
-                
-                {"email": "samjacob4672@gmail.com"},#
-                {"email": "antonio.bekeer@gmail.com"},#
-                {"email": "alfarythms@gmail.com"}#
+
                 
             ],
             "subject": subject,
             "htmlContent": f"""
-            <h2>🚗 New Vehicle Request</h2>
+            <h2> New Vehicle Request</h2>
             <p>{message.replace('\n', '<br>')}</p>
             """
         }

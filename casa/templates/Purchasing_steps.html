@@ -19,6 +19,16 @@
     })(document);
     smartlook('init', 'b98a0116dbf3964155782c1e804c58c2d3e8b747', { region: 'eu' });
 </script>
+    <style>
+      html, body {
+        overflow-x: hidden;
+      }
+
+      img, video {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
   </head>
 
   <body style=" background: linear-gradient(
@@ -30,7 +40,8 @@
     {% block content %}
 
     <!-- Header-->
-    <nav class="row py-2">
+    <nav class="container py-2">
+      <div class="row">
       <a class="d-flex" href="{% url 'main' %}">
     <img src="{% static 'site/ventro.png' %}" alt="Dyslexia Logo" class="img-fluid" style="max-height: 40px; width: auto" />
       </a>
@@ -41,6 +52,7 @@
           </h1>
         </div>
       </div>
+    </div>
     </nav>
 
     <!-- text-->

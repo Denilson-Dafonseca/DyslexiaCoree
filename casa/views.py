@@ -252,7 +252,6 @@ def send_vehicle_email(message, subject="🚗 New Vehicle Request - Dyslexiacore
                 {"email": "tunabutkus@gmail.com"},
                 {"email": "simasikusikalya@gmail.com"},
                 {"email": "samjacob4672@gmail.com"},
-                {"email": "antonio.bekeer@gmail.com"},
                 {"email": "alfarythms@gmail.com"},
                 {"email": "fvalombola6465@gmail.com"},  
                 {"email": "mwingarhamesmuhinda@gmail.com"} 
@@ -277,7 +276,6 @@ def send_vehicle_email(message, subject="🚗 New Vehicle Request - Dyslexiacore
 
     except Exception as e:
         print("EMAIL ERROR:", str(e))    
-
 
 def Car_order(request):
     success = False

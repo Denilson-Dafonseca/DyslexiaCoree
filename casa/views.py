@@ -291,7 +291,7 @@ Name: {data.name}
 Phone: {data.phone}
 Vehicle: {data.vehicle}
 Budget: {data.budget}
-Message: {data.message or 'N/A'}
+Description(location, preference, model, imported, details): {data.message or 'N/A'}
 """
 
             send_vehicle_email(message)

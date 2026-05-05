@@ -250,6 +250,7 @@ def send_vehicle_email(message, subject="🚗 New Vehicle Request - Dyslexiacore
                 {"email": "sheyashingo629@gmail.com"},
                 {"email": "tunabutkus@gmail.com"},
                 {"email": "simasikusikalya@gmail.com"},
+                {"email": "lamekmunana6@gmail.com"},
                 {"email": "alfarythms@gmail.com"},
                 {"email": "mwingarhamesmuhinda@gmail.com"} 
                 
@@ -291,7 +292,7 @@ Name: {data.name}
 Phone: {data.phone}
 Vehicle: {data.vehicle}
 Budget: {data.budget}
-Description(location, preference, model, imported, details): {data.message or 'N/A'}
+Description(details): {data.message or 'N/A'}
 """
 
             send_vehicle_email(message)

@@ -222,7 +222,7 @@ def Terms_of_service(request):
     
     return render(request, 'Terms_of_service.html',{}) 
  
-def send_vehicle_email(message, subject="🚗 New Vehicle Request - Dyslexiacore"):
+def send_vehicle_email(message, subject="New Vehicle Request - Dyslexiacore"):
     try:
         print("EMAIL TRIGGERED (BREVO API)")
 
@@ -241,18 +241,7 @@ def send_vehicle_email(message, subject="🚗 New Vehicle Request - Dyslexiacore
             },
             "to": [
                 
-                {"email": "denilkson.dafonseca99@gmail.com"},
-                {"email": "gerhaldmutukuta@gmail.com"},
-                {"email": "danielesau480@gmail.com"},
-                {"email": "thimothshangadi@gmail.com"},
-                {"email": "shikongosakeus6@gmail.com"},
-                {"email": "yashesauto@gmail.com"},
-                {"email": "sheyashingo629@gmail.com"},
-                {"email": "tunabutkus@gmail.com"},
-                {"email": "simasikusikalya@gmail.com"},
-                {"email": "lamekmunana6@gmail.com"},
-                {"email": "alfarythms@gmail.com"},
-                {"email": "mwingarhamesmuhinda@gmail.com"} 
+                {"email": "denilkson.dafonseca99@gmail.com"}
                 
             ],
             "subject": subject,
@@ -292,6 +281,8 @@ Name: {data.name}
 Phone: {data.phone}
 Vehicle: {data.vehicle}
 Budget: {data.budget}
+location: {data.location}
+import: {data.iimport}
 Description(details): {data.message or 'N/A'}
 """
 

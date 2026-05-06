@@ -89,7 +89,7 @@ class VehicleRequestForm(forms.ModelForm):
 
 	class Meta:
 		model = VehicleRequest
-		fields = ['name', 'phone', 'vehicle', 'budget', 'message']
+		fields = ['name', 'phone', 'vehicle', 'budget', 'location', 'iimport', 'message']
 
 		widgets = {
 			'name': forms.TextInput(attrs={
@@ -110,6 +110,14 @@ class VehicleRequestForm(forms.ModelForm):
 			'budget': forms.TextInput(attrs={
 				'class': 'form-control',
 				'placeholder': 'Your Budget (e.g. NAD 40,000+)'
+			}),
+			'location': forms.TextInput(attrs={
+				'class': 'form-control',
+				'placeholder': 'town'
+			}),
+			'iimport': forms.TextInput(attrs={
+				'class': 'form-control',
+				'placeholder': 'yes, no or either'
 			}),
 
 			'message': forms.Textarea(attrs={

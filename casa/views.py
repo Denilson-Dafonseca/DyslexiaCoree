@@ -318,12 +318,26 @@ def Not_secured(request):
 
     if request.method == "POST":
         VehicleRequest_id = request.POST.get("VehicleRequest_id")
+
         if VehicleRequest_id:
-            VehicleRequest.objects.filter(id=VehicleRequest_id).update(created_at=timezone.now())
-            messages.success(request, f"Request #{VehicleRequest_id} marked as Not secured.")
+            vehicle = VehicleRequest.objects.get(id=VehicleRequest_id)
+
+            # MARK AS SECURED
+            vehicle.status = True
+            vehicle.save()
+
+            messages.success(
+                request,
+                f"Request #{VehicleRequest_id} marked as secured."
+            )
+
             return redirect("Secured_deal")
 
-    return render(request, "Not_secured.html", {"VehicleRequests": VehicleRequests})
+    return render(
+        request,
+        "Not_secured.html",
+        {"VehicleRequests": VehicleRequests}
+    )
 
 
 def Secured_deal(request):
@@ -335,9 +349,23 @@ def Secured_deal(request):
 
     if request.method == "POST":
         VehicleRequest_id = request.POST.get("VehicleRequest_id")
+
         if VehicleRequest_id:
-            VehicleRequest.objects.filter(id=VehicleRequest_id).update(created_at=None)
-            messages.success(request, f"Request #{VehicleRequest_id} revert to Not secured.")
+            vehicle = VehicleRequest.objects.get(id=VehicleRequest_id)
+
+            # MOVE BACK TO NOT SECURED
+            vehicle.status = False
+            vehicle.save()
+
+            messages.success(
+                request,
+                f"Request #{VehicleRequest_id} moved back to Not secured."
+            )
+
             return redirect("Not_secured")
 
-    return render(request, "Secured_deal.html", {"VehicleRequests": VehicleRequests})
+    return render(
+        request,
+        "Secured_deal.html",
+        {"VehicleRequests": VehicleRequests}
+    )

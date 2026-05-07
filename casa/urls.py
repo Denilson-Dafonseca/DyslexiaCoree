@@ -25,6 +25,8 @@ urlpatterns = [
     path('Terms_of_service/', views.Terms_of_service, name="Terms_of_service"),
     path('Car_order/', views.Car_order, name="Car_order"),
     path('done/<int:id>/', views.mark_done, name='mark_done'),
+    path('Not_secured/', views.Not_secured, name="Not_secured"),
+    path('Secured_deal/', views.Secured_deal, name="Secured_deal"),
     
     
 ]

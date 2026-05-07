@@ -241,18 +241,8 @@ def send_vehicle_email(message, subject="New Vehicle Request - Dyslexiacore"):
             },
             "to": [
                 
-                {"email": "denilkson.dafonseca99@gmail.com"},
-                {"email": "gerhaldmutukuta@gmail.com"},
-                {"email": "danielesau480@gmail.com"},
-                {"email": "thimothshangadi@gmail.com"},
-                {"email": "shikongosakeus6@gmail.com"},
-                {"email": "yashesauto@gmail.com"},
-                {"email": "sheyashingo629@gmail.com"},
-                {"email": "tunabutkus@gmail.com"},
-                {"email": "simasikusikalya@gmail.com"},
-                {"email": "lamekmunana6@gmail.com"},
-                {"email": "alfarythms@gmail.com"},
-                {"email": "mwingarhamesmuhinda@gmail.com"} 
+                {"email": "denilkson.dafonseca99@gmail.com"}
+
                 
             ],
             "subject": subject,
@@ -318,3 +308,36 @@ def mark_done(request, id):
     data.save()
     
     return redirect(request, 'Car_order')
+
+def Not_secured(request):
+    if not request.user.is_superuser:
+        messages.error(request, "Access denied.")
+        return redirect("main")
+
+    VehicleRequests = VehicleRequest.objects.filter(status=False)
+
+    if request.method == "POST":
+        VehicleRequest_id = request.POST.get("VehicleRequest_id")
+        if VehicleRequest_id:
+            VehicleRequest.objects.filter(id=VehicleRequest_id).update(created_at=timezone.now())
+            messages.success(request, f"Request #{VehicleRequest_id} marked as Not secured.")
+            return redirect("Secured_deal")
+
+    return render(request, "Not_secured.html", {"VehicleRequests": VehicleRequests})
+
+
+def Secured_deal(request):
+    if not request.user.is_superuser:
+        messages.error(request, "Access denied.")
+        return redirect("main")
+
+    VehicleRequests = VehicleRequest.objects.filter(status=True)
+
+    if request.method == "POST":
+        VehicleRequest_id = request.POST.get("VehicleRequest_id")
+        if VehicleRequest_id:
+            VehicleRequest.objects.filter(id=VehicleRequest_id).update(created_at=None)
+            messages.success(request, f"Request #{VehicleRequest_id} revert to Not secured.")
+            return redirect("Not_secured")
+
+    return render(request, "Secured_deal.html", {"VehicleRequests": VehicleRequests})

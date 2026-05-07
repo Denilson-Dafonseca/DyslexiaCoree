@@ -89,7 +89,7 @@ class VehicleRequestForm(forms.ModelForm):
 
 	class Meta:
 		model = VehicleRequest
-		fields = ['name', 'phone', 'vehicle', 'budget', 'location', 'iimport', 'message']
+		fields = ['name', 'phone', 'vehicle', 'budget', 'location', 'iimport', 'message', 'status']
 
 		widgets = {
 			'name': forms.TextInput(attrs={

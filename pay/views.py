@@ -138,7 +138,6 @@ def not_paid_dash(request):
 
     return render(request, "payment/not_paid_dash.html", {"orders": orders})
 
-
 def paid_dash(request):
     if not request.user.is_superuser:
         messages.error(request, "Access denied.")

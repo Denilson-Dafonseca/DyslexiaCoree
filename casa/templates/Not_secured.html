@@ -40,17 +40,17 @@
 
         <tbody>
 
-        {% for VehiclesRequest in VehicleRequests %}
+        {% for VehicleRequest in VehicleRequests %}
 
             <tr>
-                <td>{{ VehiclesRequest.id }}</td>
-                <td>{{ VehiclesRequest.name }}</td>
-                <td>{{ VehiclesRequest.phone }}</td>
-                <td>{{ VehiclesRequest.vehicle }}</td>
-                <td>{{ VehiclesRequest.budget }}</td>
-                <td>{{ VehiclesRequest.location }}</td>
-                <td>{{ VehiclesRequest.iimport }}</td>
-                <td>{{ VehiclesRequest.created_at|date:"Y-m-d H:i" }}</td>
+                <td>{{ VehicleRequest.id }}</td>
+                <td>{{ VehicleRequest.name }}</td>
+                <td>{{ VehicleRequest.phone }}</td>
+                <td>{{ VehicleRequest.vehicle }}</td>
+                <td>{{ VehicleRequest.budget }}</td>
+                <td>{{ VehicleRequest.location }}</td>
+                <td>{{ VehicleRequest.iimport }}</td>
+                <td>{{ VehicleRequest.created_at|date:"Y-m-d H:i" }}</td>
 
                 <td>
                     <form method="POST">
@@ -59,7 +59,7 @@
                         <input
                             type="hidden"
                             name="VehicleRequest_id"
-                            value="{{ VehiclesRequest.id }}"
+                            value="{{ VehicleRequest.id }}"
                         >
 
                         <button

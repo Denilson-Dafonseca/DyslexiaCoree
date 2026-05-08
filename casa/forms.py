@@ -16,7 +16,7 @@ class UserInfoForm(forms.ModelForm):
 
 	class Meta:
 		model = Profile
-		fields = ('phone', 'address1', 'address2', 'city', 'state', 'zipcode', 'country', )
+		fields = ('phone', 'address1', 'address2', 'city', 'state', 'zipcode', 'country' )
 
 
 class ChangePasswordForm(SetPasswordForm):
@@ -118,6 +118,10 @@ class VehicleRequestForm(forms.ModelForm):
 			'iimport': forms.TextInput(attrs={
 				'class': 'form-control',
 				'placeholder': 'yes, no or either'
+			}),
+			'status': forms.TextInput(attrs={
+				'class': 'form-control',
+				'placeholder': 'false'
 			}),
 
 			'message': forms.Textarea(attrs={

@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
-
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     date_modified = models.DateTimeField(User, auto_now=True)
@@ -19,14 +17,12 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-
 # Create a user profile when user is created
 def create_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
 post_save.connect(create_profile, sender=User)
-
 
 # Category
 class Category(models.Model):
@@ -37,7 +33,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-
 
 # Products
 class Product(models.Model):

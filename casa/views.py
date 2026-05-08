@@ -291,7 +291,6 @@ Description(details): {data.message or 'N/A'}
 
             success = True
 
-        
             created_timestamp = int(time.time())
             request_id = data.id
 
@@ -307,7 +306,7 @@ def mark_done(request, id):
     data.status = "completed"
     data.save()
     
-    return redirect(request, 'Car_order')
+    return redirect('Car_order')
 
 def Not_secured(request):
     if not request.user.is_superuser:
@@ -320,25 +319,25 @@ def Not_secured(request):
         VehicleRequest_id = request.POST.get("VehicleRequest_id")
 
         if VehicleRequest_id:
-            vehicle = VehicleRequest.objects.get(id=VehicleRequest_id)
 
-            # MARK AS SECURED
-            vehicle.status = True
-            vehicle.save()
+            VehicleRequest.objects.filter(
+                id=VehicleRequest_id
+            ).update(
+                status=True
+            )
 
             messages.success(
                 request,
                 f"Request #{VehicleRequest_id} marked as secured."
             )
 
-            return redirect("Secured_deal")
+            return redirect("Not_secured")
 
     return render(
         request,
         "Not_secured.html",
         {"VehicleRequests": VehicleRequests}
     )
-
 
 def Secured_deal(request):
     if not request.user.is_superuser:
@@ -351,18 +350,19 @@ def Secured_deal(request):
         VehicleRequest_id = request.POST.get("VehicleRequest_id")
 
         if VehicleRequest_id:
-            vehicle = VehicleRequest.objects.get(id=VehicleRequest_id)
 
-            # MOVE BACK TO NOT SECURED
-            vehicle.status = False
-            vehicle.save()
-
+            VehicleRequest.objects.filter(
+                id=VehicleRequest_id
+            ).update(
+                status=False
+            )
+            
             messages.success(
                 request,
-                f"Request #{VehicleRequest_id} moved back to Not secured."
+                f"Request #{VehicleRequest_id} moved back to pending."
             )
 
-            return redirect("Not_secured")
+            return redirect("Secured_deal")
 
     return render(
         request,

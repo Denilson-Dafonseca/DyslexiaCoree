@@ -4,7 +4,6 @@ from casa.models import Product
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-
 # -------------------------------
 # SHIPPING ADDRESS MODEL
 # -------------------------------

@@ -79,7 +79,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Dyslexia.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
@@ -90,7 +89,6 @@ DATABASES = {
         ssl_require=True,
     )
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -110,7 +108,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
@@ -121,7 +118,6 @@ TIME_ZONE = 'Africa/Windhoek'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # STATIC FILES
 # -------------------------
@@ -140,7 +136,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DATA_UPLOAD_MAX_MEMORY_SIZE = 524288000 
 FILE_UPLOAD_MAX_MEMORY_SIZE = 524288000
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #
@@ -152,7 +147,6 @@ EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
 EMAIL_TIMEOUT = 30
-
 
 EMAIL_HOST_USER = os.environ.get("BREVO_LOGIN")
 EMAIL_HOST_PASSWORD = os.environ.get("BREVO_KEY")

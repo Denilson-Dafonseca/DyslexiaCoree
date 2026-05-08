@@ -237,53 +237,65 @@ def send_vehicle_email(message, subject="New Vehicle Request - Dyslexiacore"):
         payload = {
             "sender": {
                 "name": "Dyslexiacore",
+                # Brevo
                 "email": "dyslexiacore@gmail.com"
             },
             "to": [
-                
                 {"email": "denilkson.dafonseca99@gmail.com"}
-
-                
             ],
             "subject": subject,
             "htmlContent": f"""
-            <h2> New Vehicle Request</h2>
-            <p>{message.replace('\n', '<br>')}</p>
+            <h2>New Vehicle Request</h2>
+            <p>{message.replace(chr(10), '<br>')}</p>
             """
         }
 
-        response = requests.post(url, json=payload, headers=headers)
+        response = requests.post(
+            url,
+            json=payload,
+            headers=headers,
+            timeout=10
+        )
 
         print("STATUS:", response.status_code)
         print("RESPONSE:", response.text)
 
         if response.status_code == 201:
-            print("EMAIL SENT")
-        else:
-            print("EMAIL FAILED")
+            print("EMAIL SENT SUCCESSFULLY")
+            return True
+
+        print("EMAIL FAILED")
+        return False
 
     except Exception as e:
-        print("EMAIL ERROR:", str(e))    
+        print("EMAIL ERROR:", str(e))
+        return False
+
 
 def Car_order(request):
     success = False
     form = VehicleRequestForm()
-    created_timestamp = None
-    request_id = None
 
     if request.method == "POST":
         form = VehicleRequestForm(request.POST)
 
         if form.is_valid():
-            data = form.save()
+
+            # Don't save immediately
+            data = form.save(commit=False)
+
+            # Pending by default
+            data.status = False
+
+            data.save()
 
             message = f"""
 Name: {data.name}
 Phone: {data.phone}
 Vehicle: {data.vehicle}
 Budget: {data.budget}
-location: {data.location}
-import: {data.iimport}
+Location: {data.location}
+Import: {data.iimport}
 Description(details): {data.message or 'N/A'}
 """
 
@@ -291,32 +303,56 @@ Description(details): {data.message or 'N/A'}
 
             success = True
 
-            created_timestamp = int(time.time())
-            request_id = data.id
+            messages.success(
+                request,
+                "Vehicle request submitted successfully."
+            )
+
+            return redirect("Car_order")
+
+        else:
+            messages.error(
+                request,
+                "There was an error submitting the request."
+            )
 
     return render(request, "Car_order.html", {
         "form": form,
         "success": success,
-        "created_timestamp": created_timestamp,
-        "request_id": request_id
     })
+
 
 def mark_done(request, id):
     data = get_object_or_404(VehicleRequest, id=id)
-    data.status = "completed"
+
+    # Mark as secured
+    data.status = True
     data.save()
-    
+
+    messages.success(
+        request,
+        f"Request #{data.id} marked as secured."
+    )
+
     return redirect('Car_order')
 
+
 def Not_secured(request):
+
     if not request.user.is_superuser:
         messages.error(request, "Access denied.")
         return redirect("main")
 
-    VehicleRequests = VehicleRequest.objects.filter(status=False)
+    # Pending requests only
+    VehicleRequests = VehicleRequest.objects.filter(
+        status=False
+    ).order_by('-id')
 
     if request.method == "POST":
-        VehicleRequest_id = request.POST.get("VehicleRequest_id")
+
+        VehicleRequest_id = request.POST.get(
+            "VehicleRequest_id"
+        )
 
         if VehicleRequest_id:
 
@@ -336,18 +372,28 @@ def Not_secured(request):
     return render(
         request,
         "Not_secured.html",
-        {"VehicleRequests": VehicleRequests}
+        {
+            "VehicleRequests": VehicleRequests
+        }
     )
 
+
 def Secured_deal(request):
+
     if not request.user.is_superuser:
         messages.error(request, "Access denied.")
         return redirect("main")
 
-    VehicleRequests = VehicleRequest.objects.filter(status=True)
+    # Secured requests only
+    VehicleRequests = VehicleRequest.objects.filter(
+        status=True
+    ).order_by('-id')
 
     if request.method == "POST":
-        VehicleRequest_id = request.POST.get("VehicleRequest_id")
+
+        VehicleRequest_id = request.POST.get(
+            "VehicleRequest_id"
+        )
 
         if VehicleRequest_id:
 
@@ -356,7 +402,7 @@ def Secured_deal(request):
             ).update(
                 status=False
             )
-            
+
             messages.success(
                 request,
                 f"Request #{VehicleRequest_id} moved back to pending."
@@ -367,5 +413,7 @@ def Secured_deal(request):
     return render(
         request,
         "Secured_deal.html",
-        {"VehicleRequests": VehicleRequests}
+        {
+            "VehicleRequests": VehicleRequests
+        }
     )

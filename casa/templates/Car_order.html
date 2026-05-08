@@ -105,14 +105,6 @@
                 <div class="alert alert-success text-center">
                     ✅ Request sent successfully!
                 </div>
-
-                {% if request_id %}
-                    <div class="text-center mt-3">
-                        <a href="{% url 'mark_done' request_id %}" class="btn btn-danger w-100">
-                            Mark Deal as Done
-                        </a>
-                    </div>
-                {% endif %}
             {% endif %}
 
             <!-- TIMER -->
@@ -131,7 +123,7 @@
 
                 <textarea name="message" class="form-control mb-3" placeholder="Description(details)"></textarea>
 
-                <button class="btn btn-success w-100">Submit Request</button>
+                <button type="submit" class="btn btn-success w-100">Submit Request</button>
             </form>
 
         </div>
@@ -140,65 +132,37 @@
 
 {% include 'footer.html' %}
 <!-- SCRIPT -->
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-    const STORAGE_KEY = "vehicle_order_start_time";
-    const duration = 20 * 60 * 1000;
-
     const countdownElement = document.getElementById("countdown");
-    const form = document.getElementById("vehicleForm");
 
-    if (!countdownElement) return;
+    let duration = 20 * 60;
+    let timer = duration;
 
-    let createdAt = localStorage.getItem(STORAGE_KEY);
+    function updateTimer() {
 
-    if (!createdAt || createdAt === "null") {
-
-        const serverTime = "{{ created_timestamp|default:'' }}";
-
-        if (!serverTime) {
-            countdownElement.innerHTML = " Waiting for request...";
-            return;
-        }
-
-        createdAt = parseInt(serverTime) * 1000;
-        localStorage.setItem(STORAGE_KEY, createdAt);
-
-    } else {
-        createdAt = parseInt(createdAt);
-    }
-
-    const endTime = createdAt + duration;
-
-    function updateCountdown() {
-
-        const now = Date.now();
-        const timeLeft = endTime - now;
-
-        if (timeLeft <= 0) {
-            countdownElement.innerHTML = "Deal Expired";
-
-            if (form) {
-                Array.from(form.elements).forEach(el => el.disabled = true);
-            }
-
-            localStorage.removeItem(STORAGE_KEY);
-            return;
-        }
-
-        const minutes = Math.floor(timeLeft / 60000);
-        const seconds = Math.floor((timeLeft % 60000) / 1000);
+        let minutes = Math.floor(timer / 60);
+        let seconds = timer % 60;
 
         countdownElement.innerHTML =
-            `⏳ Time left: ${minutes}m ${seconds}s`;
+            `⏳ ${minutes}m ${seconds}s remaining`;
 
-        setTimeout(updateCountdown, 1000);
+        if (timer <= 0) {
+            countdownElement.innerHTML = "Deal session expired";
+            return;
+        }
+
+        timer--;
+
+        setTimeout(updateTimer, 1000);
     }
 
-    updateCountdown();
+    updateTimer();
 });
 </script>
+
 
 <!-- BOOTSTRAP JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

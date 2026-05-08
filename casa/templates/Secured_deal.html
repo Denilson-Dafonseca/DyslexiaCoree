@@ -3,13 +3,13 @@
 <html lang="en">
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-<title>Secured deal</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Secured Deals</title>
 
 <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}">
-<link rel="icon" type="image/png" href="{% static 'site/images/favicon.png' %}">
 <link rel="stylesheet" href="{% static 'styles.css' %}">
 
 </head>
@@ -20,13 +20,16 @@
 
 <div class="container mt-5">
 
-    <h2>Secured deal</h2>
+    <h2 class="mb-4">
+        Secured Deals
+    </h2>
 
     {% if VehicleRequests %}
 
     <table class="table table-bordered table-striped">
 
         <thead>
+
             <tr>
                 <th>ID</th>
                 <th>Name</th>
@@ -38,42 +41,41 @@
                 <th>Created</th>
                 <th>Action</th>
             </tr>
+
         </thead>
 
         <tbody>
 
-        {% for VehicleRequest in VehicleRequests %}
+        {% for request in VehicleRequests %}
 
             <tr>
 
-                <td>{{ VehicleRequest.id }}</td>
-                <td>{{ VehicleRequest.name }}</td>
-                <td>{{ VehicleRequest.phone }}</td>
-                <td>{{ VehicleRequest.vehicle }}</td>
-                <td>{{ VehicleRequest.budget }}</td>
-                <td>{{ VehicleRequest.location }}</td>
-                <td>{{ VehicleRequest.iimport }}</td>
-
-                <td>
-                    {{ VehicleRequest.created_at|date:"Y-m-d H:i" }}
-                </td>
+                <td>{{ request.id }}</td>
+                <td>{{ request.name }}</td>
+                <td>{{ request.phone }}</td>
+                <td>{{ request.vehicle }}</td>
+                <td>{{ request.budget }}</td>
+                <td>{{ request.location }}</td>
+                <td>{{ request.iimport }}</td>
+                <td>{{ request.created_at|date:"Y-m-d H:i" }}</td>
 
                 <td>
 
                     <form method="POST">
+
                         {% csrf_token %}
 
                         <input
                             type="hidden"
                             name="VehicleRequest_id"
-                            value="{{ VehicleRequest.id }}"
+                            value="{{ request.id }}"
                         >
 
                         <button
                             type="submit"
                             class="btn btn-warning btn-sm"
                         >
-                            Send back to pending
+                            Return to Pending
                         </button>
 
                     </form>
@@ -90,7 +92,9 @@
 
     {% else %}
 
-        <p>No secured deals found.</p>
+        <div class="alert alert-info">
+            No secured deals found.
+        </div>
 
     {% endif %}
 

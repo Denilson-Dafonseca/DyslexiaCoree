@@ -12,6 +12,29 @@
 <link rel="stylesheet" href="{% static 'Dyslexia_global.css' %}">
 <link rel="stylesheet" href="{% static 'styles.css' %}">
 
+
+
+<style>
+ .custom-table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 10px;
+}
+
+/* Hide scrollbar but keep scrolling */
+.custom-table-scroll::-webkit-scrollbar {
+    height: 0px;
+}
+
+.custom-table-scroll {
+    scrollbar-width: none;
+}
+
+/* Prevent table squashing */
+.custom-table-scroll table {
+    min-width: 900px;
+}   
+</style>  
 </head>
 
 <body>
@@ -23,8 +46,9 @@
     <h2 class="mb-4">
         Secured Deals
     </h2>
+{% if VehicleRequests %}
 
-    {% if VehicleRequests %}
+<div class="table-responsive custom-table-scroll">
 
     <table class="table table-bordered table-striped">
 
@@ -90,7 +114,10 @@
 
     </table>
 
+</div>
+
     {% else %}
+
 
         <div class="alert alert-info">
             No secured deals found.

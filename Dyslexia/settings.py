@@ -20,19 +20,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9+_@mp%sklldf6l7lq0o*1=h=y!y$@mb#n1#v(i4sptl-aoysm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = [
-    'dyslexiacore.xyz',
-    'www.dyslexiacore.xyz',
-    'dyslexiacoree-production.up.railway.app',
-]
+ALLOWED_HOSTS = ['.vercel.app',"dyslexia.xyz"]
+
 
 CSRF_TRUSTED_ORIGINS = [
     'https://dyslexiacore.xyz',
     'https://www.dyslexiacore.xyz',
-    'https://dyslexiacoree-production.up.railway.app',
+    'https://vercel.app',
 ]
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -82,14 +81,15 @@ WSGI_APPLICATION = 'Dyslexia.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    "default": dj_database_url.config(
-        default="postgresql://postgres:KEKHvVyQKupUEBzWNqsFmQBFBmbNOetV@interchange.proxy.rlwy.net:44571/railway",
-        conn_max_age=600,
-        ssl_require=True,
-    )
+DATABASES =  {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'casa',
+        'USER': 'postgres',
+        'PASSWORD': 'Trill635',
+        'PORT': '5432',
+    }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 

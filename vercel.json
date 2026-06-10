@@ -7,7 +7,7 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "elevate/wsgi.py"
+            "dest": "Dyslexia/wsgi.py"
 
         }
     ]

@@ -24,6 +24,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'dyslexia-coree-dltg923zn-dyslexiacores-projects.vercel.app',
+    'dyslexia-coree-j0jcsrrfz-dyslexiacores-projects.vercel.app',
     'dyslexia-coree.vercel.app'
 ]
 

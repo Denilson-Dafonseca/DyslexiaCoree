@@ -10,6 +10,12 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+DATABASES = {
+    "default": dj_database_url.parse(
+        "postgres://0f01eee13bd1de3195b7c50450320e4c9b3d8f20629c950a45f8104d53737d0d:sk_ZwN1_ZyG0Tpny3ko1gV85@db.prisma.io:5432/postgres?sslmode=require"
+    )
+}
+
 #load our environment 
 #load_dotenv()
 
@@ -22,15 +28,11 @@ SECRET_KEY = 'django-insecure-9+_@mp%sklldf6l7lq0o*1=h=y!y$@mb#n1#v(i4sptl-aoysm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'dyslexia-coree-dltg923zn-dyslexiacores-projects.vercel.app',
-    'dyslexia-coree-j0jcsrrfz-dyslexiacores-projects.vercel.app',
-    'dyslexia-coree.vercel.app'
-]
+ALLOWED_HOSTS = ['dyslexia-coree-q5ydkhgl0-dyslexiacores-projects.vercel.app']
+
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://*.vercel.app',
-    'https://dyslexia-coree.vercel.app',
+    'https://dyslexia-coree-q5ydkhgl0-dyslexiacores-projects.vercel.app'
 ]
 
 
@@ -84,17 +86,9 @@ WSGI_APPLICATION = 'Dyslexia.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': 'aws-1-us-east-1.pooler.supabase.com',
-        'PORT': '5432',
-        'OPTIONS': {
-            'sslmode': 'require',
-        },
-    }
+    "default": dj_database_url.parse(
+        "postgres://0f01eee13bd1de3195b7c50450320e4c9b3d8f20629c950a45f8104d53737d0d:sk_ZwN1_ZyG0Tpny3ko1gV85@db.prisma.io:5432/postgres?sslmode=require"
+    )
 }
 
 # Password validation

@@ -145,4 +145,4 @@ EMAIL_HOST_USER = os.getenv("BREVO_SMTP_LOGIN")
 EMAIL_HOST_PASSWORD = os.getenv("BREVO_SMTP_KEY")
 BREVO_API_KEY = os.getenv("BREVO_API_KEY")
 
-DEFAULT_FROM_EMAIL = "noreply@dyslexiacore.xyz"
+DEFAULT_FROM_EMAIL = "noreply@dyslexiacore.com"

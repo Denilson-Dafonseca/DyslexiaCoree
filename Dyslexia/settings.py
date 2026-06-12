@@ -21,10 +21,10 @@ SECRET_KEY = 'django-insecure-9+_@mp%sklldf6l7lq0o*1=h=y!y$@mb#n1#v(i4sptl-aoysm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['dyslexia-coree.vercel.app']
+ALLOWED_HOSTS = ['dyslexia-coree.vercel.app', 'dyslexiacore.xyz']
 
 
-CSRF_TRUSTED_ORIGINS = ['https://dyslexia-coree.vercel.app']
+CSRF_TRUSTED_ORIGINS = ['https://dyslexia-coree.vercel.app', 'https://dyslexiacore.xyz']
 
 
 # Application definition
@@ -136,14 +136,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp-relay.brevo.com'
-EMAIL_PORT = 465
+EMAIL_PORT = 587
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
 EMAIL_TIMEOUT = 30
 
-EMAIL_HOST_USER = os.environ.get("BREVO_LOGIN")
-EMAIL_HOST_PASSWORD = os.environ.get("BREVO_KEY")
+EMAIL_HOST_USER = os.getenv("BREVO_SMTP_LOGIN")
+EMAIL_HOST_PASSWORD = os.getenv("BREVO_SMTP_KEY")
 
-BREVO_API_KEY = os.environ.get("BREVO_API_KEY")
-
-
+DEFAULT_FROM_EMAIL = "dyslexiacore@gmail.com"

@@ -1,6 +1,9 @@
 from pathlib import Path
 import os
 import dj_database_url
+import os
+
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
 
 # from dotenv import load_dotenv
@@ -19,9 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9+_@mp%sklldf6l7lq0o*1=h=y!y$@mb#n1#v(i4sptl-aoysm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['dyslexia-coree.vercel.app', 'dyslexiacore.xyz']
+ALLOWED_HOSTS = [".vercel.app",'dyslexia-coree.vercel.app', 'dyslexiacore.xyz']
 
 
 CSRF_TRUSTED_ORIGINS = ['https://dyslexia-coree.vercel.app', 'https://dyslexiacore.xyz']
@@ -40,6 +43,8 @@ INSTALLED_APPS = [
     'cart',
     'pay',
     'whitenoise.runserver_nostatic',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -121,13 +126,11 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # -------------------------
 # MEDIA FILES
-# -------------------------
 
-INSTALLED_APPS = [
-    ...
-    "cloudinary",
-    "cloudinary_storage",
-]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+# -------------------------
 
 CLOUDINARY_STORAGE = {
     "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME"),

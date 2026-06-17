@@ -17,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-9+_@mp%sklldf6l7lq0o*1=h=y!y$@mb#n1#v(i4sptl-aoysm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("VERCEL_ENV") != "production"
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = [".vercel.app",'dyslexia-coree.vercel.app', 'dyslexiacore.xyz']
 
@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'Dyslexia.wsgi.application'
 
 DATABASES = {
     "default": dj_database_url.parse(
-        "postgres://0f01eee13bd1de3195b7c50450320e4c9b3d8f20629c950a45f8104d53737d0d:sk_ZwN1_ZyG0Tpny3ko1gV85@db.prisma.io:5432/postgres?sslmode=require"
+        os.getenv("DATABASE_URL")
     )
 }
 
@@ -115,7 +115,9 @@ USE_TZ = True
 # STATIC FILES
 # -------------------------
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR / "Dyslexia_static_files"]
+STATICFILES_DIRS = [
+    BASE_DIR / "Dyslexia_static_files"
+] if (BASE_DIR / "Dyslexia_static_files").exists() else []
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
@@ -136,6 +138,8 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Maximum size allowed for file uploads 

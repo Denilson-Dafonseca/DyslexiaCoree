@@ -40,7 +40,7 @@ class Product(models.Model):
     price = models.DecimalField(default=0, decimal_places=2, max_digits=8)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.CharField(max_length=250, blank=True, null=True)
-    image = models.URLField()
+    image = models.ImageField(upload_to="")
     is_sale = models.BooleanField(default=False)
     sale_price = models.DecimalField(default=0, decimal_places=2, max_digits=8)
     is_available = models.BooleanField(default=True)
@@ -63,7 +63,7 @@ class Customer(models.Model):
 class CarouselSlide(models.Model):
     title = models.CharField(max_length=100)
     caption = models.TextField(blank=True)
-    image = models.URLField()
+    image = models.ImageField(upload_to="carousel/")
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -74,7 +74,7 @@ class Relief(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(default=0, decimal_places=2, max_digits=8)
     description = models.CharField(max_length=250, blank=True, null=True)
-    image = models.URLField()
+    image = models.ImageField(upload_to="")
 
     def __str__(self):
         return self.name

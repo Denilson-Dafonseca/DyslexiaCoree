@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, SetPasswordForm
 from django import forms
 from .models import Profile
+from .models import ClothingOrder
 
 from .models import VehicleRequest
 
@@ -150,3 +151,31 @@ class VehicleRequestForm(forms.ModelForm):
 			raise forms.ValidationError("Name is required.")
 
 		return name
+
+class ClothingOrderForm(forms.ModelForm):
+    class Meta:
+        model = ClothingOrder
+        fields = [
+            'name', 'email', 'phone',
+            'event_type', 'gender', 'size', 'custom_size',
+            'clothing_type', 'color_preference', 'fabric_preference',
+            'event_date', 'special_requirements',
+            'budget_min', 'budget_max',
+            'additional_notes',
+        ]
+        widgets = {
+            'event_date': forms.DateInput(attrs={'type': 'date'}),
+            'special_requirements': forms.Textarea(attrs={'rows': 3}),
+            'additional_notes': forms.Textarea(attrs={'rows': 3}),
+            'custom_size': forms.Textarea(attrs={'rows': 2, 'placeholder': 'Please provide your measurements (chest, waist, hips, inseam, etc.)'}),
+        }
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        size = cleaned_data.get('size')
+        custom_size = cleaned_data.get('custom_size')
+        
+        if size == 'custom' and not custom_size:
+            self.add_error('custom_size', 'Please provide your measurements for custom sizing.')
+        
+        return cleaned_data

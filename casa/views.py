@@ -23,6 +23,9 @@ from .models import VehicleRequest
 from django.utils import timezone
 from django.conf import settings
 
+from .models import ClothingOrder
+from .forms import ClothingOrderForm
+
 import threading
 import requests
 import time
@@ -425,3 +428,139 @@ def Secured_deal(request):
             "VehicleRequests": VehicleRequests
         }
     )
+    
+    
+def send_clothing_email(message, subject="New Clothing Order - Boutique"):
+    """Send email notification via Brevo API"""
+    try:
+        print("EMAIL TRIGGERED (BREVO API)")
+        
+        url = "https://api.brevo.com/v3/smtp/email"
+        
+        headers = {
+            "accept": "application/json",
+            "api-key": settings.BREVO_API_KEY,
+            "content-type": "application/json"
+        }
+        
+        # Update with your boutique team emails
+        payload = {
+            "sender": {
+                "name": "DyslexiaCore_boutique",
+                "email":  "dyslexiacore@gmail.com"
+            },
+            "to": [
+                {"email": "denilkson.dafonseca99@gmail.com"},
+                # Add more team emails here
+            ],
+            "subject": subject,
+            "htmlContent": f"""
+            <h2>New Clothing Order</h2>
+            <div style="background:#f8f9fa; padding:20px; border-radius:10px;">
+                {message.replace(chr(10), '<br>')}
+            </div>
+            <br>
+            <p style="color:#6c757d;">This is an automated notification from your Boutique System.</p>
+            """
+        }
+        
+        response = requests.post(
+            url,
+            json=payload,
+            headers=headers,
+            timeout=10
+        )
+        
+        print("STATUS:", response.status_code)
+        print("RESPONSE:", response.text)
+        
+        if response.status_code == 201:
+            print("EMAIL SENT SUCCESSFULLY")
+            return True
+        
+        print("EMAIL FAILED")
+        return False
+        
+    except Exception as e:
+        print("EMAIL ERROR:", str(e))
+        return False
+
+def clothing_order(request):
+    form = ClothingOrderForm()
+    success = False
+    
+    if request.method == "POST":
+        form = ClothingOrderForm(request.POST)
+        
+        if form.is_valid():
+            # Save the order
+            order = form.save(commit=False)
+            order.status = 'pending'
+            order.save()
+            
+            # Prepare email message
+            message = f"""
+🛍️ NEW CLOTHING ORDER
+━━━━━━━━━━━━━━━━━━━
+
+ Personal Information:
+Name: {order.name}
+Email: {order.email}
+Phone: {order.phone}
+
+━━━━━━━━━━━━━━━━━━━
+
+Order Details:
+Event Type: {order.get_event_type_display()}
+Gender: {order.get_gender_display()}
+Size: {order.get_size_display()}
+{order.custom_size if order.size == 'custom' else ''}
+
+Clothing Type: {order.clothing_type}
+Color Preference: {order.color_preference or 'N/A'}
+Fabric Preference: {order.fabric_preference or 'N/A'}
+
+━━━━━━━━━━━━━━━━━━━
+
+Event Information:
+Event Date: {order.event_date or 'Not specified'}
+
+Budget Range:
+Min: N${order.budget_min or 'N/A'}
+Max: N${order.budget_max or 'N/A'}
+
+━━━━━━━━━━━━━━━━━━━
+
+ Special Requirements:
+{order.special_requirements or 'None specified'}
+
+Additional Notes:
+{order.additional_notes or 'None specified'}
+
+━━━━━━━━━━━━━━━━━━━
+Order ID: #{order.id}
+Created: {order.created_at.strftime('%Y-%m-%d %H:%M')}
+Status: {order.get_status_display()}
+"""
+            
+            # Send email notification
+            subject = f"New Clothing Order #{order.id} - {order.name}"
+            send_clothing_email(message, subject)
+            
+            messages.success(
+                request,
+                "🎉 Your clothing order has been submitted successfully! We'll contact you within 24 hours."
+            )
+            
+            return redirect('clothing_order')
+        else:
+            messages.error(
+                request,
+                " There was an error submitting your order. Please check the form."
+            )
+    
+    return render(request, "clothing_order.html", {
+        "form": form,
+        "success": success,
+    })
+

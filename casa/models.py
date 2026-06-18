@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-
+from django.utils import timezone
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     date_modified = models.DateTimeField(User, auto_now=True)
@@ -116,3 +116,77 @@ class VehicleRequest(models.Model):
     def __str__(self):
         return f"{self.name} - {self.vehicle}"
     
+class ClothingOrder(models.Model):
+    # Event Types
+    EVENT_CHOICES = [
+        ('wedding', 'Wedding'),
+        ('official', 'Official Event'),
+        ('dinner', 'Dinner'),
+        ('funeral', 'Funeral'),
+    ]
+    
+    # Gender Options
+    GENDER_CHOICES = [
+        ('male', 'Male'),
+        ('female', 'Female'),
+        ('unisex', 'Unisex'),
+    ]
+    
+    # Size Options
+    SIZE_CHOICES = [
+        ('xs', 'XS'),
+        ('s', 'S'),
+        ('m', 'M'),
+        ('l', 'L'),
+        ('xl', 'XL'),
+        ('xxl', 'XXL'),
+        ('custom', 'Custom Size'),
+    ]
+    
+    # Status
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('processing', 'Processing'),
+        ('completed', 'Completed'),
+        ('cancelled', 'Cancelled'),
+    ]
+    
+    # Personal Information
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    
+    # Order Details
+    event_type = models.CharField(max_length=20, choices=EVENT_CHOICES)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
+    size = models.CharField(max_length=10, choices=SIZE_CHOICES)
+    custom_size = models.TextField(blank=True, null=True, help_text="If custom size selected, provide measurements")
+    
+    # Clothing Details
+    clothing_type = models.CharField(max_length=100, help_text="e.g., Suit, Gown, Dress, Traditional Attire")
+    color_preference = models.CharField(max_length=50, blank=True, null=True)
+    fabric_preference = models.CharField(max_length=100, blank=True, null=True)
+    
+    # Event Specific Details
+    event_date = models.DateField(blank=True, null=True)
+    special_requirements = models.TextField(blank=True, null=True)
+    
+    # Budget
+    budget_min = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    budget_max = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    
+    # Additional Information
+    additional_notes = models.TextField(blank=True, null=True)
+    
+    # Status and Timestamps
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return f"{self.name} - {self.get_event_type_display()} - {self.clothing_type}"
+    
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Clothing Order"
+        verbose_name_plural = "Clothing Orders"

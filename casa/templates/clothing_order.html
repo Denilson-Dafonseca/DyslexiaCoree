@@ -10,7 +10,19 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link href="{% static 'styles.css' %}" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="{% static 'site/images/favicon.png' %}">
+
+    <script>
+      window.smartlook||(function(d) {
+        var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+        var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+        c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+      })(document);
+      smartlook('init', 'b98a0116dbf3964155782c1e804c58c2d3e8b747', { region: 'eu' });
+    </script>
+
+
     <style>
         /* Boutique Theme - Blue, White, Grey */
         :root {
@@ -269,7 +281,8 @@
 <body>
 
 <!-- HEADER -->
-<header class="boutique-header">
+<nav>
+
     <div class="container text-center">
         <div class="boutique-logo">
             <i class="fas fa-crown me-2"></i>Boutique<span>Clothing</span>
@@ -278,8 +291,8 @@
             <i class="fas fa-tshirt me-2"></i>Elegant attire for life's most memorable moments
         </p>
     </div>
-</header>
-
+</nav>
+{% include 'nav.html' %}
 <!-- MESSAGES -->
 {% if messages %}
     <div class="container mt-3">
@@ -293,6 +306,17 @@
     </div>
 {% endif %}
 
+<!-- RULES -->
+<div class="container bg-light mt-5 border border-5 border-info p-3 rounded">
+    <h2 class="text-center">Guidelines</h2>
+    <ul>
+
+<li>This platform was designed to provide individuals and businesses with a convenient way to order clothing from the comfort of their homes or workplaces. To place an order, users simply need to complete the order form and submit their request. Once an order is placed, the provided information is forwarded to selected boutiques in Namibia. These boutiques will review the request and respond within 24 hours. We are committed to making the ordering process simple, efficient, and convenient for all customers.
+</li>
+    </ul>
+</div>
+
+
 <!-- MAIN CONTENT -->
 <div class="container py-5">
     <div class="row justify-content-center">
@@ -304,9 +328,9 @@
                 <!-- Quick Event Selection Guide -->
                 <div class="text-center mb-4">
                     <h2 class="boutique-card-title">
-                        <i class="fas fa-feather-alt me-2"></i>Your Perfect Attire
+                        Your Perfect Attire
                     </h2>
-                    <p class="boutique-subtitle">Select your event type and let us create something extraordinary</p>
+                    <p class="boutique-subtitle">Select your event type and let us find you something extraordinary</p>
                 </div>
                 
                 <!-- Quick Select Event Types -->
@@ -318,12 +342,12 @@
                     </div>
                     <div class="col-auto">
                         <span class="event-badge event-badge-official" onclick="selectEvent('official')">
-                            <i class="fas fa-briefcase me-1"></i>Official
+                            <i class="fas fa-briefcase me-1"></i>Official event
                         </span>
                     </div>
                     <div class="col-auto">
                         <span class="event-badge event-badge-dinner" onclick="selectEvent('dinner')">
-                            <i class="fas fa-utensils me-1"></i>Dinner
+                            <i class="fas fa-utensils me-1"></i>Dinners
                         </span>
                     </div>
                     <div class="col-auto">
@@ -378,10 +402,10 @@
                             <label for="id_event_type" class="form-label boutique-form-label">Event Type *</label>
                             <select name="event_type" id="id_event_type" class="form-select boutique-form-select" required>
                                 <option value="">Select event type</option>
-                                <option value="wedding" {% if form.event_type.value == 'wedding' %}selected{% endif %}>💍 Wedding</option>
-                                <option value="official" {% if form.event_type.value == 'official' %}selected{% endif %}>💼 Official Event</option>
-                                <option value="dinner" {% if form.event_type.value == 'dinner' %}selected{% endif %}>🍽️ Dinner</option>
-                                <option value="funeral" {% if form.event_type.value == 'funeral' %}selected{% endif %}>🕊️ Funeral</option>
+                                <option value="wedding" {% if form.event_type.value == 'wedding' %}selected{% endif %}> Wedding</option>
+                                <option value="official" {% if form.event_type.value == 'official' %}selected{% endif %}> Official Event</option>
+                                <option value="dinner" {% if form.event_type.value == 'dinner' %}selected{% endif %}> Dinner</option>
+                                <option value="funeral" {% if form.event_type.value == 'funeral' %}selected{% endif %}> Funeral</option>
                             </select>
                             {% if form.event_type.errors %}
                                 <div class="text-danger small">{{ form.event_type.errors }}</div>
@@ -391,9 +415,9 @@
                             <label for="id_gender" class="form-label boutique-form-label">Gender *</label>
                             <select name="gender" id="id_gender" class="form-select boutique-form-select" required>
                                 <option value="">Select gender</option>
-                                <option value="male" {% if form.gender.value == 'male' %}selected{% endif %}>👔 Male</option>
-                                <option value="female" {% if form.gender.value == 'female' %}selected{% endif %}>👗 Female</option>
-                                <option value="unisex" {% if form.gender.value == 'unisex' %}selected{% endif %}>👤 Unisex</option>
+                                <option value="male" {% if form.gender.value == 'male' %}selected{% endif %}> Male</option>
+                                <option value="female" {% if form.gender.value == 'female' %}selected{% endif %}> Female</option>
+                                <option value="unisex" {% if form.gender.value == 'unisex' %}selected{% endif %}> Unisex</option>
                             </select>
                             {% if form.gender.errors %}
                                 <div class="text-danger small">{{ form.gender.errors }}</div>
@@ -412,7 +436,7 @@
                                 <option value="l" {% if form.size.value == 'l' %}selected{% endif %}>L</option>
                                 <option value="xl" {% if form.size.value == 'xl' %}selected{% endif %}>XL</option>
                                 <option value="xxl" {% if form.size.value == 'xxl' %}selected{% endif %}>XXL</option>
-                                <option value="custom" {% if form.size.value == 'custom' %}selected{% endif %}>📏 Custom Size</option>
+                                <option value="custom" {% if form.size.value == 'custom' %}selected{% endif %}> Custom Size</option>
                             </select>
                             {% if form.size.errors %}
                                 <div class="text-danger small">{{ form.size.errors }}</div>
@@ -468,13 +492,6 @@
                                 <div class="text-danger small">{{ form.event_date.errors }}</div>
                             {% endif %}
                         </div>
-                        <div class="col-md-6">
-                            <label for="id_special_requirements" class="form-label boutique-form-label">Special Requirements</label>
-                            <textarea name="special_requirements" id="id_special_requirements" class="form-control boutique-form-control" rows="2" placeholder="Any specific requirements for this event">{{ form.special_requirements.value|default:'' }}</textarea>
-                            {% if form.special_requirements.errors %}
-                                <div class="text-danger small">{{ form.special_requirements.errors }}</div>
-                            {% endif %}
-                        </div>
                     </div>
                     
                     <hr class="my-4">
@@ -499,11 +516,18 @@
                             {% endif %}
                         </div>
                     </div>
+                     <div class="col-md-12">
+                            <label for="id_image" class="form-label boutique-form-label">Image</label>
+                            <input type="image" name="image" id="id_image" class="form-control boutique-form-control" placeholder="Image of clothing">
+                            {% if form.image.errors %}
+                                <div class="text-danger small">{{ form.image.errors }}</div>
+                            {% endif %}
+                        </div>
                     
                     <div class="row g-3 mt-2">
                         <div class="col-md-12">
-                            <label for="id_additional_notes" class="form-label boutique-form-label">Additional Notes</label>
-                            <textarea name="additional_notes" id="id_additional_notes" class="form-control boutique-form-control" rows="3" placeholder="Any other details you'd like us to know...">{{ form.additional_notes.value|default:'' }}</textarea>
+                            <label for="id_additional_notes" class="form-label boutique-form-label">location</label>
+                            <textarea name="additional_notes" id="id_additional_notes" class="form-control boutique-form-control" rows="3" placeholder="Where to send your clothing? ">{{ form.additional_notes.value|default:'' }}</textarea>
                             {% if form.additional_notes.errors %}
                                 <div class="text-danger small">{{ form.additional_notes.errors }}</div>
                             {% endif %}
@@ -531,7 +555,7 @@
                 <div class="col-md-4">
                     <div class="text-center p-3 bg-white rounded-3 shadow-sm">
                         <i class="fas fa-scroll fa-2x text-primary mb-2"></i>
-                        <h6 class="fw-bold text-primary">Custom Tailoring</h6>
+                        <h6 class="fw-bold text-primary">Custom orders</h6>
                         <small class="text-muted">Perfect fit guaranteed</small>
                     </div>
                 </div>
@@ -546,7 +570,7 @@
                     <div class="text-center p-3 bg-white rounded-3 shadow-sm">
                         <i class="fas fa-star fa-2x text-primary mb-2"></i>
                         <h6 class="fw-bold text-primary">Premium Quality</h6>
-                        <small class="text-muted">Excellence in every stitch</small>
+                        <small class="text-muted">Best wears in the lands</small>
                     </div>
                 </div>
             </div>
@@ -555,29 +579,8 @@
     </div>
 </div>
 
-<!-- FOOTER -->
-<footer class="boutique-footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 text-center text-md-start">
-                <h5 class="text-white">
-                    <i class="fas fa-crown me-2"></i>Boutique<span style="color:var(--boutique-gold);">Clothing</span>
-                </h5>
-                <p class="small">Elegant attire for life's most memorable moments</p>
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <a href="#" class="me-3"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="me-3"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="me-3"><i class="fab fa-whatsapp"></i></a>
-                <a href="#"><i class="fab fa-pinterest"></i></a>
-            </div>
-        </div>
-        <hr class="my-3" style="background:rgba(255,255,255,0.1);">
-        <div class="text-center small">
-            &copy; 2026 BoutiqueClothing. All rights reserved.
-        </div>
-    </div>
-</footer>
+<!-- footer -->
+ {% include 'footer.html' %}
 
 <!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

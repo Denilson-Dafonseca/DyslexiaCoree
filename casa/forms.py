@@ -159,13 +159,12 @@ class ClothingOrderForm(forms.ModelForm):
             'name', 'email', 'phone',
             'event_type', 'gender', 'size', 'custom_size',
             'clothing_type', 'color_preference', 'fabric_preference',
-            'event_date', 'special_requirements',
+            'event_date', 'image',
             'budget_min', 'budget_max',
             'additional_notes',
         ]
         widgets = {
             'event_date': forms.DateInput(attrs={'type': 'date'}),
-            'special_requirements': forms.Textarea(attrs={'rows': 3}),
             'additional_notes': forms.Textarea(attrs={'rows': 3}),
             'custom_size': forms.Textarea(attrs={'rows': 2, 'placeholder': 'Please provide your measurements (chest, waist, hips, inseam, etc.)'}),
         }

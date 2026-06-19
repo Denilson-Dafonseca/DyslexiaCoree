@@ -169,7 +169,7 @@ class ClothingOrder(models.Model):
     
     # Event Specific Details
     event_date = models.DateField(blank=True, null=True)
-    special_requirements = models.TextField(blank=True, null=True)
+   
     
     # Budget
     budget_min = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
@@ -177,6 +177,7 @@ class ClothingOrder(models.Model):
     
     # Additional Information
     additional_notes = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to="",blank=True, null=True)
     
     # Status and Timestamps
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')

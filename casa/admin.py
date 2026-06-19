@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from .models import Product, Category, Customer, CarouselSlide, Profile, Relief, Video, VehicleRequest 
+from .models import Product, Category, Customer, CarouselSlide, Profile, Relief, Video, VehicleRequest, ClothingOrder
 from django.contrib.auth.models import User
 
 admin.site.register(Category)
@@ -11,6 +11,8 @@ admin.site.register(Profile)
 admin.site.register(Relief)
 admin.site.register(Video)
 admin.site.register(VehicleRequest)
+admin.site.register(ClothingOrder)
+
  
 class ProfileInline(admin.StackedInline):
       model = Profile

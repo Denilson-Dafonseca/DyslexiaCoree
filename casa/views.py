@@ -443,7 +443,7 @@ def send_clothing_email(message, subject="New Clothing Order - Boutique"):
             "content-type": "application/json"
         }
         
-        # Update with your boutique team emails
+        
         payload = {
             "sender": {
                 "name": "DyslexiaCore_boutique",
@@ -451,7 +451,7 @@ def send_clothing_email(message, subject="New Clothing Order - Boutique"):
             },
             "to": [
                 {"email": "denilkson.dafonseca99@gmail.com"},
-                # Add more team emails here
+               
             ],
             "subject": subject,
             "htmlContent": f"""
@@ -531,10 +531,7 @@ Max: N${order.budget_max or 'N/A'}
 
 ━━━━━━━━━━━━━━━━━━━
 
- Special Requirements:
-{order.special_requirements or 'None specified'}
-
-Additional Notes:
+Location:
 {order.additional_notes or 'None specified'}
 
 ━━━━━━━━━━━━━━━━━━━
@@ -543,13 +540,13 @@ Created: {order.created_at.strftime('%Y-%m-%d %H:%M')}
 Status: {order.get_status_display()}
 """
             
-            # Send email notification
+           
             subject = f"New Clothing Order #{order.id} - {order.name}"
             send_clothing_email(message, subject)
             
             messages.success(
                 request,
-                "🎉 Your clothing order has been submitted successfully! We'll contact you within 24 hours."
+                " Your clothing order has been submitted successfully! We'll contact you within 24 hours."
             )
             
             return redirect('clothing_order')

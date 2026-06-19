@@ -500,7 +500,7 @@ def clothing_order(request):
             
             # Prepare email message
             message = f"""
-🛍️ NEW CLOTHING ORDER
+NEW CLOTHING ORDER
 ━━━━━━━━━━━━━━━━━━━
 
  Personal Information:
@@ -530,6 +530,10 @@ Min: N${order.budget_min or 'N/A'}
 Max: N${order.budget_max or 'N/A'}
 
 ━━━━━━━━━━━━━━━━━━━
+
+
+Image:
+{order.image or 'N/A'}
 
 Location:
 {order.additional_notes or 'None specified'}

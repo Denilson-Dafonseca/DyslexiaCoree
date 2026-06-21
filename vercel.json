@@ -1,5 +1,5 @@
 {
-    "builds": [
+    "build": [
         {
             "src": "Dyslexia/wsgi.py",
             "use": "@vercel/python",

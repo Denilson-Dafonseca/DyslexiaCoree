@@ -25,11 +25,5 @@
             "src": "/(.*)",
             "dest": "Dyslexia/wsgi.py"
         }
-    ],
-    "env": {
-        "DATABASE_URL": "DATABASE_URL",
-        "SECRET_KEY": "SECRET_KEY",
-        "DEBUG": "False",
-        "VERCEL": "True"
-    }
+    ]
 }

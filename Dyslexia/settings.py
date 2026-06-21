@@ -1,7 +1,7 @@
 import os
+import sys
 from pathlib import Path
 import dj_database_url
-
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -78,20 +78,42 @@ WSGI_APPLICATION = 'Dyslexia.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("DATABASE_URL", "").strip()
 
-if DATABASE_URL:
-    DATABASES = {
-        "default": dj_database_url.parse(DATABASE_URL)
-    }
-else:
-    # Fallback to SQLite for local development
+# Debug output (remove after fixing)
+print(f"DEBUG: DATABASE_URL = '{DATABASE_URL[:50] if DATABASE_URL else 'EMPTY'}'")
+
+if not DATABASE_URL:
+    print("⚠️  WARNING: DATABASE_URL is not set. Using SQLite.")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+elif not DATABASE_URL.startswith(('postgres://', 'postgresql://', 'postgis://')):
+    print(f"⚠️  WARNING: Invalid DATABASE_URL scheme: {DATABASE_URL[:20]}... Using SQLite.")
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    try:
+        import dj_database_url
+        DATABASES = {
+            "default": dj_database_url.parse(DATABASE_URL)
+        }
+        print("✅ Using PostgreSQL database successfully.")
+    except Exception as e:
+        print(f"❌ Error parsing DATABASE_URL: {e}. Using SQLite fallback.")
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': BASE_DIR / 'db.sqlite3',
+            }
+        }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

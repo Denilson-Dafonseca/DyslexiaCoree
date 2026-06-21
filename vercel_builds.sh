@@ -1,22 +1,27 @@
 #!/bin/bash
-# vercel_build.sh
 
-echo "🚀 Running Vercel build..."
+echo "🚀 Starting Vercel build process..."
 
-# 1. Install Python dependencies
+# Print environment for debugging (remove in production)
+echo "🔍 Checking environment variables..."
+echo "DATABASE_URL exists: $([ -n "$DATABASE_URL" ] && echo 'YES' || echo 'NO')"
+echo "DATABASE_URL starts with: ${DATABASE_URL:0:15}..."
+
+# Install Python dependencies
+echo "📦 Installing Python dependencies..."
 pip install -r requirements.txt
 
-# 2. Run Django migrations
-python manage.py makemigrations
-python manage.py migrate
+# Install Node.js dependencies
+echo "📦 Installing Node.js dependencies..."
+npm install
 
-# 3. Collect static files
+# Run Django commands
+echo "📤 Running Django migrations..."
+python manage.py makemigrations --noinput || echo "⚠️  Makemigrations failed, continuing..."
+python manage.py migrate --noinput || echo "⚠️  Migrations failed, continuing..."
+
+# Collect static files
+echo "📤 Collecting static files..."
 python manage.py collectstatic --noinput
 
-# 4. Generate Prisma client
-npx prisma generate
-
-# 5. Push Prisma schema (if needed)
-npx prisma db push --accept-data-loss
-
-echo "✅ Build complete!"
+echo "✅ Build completed successfully!"

@@ -285,10 +285,10 @@
 
     <div class="container text-center">
         <div class="boutique-logo">
-            <i class="fas fa-crown me-2"></i>Boutique<span>Clothing</span>
+            <i class="me-2"></i>Style<span>On</span>Demand
         </div>
         <p class="boutique-tagline mt-2">
-            <i class="fas fa-tshirt me-2"></i>Elegant attire for life's most memorable moments
+            <i class="me-2"></i>Elegant attire for life's most memorable moments
         </p>
     </div>
 </nav>
@@ -341,13 +341,13 @@
                         </span>
                     </div>
                     <div class="col-auto">
-                        <span class="event-badge event-badge-official" onclick="selectEvent('official')">
-                            <i class="fas fa-briefcase me-1"></i>Official event
+                        <span class="event-badge event-badge-corporate_event" onclick="selectEvent('corporate_event')">
+                            <i class="fas fa-briefcase me-1"></i>Corporate_event
                         </span>
                     </div>
                     <div class="col-auto">
-                        <span class="event-badge event-badge-dinner" onclick="selectEvent('dinner')">
-                            <i class="fas fa-utensils me-1"></i>Dinners
+                        <span class="event-badge event-badge-formal_event" onclick="selectEvent('formal_event')">
+                            <i class="fas fa-utensils me-1"></i>Formal_event
                         </span>
                     </div>
                     <div class="col-auto">
@@ -403,8 +403,8 @@
                             <select name="event_type" id="id_event_type" class="form-select boutique-form-select" required>
                                 <option value="">Select event type</option>
                                 <option value="wedding" {% if form.event_type.value == 'wedding' %}selected{% endif %}> Wedding</option>
-                                <option value="official" {% if form.event_type.value == 'official' %}selected{% endif %}> Official Event</option>
-                                <option value="dinner" {% if form.event_type.value == 'dinner' %}selected{% endif %}> Dinner</option>
+                                <option value="official" {% if form.event_type.value == 'corporate_event' %}selected{% endif %}> Corporate_event</option>
+                                <option value="dinner" {% if form.event_type.value == 'formal_event' %}selected{% endif %}> Formal_event</option>
                                 <option value="funeral" {% if form.event_type.value == 'funeral' %}selected{% endif %}> Funeral</option>
                             </select>
                             {% if form.event_type.errors %}

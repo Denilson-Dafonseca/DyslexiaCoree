@@ -60,7 +60,7 @@ ROOT_URLCONF = 'Dyslexia.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # ← ADD THIS for global templates
+        'DIRS': [BASE_DIR / 'templates'], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,7 +84,7 @@ DATABASE_URL = os.getenv("DATABASE_URL", "").strip()
 print(f"DEBUG: DATABASE_URL = '{DATABASE_URL[:50] if DATABASE_URL else 'EMPTY'}'")
 
 if not DATABASE_URL:
-    print("⚠️  WARNING: DATABASE_URL is not set. Using SQLite.")
+    print(" WARNING: DATABASE_URL is not set. Using SQLite.")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -92,7 +92,7 @@ if not DATABASE_URL:
         }
     }
 elif not DATABASE_URL.startswith(('postgres://', 'postgresql://', 'postgis://')):
-    print(f"⚠️  WARNING: Invalid DATABASE_URL scheme: {DATABASE_URL[:20]}... Using SQLite.")
+    print(f" WARNING: Invalid DATABASE_URL scheme: {DATABASE_URL[:20]}... Using SQLite.")
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -105,9 +105,9 @@ else:
         DATABASES = {
             "default": dj_database_url.parse(DATABASE_URL)
         }
-        print("✅ Using PostgreSQL database successfully.")
+        print(" Using PostgreSQL database successfully.")
     except Exception as e:
-        print(f"❌ Error parsing DATABASE_URL: {e}. Using SQLite fallback.")
+        print(f" Error parsing DATABASE_URL: {e}. Using SQLite fallback.")
         DATABASES = {
             'default': {
                 'ENGINE': 'django.db.backends.sqlite3',
@@ -166,10 +166,6 @@ DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-
-# Maximum size allowed for file uploads 
-DATA_UPLOAD_MAX_MEMORY_SIZE = 524288000 
-FILE_UPLOAD_MAX_MEMORY_SIZE = 524288000
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

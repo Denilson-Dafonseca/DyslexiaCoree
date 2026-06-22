@@ -120,8 +120,8 @@ class ClothingOrder(models.Model):
     # Event Types
     EVENT_CHOICES = [
         ('wedding', 'Wedding'),
-        ('official', 'Official Event'),
-        ('dinner', 'Dinner'),
+        ('corporate_event', 'Corporate_event'),
+        ('formal_event', 'Formal_event'),
         ('funeral', 'Funeral'),
     ]
     

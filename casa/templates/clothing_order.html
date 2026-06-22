@@ -403,8 +403,8 @@
                             <select name="event_type" id="id_event_type" class="form-select boutique-form-select" required>
                                 <option value="">Select event type</option>
                                 <option value="wedding" {% if form.event_type.value == 'wedding' %}selected{% endif %}> Wedding</option>
-                                <option value="official" {% if form.event_type.value == 'corporate_event' %}selected{% endif %}> Corporate_event</option>
-                                <option value="dinner" {% if form.event_type.value == 'formal_event' %}selected{% endif %}> Formal_event</option>
+                                <option value="corporate_event" {% if form.event_type.value == 'corporate_event' %}selected{% endif %}> Corporate_event</option>
+                                <option value="formal_event" {% if form.event_type.value == 'formal_event' %}selected{% endif %}> Formal_event</option>
                                 <option value="funeral" {% if form.event_type.value == 'funeral' %}selected{% endif %}> Funeral</option>
                             </select>
                             {% if form.event_type.errors %}

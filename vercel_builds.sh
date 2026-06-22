@@ -1,27 +1,34 @@
 #!/bin/bash
+# fix_migrations_now.sh
 
-echo "🚀 Starting Vercel build process..."
+echo "🔧 Fixing migrations..."
 
-# Print environment for debugging (remove in production)
-echo "🔍 Checking environment variables..."
-echo "DATABASE_URL exists: $([ -n "$DATABASE_URL" ] && echo 'YES' || echo 'NO')"
-echo "DATABASE_URL starts with: ${DATABASE_URL:0:15}..."
+# 1. Reset casa migrations
+echo "📤 Resetting casa migrations..."
+python manage.py migrate casa zero --fake
 
-# Install Python dependencies
-echo "📦 Installing Python dependencies..."
-pip install -r requirements.txt
+# 2. Delete old casa migrations
+echo "🗑️  Deleting old casa migrations..."
+rm -f casa/migrations/0*.py
+rm -rf casa/migrations/__pycache__
 
-# Install Node.js dependencies
-echo "📦 Installing Node.js dependencies..."
-npm install
+# 3. Create fresh casa migrations
+echo "📤 Creating fresh casa migrations..."
+python manage.py makemigrations casa
 
-# Run Django commands
-echo "📤 Running Django migrations..."
-python manage.py makemigrations --noinput || echo "⚠️  Makemigrations failed, continuing..."
-python manage.py migrate --noinput || echo "⚠️  Migrations failed, continuing..."
+# 4. Apply casa migrations (creates tables)
+echo "📤 Applying casa migrations..."
+python manage.py migrate casa
 
-# Collect static files
-echo "📤 Collecting static files..."
-python manage.py collectstatic --noinput
+# 5. Apply pay migrations
+echo "📤 Applying pay migrations..."
+python manage.py migrate pay
 
-echo "✅ Build completed successfully!"
+# 6. Apply sessions migrations
+echo "📤 Applying sessions migrations..."
+python manage.py migrate sessions
+
+# 7. Show final status
+python manage.py showmigrations
+
+echo "✅ Done!"

@@ -77,45 +77,19 @@ WSGI_APPLICATION = 'Dyslexia.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASE_URL = (
-    os.getenv('DATABASE_URL') or 
-    os.getenv('POSTGRES_URL') or 
-    os.getenv('PRISMA_DATABASE_URL') or 
-    ''
-).strip()
+DATABASE_URL = os.getenv('DATABASE_URL', '').strip()
 
-# Debug: Print to logs
-print(f"🔍 DATABASE_URL found: {'YES' if DATABASE_URL else 'NO'}")
-if DATABASE_URL:
-    print(f"🔍 DATABASE_URL starts with: {DATABASE_URL[:20]}...")
-
-# Force PostgreSQL if on Vercel or if DATABASE_URL exists
-if DATABASE_URL and DATABASE_URL.startswith(('postgres://', 'postgresql://')):
-    try:
-        DATABASES = {'default': dj_database_url.parse(DATABASE_URL)}
-        print("✅ Using PostgreSQL database")
-    except Exception as e:
-        print(f"❌ Error parsing DATABASE_URL: {e}")
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': '/tmp/db.sqlite3',
-            }
-        }
+if DATABASE_URL and DATABASE_URL.startswith('postgres'):
+    import dj_database_url
+    DATABASES = {'default': dj_database_url.parse(DATABASE_URL)}
+    print("✅ Using PostgreSQL")
 else:
-    # Only use SQLite if explicitly set or local development
-    if os.getenv('VERCEL'):
-        print("❌ ERROR: DATABASE_URL not set on Vercel!")
-        # Don't fallback to SQLite on Vercel - fail explicitly
-        raise Exception("DATABASE_URL environment variable is required on Vercel")
-    else:
-        print("⚠️  Using SQLite (local development)")
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': BASE_DIR / 'db.sqlite3',
-            }
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': '/tmp/db.sqlite3',
         }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

@@ -31,4 +31,24 @@ python manage.py migrate sessions
 # 7. Show final status
 python manage.py showmigrations
 
-echo "✅ Done!"
+
+# Create static directory
+mkdir -p static
+
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Collect static files
+echo "📤 Collecting static files..."
+python manage.py collectstatic --noinput
+
+# Show collected files
+echo "📊 Collected static files:"
+ls -la staticfiles/ || echo "⚠️  No static files found"
+
+# Run migrations
+echo "📤 Running migrations..."
+python manage.py makemigrations --noinput
+python manage.py migrate --noinput
+
+echo "✅ Build completed successfully!"

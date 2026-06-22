@@ -6,27 +6,16 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Build paths inside the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
+# SECURITY
 SECRET_KEY = 'He3Erj7PPQvaeHLDPdE5mP7EAqUQ07oyy67bcQClEIVLtzcp0tcrCtQ1LhRq8MwhMsI'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
-
-ALLOWED_HOSTS = [".vercel.app",'dyslexia-coree.vercel.app', 'dyslexiacore.xyz']
-
+ALLOWED_HOSTS = [".vercel.app", "dyslexia-coree.vercel.app", "dyslexiacore.xyz"]
 CSRF_TRUSTED_ORIGINS = ['https://dyslexia-coree.vercel.app', 'https://dyslexiacore.xyz']
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,7 +40,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',  
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'Dyslexia.urls'
@@ -59,7 +48,7 @@ ROOT_URLCONF = 'Dyslexia.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'], 
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,12 +64,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Dyslexia.wsgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
 DATABASE_URL = os.getenv('DATABASE_URL', '').strip()
-
 if DATABASE_URL and DATABASE_URL.startswith('postgres'):
-    import dj_database_url
     DATABASES = {'default': dj_database_url.parse(DATABASE_URL)}
     print("✅ Using PostgreSQL")
 else:
@@ -92,71 +77,86 @@ else:
     }
 
 # Password validation
-# https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 # Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'Africa/Windhoek'
-
 USE_I18N = True
-
 USE_TZ = True
 
-# STATIC FILES
-# -------------------------
+# ========================================
+# STATIC FILES FIX
+# ========================================
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [
-    BASE_DIR / "Dyslexia_static_files"
-] if (BASE_DIR / "Dyslexia_static_files").exists() else []
+
+# Create static directory if it doesn't exist
+STATIC_DIR = BASE_DIR / "static"
+if not STATIC_DIR.exists():
+    STATIC_DIR.mkdir(parents=True, exist_ok=True)
+    print(f"✅ Created static directory: {STATIC_DIR}")
+
+# Where Django looks for static files
+STATICFILES_DIRS = [STATIC_DIR]
+
+# Where Django collects static files
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Use Whitenoise for static files
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# -------------------------
-# MEDIA FILES
-
+# ========================================
+# MEDIA FILES (User Uploads) - Cloudinary
+# ========================================
 CLOUDINARY_STORAGE = {
     "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME"),
     "API_KEY": os.getenv("CLOUDINARY_API_KEY"),
     "API_SECRET": os.getenv("CLOUDINARY_API_SECRET"),
 }
-
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
+# Security
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-
+# Default field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#
-
+# Email Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
 EMAIL_HOST = 'smtp-relay.brevo.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_TIMEOUT = 30
-
 EMAIL_HOST_USER = os.getenv("BREVO_SMTP_LOGIN")
 EMAIL_HOST_PASSWORD = os.getenv("BREVO_SMTP_KEY")
 BREVO_API_KEY = os.getenv("BREVO_API_KEY")
-
 DEFAULT_FROM_EMAIL = "noreply@dyslexiacore.com"
+
+# ========================================
+# LOGGING for Debugging
+# ========================================
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        'django.template': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}

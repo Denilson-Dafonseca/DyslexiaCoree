@@ -5,9 +5,12 @@
             "use": "@vercel/python",
             "config": {
                 "maxLambdaSize": "15mb",
-                "runtime": "python3.12",
-                "buildCommand": "pip install -r requirements.txt && python manage.py collectstatic --noinput"
+                "runtime": "python3.12"
             }
+        },
+        {
+            "src": "static/**/*",
+            "use": "@vercel/static"
         }
     ],
     "routes": [
@@ -16,15 +19,14 @@
             "dest": "/static/$1"
         },
         {
-            "src": "/api/health",
-            "dest": "Dyslexia/wsgi.py",
-            "headers": {
-                "x-vercel-test": "true"
-            }
-        },
-        {
             "src": "/(.*)",
             "dest": "Dyslexia/wsgi.py"
         }
-    ]
+    ],
+    "env": {
+        "DATABASE_URL": "postgres://0f01eee13bd1de3195b7c50450320e4c9b3d8f20629c950a45f8104d53737d0d:sk_ZwN1_ZyG0Tpny3ko1gV85@db.prisma.io:5432/postgres?sslmode=require",
+        "SECRET_KEY": "He3Erj7PPQvaeHLDPdE5mP7EAqUQ07oyy67bcQClEIVLtzcp0tcrCtQ1LhRq8MwhMsI",
+        "DEBUG": "False",
+        "VERCEL": "True"
+    }
 }

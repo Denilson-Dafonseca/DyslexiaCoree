@@ -179,7 +179,7 @@ def category(request,bk):
     
 
 def product(request,pk):
-    product = Product.objects.get(id=pk)
+    product = get_object_or_404(Product, id=pk)
     return render(request, 'product.html', {'product':product})
 
 def stand(request):

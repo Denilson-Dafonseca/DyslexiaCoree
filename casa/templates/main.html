@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <!-- Custom CSS (load after Bootstrap to override) -->
-    <link href="{% static 'Dyslexia_global.css' %}" rel="stylesheet" />
+    <link href="{% staticfiles 'Dyslexia_global.css' %}" rel="stylesheet" />
     
     <!-- Theme color for mobile browsers -->
     <meta name="theme-color" content="#4a90d9" /> 
@@ -42,7 +42,6 @@
       smartlook('init', 'b98a0116dbf3964155782c1e804c58c2d3e8b747', { region: 'eu' });
     </script>
 
-
     <style>
       html, body {
         overflow-x: hidden;
@@ -52,7 +51,71 @@
         max-width: 100%;
         height: auto;
       }
-    </style>
+
+      body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+nav {
+  background: url(site/water.gif);
+  background-size: cover;
+}
+
+.hero-gradient {
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+
+  background: linear-gradient(
+    to bottom,
+    #98d7ee 0%,
+    #528dee47 45%,
+    #5a85c5 100%
+  );
+
+  color: white;
+  padding: 80px 20px;
+}
+
+/* Headline */
+.hero-title {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  line-height: 1.2;
+  color: #fff;
+}
+
+/* Highlight word */
+.text-highlight {
+  background: linear-gradient(90deg, #3b80e9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Subtitle */
+.hero-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #4e69f5;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Buttons */
+.btn-dark {
+  background-color: #000;
+  border: none;
+}
+
+.btn-dark:hover {
+  background-color: #222;
+}
+
+.btn-outline-light:hover {
+  background-color: rgb(66, 189, 237);
+  color: black;
+}
+</style>
   </head>
 
   <body>
@@ -71,7 +134,7 @@
     <nav class="navbar navbar-expand-sm" style="background: #98d7ee">
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'main' %}">
-          <img src="{% static 'site/ventro.png' %}" alt="Logo" style="width:120px;" class="rounded-pill">
+          <img src="{% staticfiles 'site/ventro.png' %}" alt="Logo" style="width:120px;" class="rounded-pill">
         </a>
 
         <div class="d-flex">

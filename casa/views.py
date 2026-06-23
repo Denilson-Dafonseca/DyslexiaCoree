@@ -432,82 +432,95 @@ def Secured_deal(request):
             "VehicleRequests": VehicleRequests
         }
     )
-    
-    
-def send_clothing_email(message, subject="New Clothing Order - Boutique"):
-    """Send email notification via Brevo API"""
+
+
+def send_clothing_email(message, subject="New Clothing Order"):
     try:
         print("EMAIL TRIGGERED (BREVO API)")
-        
+
         url = "https://api.brevo.com/v3/smtp/email"
-        
+
         headers = {
             "accept": "application/json",
             "api-key": settings.BREVO_API_KEY,
-            "content-type": "application/json"
+            "content-type": "application/json",
         }
-        
-        
+
         payload = {
             "sender": {
-                "name": "DyslexiaCore_boutique",
-                "email":  "dyslexiacore@gmail.com"
+                "name": "DyslexiaCore Boutique",
+                "email": settings.DEFAULT_FROM_EMAIL,
             },
             "to": [
-                {"email": "denilkson.dafonseca99@gmail.com"},
-               
+                {
+                    "email": "denilkson.dafonseca99@gmail.com"
+                }
             ],
             "subject": subject,
             "htmlContent": f"""
-            <h2>New Clothing Order</h2>
-            <div style="background:#f8f9fa; padding:20px; border-radius:10px;">
-                {message.replace(chr(10), '<br>')}
-            </div>
-            <br>
-            <p style="color:#6c757d;">This is an automated notification from your Boutique System.</p>
-            """
+                <h2>New Clothing Order</h2>
+
+                <div style="
+                    background:#f8f9fa;
+                    padding:20px;
+                    border-radius:10px;
+                    font-family:Arial,sans-serif;
+                    line-height:1.6;
+                ">
+                    {message.replace(chr(10), "<br>")}
+                </div>
+
+                <br>
+
+                <p style="color:#6c757d;">
+                    This is an automated notification from your Boutique System.
+                </p>
+            """,
         }
-        
+
         response = requests.post(
             url,
             json=payload,
             headers=headers,
-            timeout=10
+            timeout=30,
         )
-        
+
         print("STATUS:", response.status_code)
         print("RESPONSE:", response.text)
-        
+
         if response.status_code == 201:
             print("EMAIL SENT SUCCESSFULLY")
             return True
-        
+
         print("EMAIL FAILED")
         return False
-        
+
     except Exception as e:
         print("EMAIL ERROR:", str(e))
-        return False
+        return False    
+    
 
 def clothing_order(request):
     form = ClothingOrderForm()
-    success = False
-    
+
     if request.method == "POST":
-        form = ClothingOrderForm(request.POST)
-        
+        form = ClothingOrderForm(request.POST, request.FILES)
+
         if form.is_valid():
-            # Save the order
             order = form.save(commit=False)
-            order.status = 'pending'
+            order.status = "pending"
             order.save()
-            
-            # Prepare email message
+
+            image_url = None
+
+            if order.image:
+                image_url = request.build_absolute_uri(order.image.url)
+
             message = f"""
 NEW CLOTHING ORDER
 ━━━━━━━━━━━━━━━━━━━
 
- Personal Information:
+Personal Information:
 Name: {order.name}
 Email: {order.email}
 Phone: {order.phone}
@@ -535,37 +548,42 @@ Max: N${order.budget_max or 'N/A'}
 
 ━━━━━━━━━━━━━━━━━━━
 
-
 Image:
-{order.image or 'N/A'}
+{image_url or 'No image uploaded'}
 
 Location:
 {order.additional_notes or 'None specified'}
 
 ━━━━━━━━━━━━━━━━━━━
+
 Order ID: #{order.id}
 Created: {order.created_at.strftime('%Y-%m-%d %H:%M')}
 Status: {order.get_status_display()}
 """
-            
-           
+
             subject = f"New Clothing Order #{order.id} - {order.name}"
-            send_clothing_email(message, subject)
-            
+
+            send_clothing_email(
+                message=message,
+                subject=subject
+            )
+
             messages.success(
                 request,
-                " Your clothing order has been submitted successfully! We'll contact you within 24 hours."
+                "Your clothing order has been submitted successfully! We'll contact you within 24 hours."
             )
-            
-            return redirect('clothing_order')
-        else:
-            messages.error(
-                request,
-                " There was an error submitting your order. Please check the form."
-            )
-    
-    return render(request, "clothing_order.html", {
-        "form": form,
-        "success": success,
-    })
 
+            return redirect("clothing_order")
+
+        messages.error(
+            request,
+            "There was an error submitting your order. Please check the form."
+        )
+
+    return render(
+        request,
+        "clothing_order.html",
+        {
+            "form": form,
+        },
+    )

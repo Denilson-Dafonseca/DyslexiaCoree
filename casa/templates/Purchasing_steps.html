@@ -9,8 +9,8 @@
     <meta name="description" content="Online store" />
     <title>Purchasing_steps</title>
     <link rel="icon" type="image/png" href="{% static 'site/images/favicon.png' %}">
-    <link href="{% static 'styles.css' %}" rel="stylesheet" />
-    <link href="{% static 'door.css' %}" rel="stylesheet" />
+    <link href="{% staticfiles 'styles.css' %}" rel="stylesheet" />
+    <link href="{% staticfiles 'door.css' %}" rel="stylesheet" />
     <script type='text/javascript'>
   window.smartlook||(function(d) {
     var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
@@ -43,7 +43,7 @@
     <nav class="container py-2">
       <div class="row">
       <a class="d-flex" href="{% url 'main' %}">
-    <img src="{% static 'site/ventro.png' %}" alt="Dyslexia Logo" class="img-fluid" style="max-height: 40px; width: auto" />
+    <img src="{% staticfiles 'site/ventro.png' %}" alt="Dyslexia Logo" class="img-fluid" style="max-height: 40px; width: auto" />
       </a>
       <div class="container px-2 px-lg-5">
         <div class="text-center text-light text-decoration-underline">
@@ -59,7 +59,7 @@
     <div>
       <p class="col text-center">
         <h3 class="text-center text-light display-2 fw-bolder text-decoration-underline">Go to product section</h3>
-<p>  <img src="{% static 'site/pp.jpg' %}"
+<p>  <img src="{% staticfiles 'site/pp.jpg' %}"
       class="d-block w-100 img-fluid" 
       alt="items" 
       style="max-height: 70vh; object-fit: contain; margin: 0 auto;"/>
@@ -70,7 +70,7 @@ Go to the product section and select a category to browse.
 </p>
 
 <h3 class="text-center text-light display-2 fw-bolder text-decoration-underline">Preview item</h3>
-<p>  <img src="{% static 'site/preview.jpg' %}"
+<p>  <img src="{% staticfiles 'site/preview.jpg' %}"
       class="d-block w-100 img-fluid" 
       alt="items" 
       style="max-height: 70vh; object-fit: contain; margin: 0 auto;"/>
@@ -82,7 +82,7 @@ Go to the product section and select a category to browse.
 </p>
 <h3 class="text-center text-light display-2 fw-bolder text-decoration-underline"> Add to cart.</h3>
 
-<p>  <img src="{% static 'site/atc.jpg' %}"
+<p>  <img src="{% staticfiles 'site/atc.jpg' %}"
       class="d-block w-100 img-fluid" 
       alt="items" 
       style="max-height: 70vh; object-fit: contain; margin: 0 auto;"/>
@@ -93,7 +93,7 @@ Once you’ve reviewed the product and wish to buy it, click “Add to Cart.” 
 </p>
 
 <h3 class="text-center text-light display-2 fw-bolder text-decoration-underline">Go to cart.</h3>
-<p>  <img src="{% static 'site/cart.jpg' %}"
+<p>  <img src="{% staticfiles 'site/cart.jpg' %}"
       class="d-block w-100 img-fluid" 
       alt="items" 
       style="max-height: 70vh; object-fit: contain; margin: 0 auto;"/>
@@ -105,7 +105,7 @@ Go towards the cart icon.
 </p>
 
 <h3 class="text-center text-light display-2 fw-bolder text-decoration-underline">In the cart</h3>
-<p>  <img src="{% static 'site/gcheckout.jpg' %}"
+<p>  <img src="{% staticfiles 'site/gcheckout.jpg' %}"
       class="d-block w-100 img-fluid" 
       alt="items" 
       style="max-height: 70vh; object-fit: contain; margin: 0 auto;"/>
@@ -116,7 +116,7 @@ Here you can view all the items you have added to your cart. You may add multipl
 </p>
 
 <h3 class="text-center text-light display-2 fw-bolder text-decoration-underline"> Checkout area </h3>
-<p>  <img src="{% static 'site/checkout.jpg' %}"
+<p>  <img src="{% staticfiles 'site/checkout.jpg' %}"
       class="d-block w-100 img-fluid" 
       alt="items" 
       style="max-height: 70vh; object-fit: contain; margin: 0 auto;"/>
@@ -129,7 +129,7 @@ Here, you simply fill in your information. This process is straightforward. Your
 
 <h3 class="text-center text-light display-2 fw-bolder text-decoration-underline">Order successful </h3>
 
-<p>  <img src="{% static 'site/order.jpg' %}"
+<p>  <img src="{% staticfiles 'site/order.jpg' %}"
       class="d-block w-100 img-fluid" 
       alt="items" 
       style="max-height: 70vh; object-fit: contain; margin: 0 auto;"/>
@@ -141,7 +141,7 @@ Reaching this page confirms that your order has been successfully placed. You ma
 
 
 <h3 class="text-center text-light display-2 fw-bolder text-decoration-underline">Receipt page</h3>
-<p>  <img src="{% static 'site/rw.jpg' %}"
+<p>  <img src="{% staticfiles 'site/rw.jpg' %}"
       class="d-block w-100 img-fluid" 
       alt="items" 
       style="max-height: 70vh; object-fit: contain; margin: 0 auto;"/>

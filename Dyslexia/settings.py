@@ -101,10 +101,10 @@ STATICFILES_DIRS = [
 ]
 
 # If you also want to keep Dyslexia_static_files:
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    BASE_DIR / "Dyslexia_static_files",
-] if (BASE_DIR / "Dyslexia_static_files").exists() else [BASE_DIR / "static"]
+#STATICFILES_DIRS = [
+ #   BASE_DIR / "static",
+#    BASE_DIR / "Dyslexia_static_files",
+#] if (BASE_DIR / "Dyslexia_static_files").exists() else [BASE_DIR / "static"]
 
 # Where Django collects static files
 STATIC_ROOT = BASE_DIR / "staticfiles"

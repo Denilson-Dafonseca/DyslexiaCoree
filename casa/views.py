@@ -449,7 +449,7 @@ def send_clothing_email(message, subject="New Clothing Order"):
         payload = {
             "sender": {
                 "name": "DyslexiaCore Boutique",
-                "email": settings.DEFAULT_FROM_EMAIL,
+                "email": "dyslexiacore@gmail.com",
             },
             "to": [
                 {

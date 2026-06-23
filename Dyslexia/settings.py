@@ -93,24 +93,17 @@ USE_TZ = True
 # ========================================
 # STATIC FILES FIX
 # ========================================
+
 STATIC_URL = "/static/"
 
-# Where Django looks for static files - ADD 'static' folder
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # ADD THIS LINE
+    BASE_DIR / "static",
 ]
 
-# If you also want to keep Dyslexia_static_files:
-#STATICFILES_DIRS = [
- #   BASE_DIR / "static",
-#    BASE_DIR / "Dyslexia_static_files",
-#] if (BASE_DIR / "Dyslexia_static_files").exists() else [BASE_DIR / "static"]
-
-# Where Django collects static files
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Use WhiteNoise for serving static files
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # ========================================
 # MEDIA FILES (User Uploads) - Cloudinary
 # ========================================

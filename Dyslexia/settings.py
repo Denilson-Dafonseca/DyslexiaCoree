@@ -102,8 +102,7 @@ STATICFILES_DIRS = [BASE_DIR / 'Dyslexia_static_files']
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Use WhiteNoise for serving static files
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
-# ========================================
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # MEDIA FILES (User Uploads) - Cloudinary
 # ========================================
 CLOUDINARY_STORAGE = {

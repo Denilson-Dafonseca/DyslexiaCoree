@@ -20,33 +20,9 @@
     smartlook('init', 'b98a0116dbf3964155782c1e804c58c2d3e8b747', { region: 'eu' });
 </script>
 <style>
-  html,
-     body {
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
-
-      .navbar {
-        width: 100vw;
-        margin: 0;
-        padding: 0;
-      }
-
-      .navbar-toggler {
-        border-color: rgb(255, 255, 255) !important;
-      }
-
-      .navbar-collapse {
-        flex-wrap: wrap;
-      }
-
-      .nav-item {
-        white-space: nowrap;
-      }
-
-
+ 
       nav {
+  width: 100%;      
   background: url(https://res.cloudinary.com/du5qt97qf/image/upload/v1782308564/water_drvdeh.gif);
   background-size: cover;
   background-position: center;
@@ -73,12 +49,12 @@
     </div>
     {% endfor %} {% endif %} 
     <!-- Header-->
-    <nav class="navbar py-2">
+    <nav class=" py-2">
       <a class="d-flex" href="{% url 'main' %}">
       <img src="https://res.cloudinary.com/du5qt97qf/image/upload/v1782307320/ventro_buwqkq.png" alt="Dyslexia Logo" class="img-fluid" style="max-height: 40px; width: auto" />
 
       </a>
-      <div class="container px-2 px-lg-5 my-2">
+      <div class="container-fluid px-2 px-lg-5 my-2">
         <div class="text-center text-dark">
           <h1 class="display-4 fw-bolder text-decoration-underline">Credit Purchases</h1>
           <p class="lead fw-normal text-white-50 mb-0">

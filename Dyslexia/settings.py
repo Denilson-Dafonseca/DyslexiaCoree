@@ -96,7 +96,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Where Django looks for static files - ADD 'static' folder
-STATICFILES_DIRS = [BASE_DIR / 'Dyslexia_static_files']
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Where Django collects static files
 STATIC_ROOT = BASE_DIR / "staticfiles"

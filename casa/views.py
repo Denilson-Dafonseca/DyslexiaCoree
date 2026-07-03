@@ -453,7 +453,10 @@ def send_clothing_email(message, subject="New Clothing Order"):
             },
             "to": [
                 {
-                    "email": "denilkson.dafonseca99@gmail.com"  
+                    "email": "denilkson.dafonseca99@gmail.com",
+                    "email": "juniaslylie1@gmail.com",
+                    "email": "pandenafb@gmail.com",
+                    "email": "ndali0209@gmail.com",
                 }
             ],
             "subject": subject,

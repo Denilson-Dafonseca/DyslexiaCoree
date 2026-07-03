@@ -457,6 +457,7 @@ def send_clothing_email(message, subject="New Clothing Order"):
                     "email": "juniaslylie1@gmail.com",
                     "email": "pandenafb@gmail.com",
                     "email": "ndali0209@gmail.com",
+                    "email": "savannah@bbi.co.bw",
                 }
             ],
             "subject": subject,

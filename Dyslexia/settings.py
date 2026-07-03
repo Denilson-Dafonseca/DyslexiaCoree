@@ -93,13 +93,13 @@ USE_TZ = True
 # ========================================
 # STATIC FILES FIX
 # ========================================
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
 # Where Django looks for static files - ADD 'static' folder
-STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_DIRS = ['static/']
 
 # Where Django collects static files
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Use WhiteNoise for serving static files
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
@@ -152,3 +152,6 @@ LOGGING = {
         },
     },
 }
+
+
+# Area for paypal information 

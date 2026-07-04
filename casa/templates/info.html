@@ -48,10 +48,6 @@
 
 <!-- HEADER -->
 <nav class="container-fluid py-2">
-  <a href="{% url 'main' %}">
-      <img src="https://res.cloudinary.com/du5qt97qf/image/upload/v1782307320/ventro_buwqkq.png" alt="Dyslexia Logo" class="img-fluid" style="max-height: 50px; width: auto" />
-
-  </a>
   <div class="container text-center text-light">
     <h1 class="display-4 fw-bolder text-decoration-underline mt-3">
       What is DyslexiaCore <span class="text-primary">TUOBA</span>?
@@ -61,7 +57,7 @@
 
   </div>
 </nav>
-
+{% include 'nav.html' %}
 <!-- TEXT -->
 <div class="container py-4">
 

@@ -76,10 +76,6 @@
     {% endfor %} {% endif %} 
     <!-- Header-->
     <nav class="py-2">
-      <a class="d-flex" href="{% url 'main' %}">
-      <img src="https://res.cloudinary.com/du5qt97qf/image/upload/v1782307320/ventro_buwqkq.png" alt="Dyslexia Logo" class="img-fluid" style="max-height: 40px; width: auto" />
-
-      </a>
       <div class="container-fluid px-2 px-lg-5 my-2">
         <div class="text-center text-dark">
           <h1 class="display-4 fw-bolder text-decoration-underline">Affiliate Commission</h1>
@@ -88,6 +84,7 @@
         </div>
       </div>
     </nav>
+    {% include 'nav.html' %}
 
 <section class="payment-info" style="max-width: 850px; margin: 40px auto; padding: 30px; background: #73A6D8; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); font-family: 'Poppins', sans-serif;">
 

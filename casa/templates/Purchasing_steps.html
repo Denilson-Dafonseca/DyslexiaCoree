@@ -42,9 +42,6 @@
     <!-- Header-->
     <nav class="container py-2">
       <div class="row">
-      <a class="d-flex" href="{% url 'main' %}">
-    <img src="https://res.cloudinary.com/du5qt97qf/image/upload/v1782307320/ventro_buwqkq.png" alt="Dyslexia Logo" class="img-fluid" style="max-height: 40px; width: auto" />
-      </a>
       <div class="container px-2 px-lg-5">
         <div class="text-center text-light text-decoration-underline">
           <h1 class="display-4 fw-bolder">
@@ -54,6 +51,7 @@
       </div>
     </div>
     </nav>
+    {% include 'nav.html' %}
 
     <!-- text-->
     <div>
